@@ -14,14 +14,17 @@ Component({
     items: {
       type: Array,
       value: []
-    }, 
+    },
+    height: {
+      type: Number,
+      value: 0
+    },
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    height: wx.getSystemInfoSync().windowHeight - 0.25 * wx.getSystemInfoSync().windowHeight
   },
 
   /**

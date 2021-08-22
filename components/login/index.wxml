@@ -1,52 +1,21 @@
 <view wx:if="{{needLogin}}">
-  <van-popup show="{{true}}" position="bottom" custom-style="height: 40%">
+  <van-popup show="{{true}}" position="bottom" custom-style="height: 100%">
     <view class="container">
-      <view class="divider">
-        <van-row>
-          <van-col span="24">
-            <view style="text-align: center; font-size: 18px;">
-              登录
-            </view>
-          </van-col>
-        </van-row>
-      </view>
-      <view class="divider">
-        <van-field
-          value="{{phone}}"
-          required
-          clearable
-          label="手机号"
-          placeholder="请输入手机号"
-          use-button-slot
-        >
-          <van-button slot="button" size="small" type="primary" open-type="getPhoneNumber" 
-            bindgetphonenumber="getPhoneNumber">
-            获取手机号
-          </van-button>
-        </van-field>
-      </view>
-      <view class="divider">
-        <van-field
-          value="{{sms}}"
-          required
-          clearable
-          label="短信验证码"
-          placeholder="请输入短信验证码"
-          border="{{ false }}"
-          use-button-slot
-        >
-          <van-button slot="button" size="small" type="primary" disabled="{{disabled}}" bindtap="">
-            {{countDownTips}}
-          </van-button>
-        </van-field>
-      </view>
-      <view style="margin-top: 25px;">
+      <view style="margin-top: 50%;">
         <van-row>
           <van-col span="24">
             <view style="text-align: center;">
-              <van-button type="primary" size="small" bindtap="login">
-                登录
-              </van-button>
+              <view>
+                <van-button type="primary" style="--button-large-height: 40px;" round size="large"
+                  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" disabled="{{!agreeProtocol}}">
+                  微信一键登录
+                </van-button>
+              </view>
+              <view>
+                <van-checkbox value="{{agreeProtocol}}" bind:change="agreeProtocol" icon-size="20px">
+                  <view class="font">若手机号未注册将进入注册流程，注册即为同意《友小聚注册协议》《友小聚隐私政策》</view>
+                </van-checkbox>
+              </view>
             </view>
           </van-col>
         </van-row>

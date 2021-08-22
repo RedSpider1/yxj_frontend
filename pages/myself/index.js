@@ -12,11 +12,29 @@ Page({
     items: [],
     alreadyExistId: [],
     pageNum: 1,
-    pageSize: 20
+    pageSize: 20,
+    height: wx.getSystemInfoSync().windowHeight - 0.15 * wx.getSystemInfoSync().windowHeight
   },
-  jmp: function () {
+  jmp: function (event) {
+    let type = event.currentTarget.dataset.type
+    let title = ''
+    switch (type) {
+      case 'join':
+        title = '我参与过'
+        break
+      case 'create':
+        title = '我发起的'
+        break
+      case 'view':
+      default:
+        title = '我浏览过'
+        break
+    }
     this.setData({showChoose: false})
     this.list()
+    wx.setNavigationBarTitle({
+      title: title,
+    })
   },
   list: function () {
     let that = this

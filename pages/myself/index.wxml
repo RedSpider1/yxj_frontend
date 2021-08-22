@@ -1,5 +1,5 @@
 <view class="container" wx:if="{{showChoose}}">
-  <view class="deliver shadow" bindtap="jmp">
+  <view class="deliver shadow" bindtap="jmp" data-type="view">
     <van-row>
       <van-col>
         <van-icon name="browsing-history" color="#f44336" size="20px"></van-icon>
@@ -9,7 +9,7 @@
       </van-col>
     </van-row>
   </view>
-  <view class="deliver shadow" bindtap="jmp">
+  <view class="deliver shadow" bindtap="jmp" data-type="join">
     <van-row>
       <van-col>
         <van-icon name="add-square" color="#2196f3" size="20px"></van-icon>
@@ -19,7 +19,7 @@
       </van-col>
     </van-row>
   </view>
-  <view class="deliver shadow" bindtap="jmp">
+  <view class="deliver shadow" bindtap="jmp" data-type="create">
     <van-row>
       <van-col>
         <van-icon name="friends" color="rgb(153, 50, 204)" size="20px"></van-icon>
@@ -33,5 +33,7 @@
 </view>
 
 <view class="container" wx:else>
-  <platoon-sheet-list items="{{items}}" bind:list="list"></platoon-sheet-list>
+  <platoon-sheet-list items="{{items}}" bind:list="list" height="{{height}}"></platoon-sheet-list>
+  <footer id="footer" name="view"></footer>
 </view>
+

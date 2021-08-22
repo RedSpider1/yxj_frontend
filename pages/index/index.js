@@ -8,7 +8,8 @@ Page({
     items: [],
     alreadyExistId: [],
     pageNum: 1,
-    pageSize: 20
+    pageSize: 20,
+    height: wx.getSystemInfoSync().windowHeight - 0.25 * wx.getSystemInfoSync().windowHeight
   },
   onChangeActive (event) {
     console.log(event)

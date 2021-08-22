@@ -2,7 +2,7 @@
   <van-notice-bar left-icon="volume-o" scrollable mode="closeable" text="小程序上线啦！！！"/>
   <van-tabs active="{{ active }}" bind:change="onChangeActive">
     <van-tab title="最新">
-      <platoon-sheet-list items="{{items}}" bind:list="list"></platoon-sheet-list>
+      <platoon-sheet-list items="{{items}}" bind:list="list" height="{{height}}"></platoon-sheet-list>
     </van-tab>
     <van-tab title="搜索">
     </van-tab>

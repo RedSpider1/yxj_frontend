@@ -13,20 +13,23 @@ Component({
    */
   data: {
     needLogin: false, // 是否需要登录
-    countDownTips: '发送验证码',
-    disabled: false,
-    phone: '',
-    sms: ''
+    agreeProtocol: false, // 同意注册/登录
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+    agreeProtocol () {
+      this.setData({agreeProtocol: !this.data.agreeProtocol})
+    },
     getPhoneNumber (event) {
       console.log(event)
-    },
-    login () {
+      wx.getUserInfo({
+        success: function (res) {
+          console.log(res)
+        }
+      })
       this.setData({needLogin: false})
     },
   },
