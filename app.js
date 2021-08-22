@@ -9,11 +9,13 @@ App({
     wx.login({
       success: res => {
         console.log(res.code)
+        this.globalData.code = res.code
       }
     })
   },
   globalData: {
     token: null,
-    authFilter: null
+    authFilter: null,
+    code: null
   }
 })
