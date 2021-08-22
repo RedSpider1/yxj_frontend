@@ -1,0 +1,119 @@
+<view class="container">
+  <view class="divider">
+    <van-field
+      value="{{submitData.title}}"
+      required
+      clearable
+      placeholder="请输入标题"
+    />
+  </view>
+  <view class="divider line">
+    <view class="font">人数：</view>
+    <van-stepper value="{{submitData.minTeamSize}}" min="{{minTeamSize}}"/>
+  </view>
+  <view class="divider line">
+    <view class="font">人数包含我自己：</view>
+    <van-switch checked="{{containMe}}" size="24px" bind:change="changeContainMe"/>
+  </view>
+  <view class="divider">
+    <view class="font">描述：</view>
+    <view>
+      <van-field
+        value="{{submitData.introduce}}"
+        type="textarea"
+        placeholder="请输入描述"
+        autosize="{{autosize}}"
+        maxlength="200"
+        border="{{true}}"
+        clearable
+        custom-style="border-color: black;"
+      />
+    </view>
+  </view>
+  <view class="divider">
+    <view class="font">图片：</view>
+    <van-uploader file-list="{{pictureUrlArray}}" use-before-read
+     bind:before-read="beforeReadPicture" bind:after-read="afterReadPicture" />
+  </view>
+  <view class="divider">
+    <view class="font">截止时间：</view>
+    <van-field
+      value="{{submitData.expireTime}}"
+      disabled
+      placeholder="请选择截止时间"
+      bindtap="openShowExpireDate"
+      style="--field-input-disabled-text-color: rgba(80, 80, 80, 1);"
+    />
+    <van-calendar show="{{showExpireDate}}" bind:close="closeShowExpireDate" bind:confirm="confirmShowExpireDate"/>
+    <van-popup
+      show="{{showExpireTime}}"
+      position="bottom"
+      custom-style="height: 50%;"
+      bind:close="closeShowExpireTime">
+      <van-datetime-picker
+        type="time"
+        value="{{expireTime}}"
+        bind:input="onInput"
+        bind:close="closeShowExpireTime"
+        bind:confirm="confirmShowExpireTime"
+        formatter="{{expireTimeFormatter}}"
+      />
+    </van-popup>
+  </view>
+  <view class="divider">
+    <view class="font">标签：</view>
+    <view class="tag" bindtap="openShowTag">
+      <view style="display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap;">
+        <view wx:for="{{chooseLabelArr}}" wx:key="key" style="margin-right: 5px; margin-bottom: 5px;">
+          <van-tag round type="success" size="large" style="--tag-success-color: {{item.color}};">
+            {{item.name}}
+          </van-tag>
+        </view>
+      </view>
+    </view>
+    <van-popup
+      show="{{showTag}}"
+      round
+      closeable	
+      position="bottom"
+      custom-style="height: 50%"
+      bind:close="closeShowTag"
+    >
+      <view class="container">
+        <van-row>
+          <van-col span="24">
+            <view class="tagTitle">
+              选择标签
+            </view>
+          </van-col>
+        </van-row>
+        <view class="font">已选标签：</view>
+        <view style="display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap;">
+          <view wx:for="{{chooseLabelArr}}" wx:key="key" style="margin-right: 5px; margin-bottom: 5px;">
+            <van-tag round type="success" size="large" style="--tag-success-color: {{item.color}};"
+              bind:close="closeTag" data-item="{{item}}" closeable>
+              {{item.name}}
+            </van-tag>
+          </view>
+        </view>
+        <view class="font">可选标签：</view>
+        <view class="tagItem">
+          <view wx:for="{{labelArr}}" wx:key="key" style="margin-right: 5px; margin-bottom: 5px;"
+            bindtap="chooseTag" data-item="{{item}}">
+            <van-tag round type="success" size="large" style="--tag-success-color: {{item.color}};">
+              {{item.name}}
+            </van-tag>
+          </view>
+        </view>
+      </view>
+    </van-popup>
+  </view>
+  <van-row>
+    <van-col span="24">
+      <view style="text-align: center; margin-bottom: 200px;">
+        <van-button round type="info">确认添加</van-button>
+      </view>
+    </van-col>
+  </van-row>
+  <footer id="footer" name="create"></footer>
+</view>

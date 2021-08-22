@@ -1,0 +1,4 @@
+/* components/footer/index.wxss */
+.tabbar {
+  --tabbar-background-color: #17bbd1;
+}

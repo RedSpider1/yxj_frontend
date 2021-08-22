@@ -1,0 +1,22 @@
+.container {
+  margin: 20px;
+}
+
+.deliver {
+  margin-bottom: 10px;
+}
+
+.headImg {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.deliver1 {
+  margin-bottom: 20px;
+}
+
+.font {
+  font-size: 14px;
+  color: rgba(80, 80, 80, 1);
+  line-height: 200%;
+}

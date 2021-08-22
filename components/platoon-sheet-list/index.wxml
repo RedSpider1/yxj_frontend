@@ -1,0 +1,34 @@
+<scroll-view class="container" scroll-y='true' style="height: {{height}}px;" bindscrolltolower="list">
+  <view wx:for="{{items}}" class="subContainer" wx:key="key" bindtap="jmp" data-id="{{item.id}}">
+    <van-row>
+      <van-col span="18" class="hide">
+        {{item.title}}
+      </van-col>
+      <van-col span="6">
+        <view class="status" style="background-color: rgba(86, 236, 49, 1)" wx:if="{{item.status === '组队成功'}}">
+          {{item.status}}
+        </view>
+        <view class="status" style="background-color: rgba(154, 84, 84, 1)" wx:elif="{{item.status === '组队失败'}}">
+          {{item.status}}
+        </view>
+        <view class="status" wx:else>
+          {{item.status}}
+        </view>
+      </van-col>
+    </van-row>
+    <view class="subtitle hide">
+      {{item.subtitle}}
+    </view>
+    <view class="content">
+      <van-row>
+        <van-col span="18">
+          <view class="hide">{{item.introduce}}</view>
+        </van-col>
+        <van-col span="6" class="person">
+          {{item.person}}
+        </van-col>
+      </van-row>
+    </view>
+    <van-divider></van-divider>
+  </view>
+</scroll-view>

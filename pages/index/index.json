@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "platoon-sheet-list": "../../components/platoon-sheet-list/index",
+    "footer": "../../components/footer/index"
+  },
+  "navigationBarTitleText": "友小聚 - 首页"
+}

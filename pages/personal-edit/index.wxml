@@ -1,0 +1,78 @@
+<view class="container">
+  <view class="deliver">
+    <van-row>
+      <van-col span="24">
+        <view class="headImg">
+          <van-uploader file-list="{{avatar}}" bind:after-read="afterRead" max-count="{{1}}">
+            <van-image
+              round
+              width="100px"
+              height="100px"
+              lazy-load
+              fit="cover"
+              src="https://img.yzcdn.cn/vant/cat.jpeg"
+            />
+          </van-uploader>
+          <view class="font">
+            点击图片修改头像
+          </view>
+        </view>
+      </van-col>
+    </van-row>
+  </view>
+  <view class="deliver">
+    <van-field
+      value="{{phone}}"
+      label="手机号"
+      disabled
+      input-align="right"
+    />
+  </view>
+  <view class="deliver">
+    <van-field
+      value="{{name}}"
+      label="昵称"
+      input-align="right"
+    />
+  </view>
+  <view class="deliver">
+    <van-field
+      value="{{slogan}}"
+      label="个性签名"
+      type="textarea"
+      autosize
+      input-align="right"
+    />
+  </view>
+  <view class="deliver">
+    <van-field
+      value="{{wetchatNum}}"
+      label="微信号"
+      input-align="right"
+    />
+  </view>
+  <view class="deliver">
+    <van-field
+      value="{{birthday}}"
+      label="生日"
+      input-align="right"
+    />
+  </view>
+  <view class="deliver">
+    <van-field
+      value="{{sex}}"
+      label="性别"
+      input-align="right"
+    />
+  </view>
+  <view class="deliver">
+    <van-row>
+      <van-col span="24">
+        <view style="text-align: center;">
+          <van-button type="primary">确认修改</van-button>
+        </view>
+      </van-col>
+    </van-row>
+  </view>
+  <footer id="footer" name="personal"></footer>
+</view>

@@ -1,0 +1,37 @@
+<view class="container" wx:if="{{showChoose}}">
+  <view class="deliver shadow" bindtap="jmp">
+    <van-row>
+      <van-col>
+        <van-icon name="browsing-history" color="#f44336" size="20px"></van-icon>
+      </van-col>
+      <van-col offset="10">
+        <view>我浏览过</view>
+      </van-col>
+    </van-row>
+  </view>
+  <view class="deliver shadow" bindtap="jmp">
+    <van-row>
+      <van-col>
+        <van-icon name="add-square" color="#2196f3" size="20px"></van-icon>
+      </van-col>
+      <van-col offset="10">
+        <view>我参与过</view>
+      </van-col>
+    </van-row>
+  </view>
+  <view class="deliver shadow" bindtap="jmp">
+    <van-row>
+      <van-col>
+        <van-icon name="friends" color="rgb(153, 50, 204)" size="20px"></van-icon>
+      </van-col>
+      <van-col offset="10">
+        <view>我发起的</view>
+      </van-col>
+    </van-row>
+  </view>
+  <footer id="footer" name="view"></footer>
+</view>
+
+<view class="container" wx:else>
+  <platoon-sheet-list items="{{items}}" bind:list="list"></platoon-sheet-list>
+</view>

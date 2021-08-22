@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "footer": "../../components/footer/index"
+  },
+  "navigationBarTitleText": "友小聚 - 个人中心"
+}

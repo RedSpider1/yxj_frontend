@@ -1,0 +1,18 @@
+{
+  "name": "yxj-applet",
+  "version": "1.0.0",
+  "description": "yxj front",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "yxj",
+    "front"
+  ],
+  "author": "CoolerWu (1447186835@qq.com)",
+  "license": "ISC",
+  "dependencies": {
+    "@vant/weapp": "^1.8.2"
+  }
+}
