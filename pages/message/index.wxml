@@ -1,0 +1,4 @@
+<view class="container">
+  
+  <footer id="footer" name="message"></footer>
+</view>

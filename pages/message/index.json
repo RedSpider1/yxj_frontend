@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "友小聚 - 消息",
+  "usingComponents": {
+    "footer": "../../components/footer/index"
+  }
+}

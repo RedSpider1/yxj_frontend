@@ -27,33 +27,47 @@ Component({
    */
   methods: {
     onChange (event) {
-      this.setData({home: '', view: '', create: '', message: '', personal: ''})
-      this.setData({active: event.detail})
+      const pages = getCurrentPages()
+      const currentPage = pages[pages.length - 1];
+      const route = currentPage.route
       switch (event.detail) {
         case 'view':
-          this.setData({view: '我的'})
+          if (route === 'pages/myself/index') {
+            break
+          }
           wx.navigateTo({
             url: '/pages/myself/index',
           })
           break
         case 'create':
-          this.setData({create: '创建组队单'})
+          if (route === 'pages/create-platoon/index') {
+            break
+          }
           wx.navigateTo({
             url: '/pages/create-platoon/index',
           })
           break
         case 'message':
-          this.setData({message: '消息'})
+          if (route === 'pages/message/index') {
+            break
+          }
+          wx.navigateTo({
+            url: '/pages/message/index',
+          })
           break
         case 'personal':
-          this.setData({personal: '个人中心'})
+          if (route === 'pages/personal-center/index') {
+            break
+          }
           wx.navigateTo({
             url: '/pages/personal-center/index',
           })
           break
         case 'home':
         default:
-          this.setData({home: '首页'})
+          if (route === 'pages/index/index') {
+            break
+          }
           wx.navigateTo({
             url: '/pages/index/index',
           })

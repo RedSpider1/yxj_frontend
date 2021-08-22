@@ -5,7 +5,8 @@
     "pages/create-platoon/index",
     "pages/personal-center/index",
     "pages/personal-edit/index",
-    "pages/myself/index"
+    "pages/myself/index",
+    "pages/message/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
