@@ -8,6 +8,16 @@ export const groupTeamDetails = {
   desc: '根据id查询组队单'
 }
 
+export const listSearchHistory = {
+  url: 'groupTeam/search/history/pageQuery',
+  desc: '获取查询历史'
+}
+
+export const groupTeamSearch = {
+  url: 'groupTeam/search/byKeyWord',
+  desc: '组队单搜索'
+}
+
 export const getFileToken = {
   url: 'file/token',
   desc: '文件/图片上传获取token'

@@ -1,10 +1,30 @@
 <view>
-  <van-notice-bar left-icon="volume-o" scrollable mode="closeable" text="小程序上线啦！！！"/>
+  <van-notice-bar left-icon="volume-o" scrollable mode="closeable" text="小程序上线啦！！！" />
   <van-tabs active="{{ active }}" bind:change="onChangeActive">
     <van-tab title="最新">
       <platoon-sheet-list items="{{items}}" bind:list="list" height="{{height}}"></platoon-sheet-list>
     </van-tab>
     <van-tab title="搜索">
+      <van-search placeholder="请输入搜索关键词"   bind:change="onKeyWordChange" bind:search="search"></van-search>
+      <view style="margin: 0px 20px;">
+        <view style="margin: 10px 0px;">搜索历史</view>
+        <view style="display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap;">
+          <view wx:for="{{historyLabels}}" wx:key="key" style="margin-right: 5px; margin-bottom: 5px;">
+            <van-tag round type="success" size="large" style="--tag-success-color: {{item.color}};">
+              {{item.labelName}}
+            </van-tag>
+          </view>
+        </view>
+        <view style="margin: 10px 0px;">标签搜索</view>
+        <view style="display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap;">
+          <view wx:for="{{searchLabels}}" wx:key="key" style="margin-right: 5px; margin-bottom: 5px;">
+            <van-tag round type="success" size="large" style="--tag-success-color: {{item.color}};">
+              {{item.labelName}}
+            </van-tag>
+          </view>
+        </view>
+      </view>
+      <platoon-sheet-list items="{{searchItems}}" bind:list="search" height="{{height}}"></platoon-sheet-list>
     </van-tab>
   </van-tabs>
   <footer id="footer" name="home"></footer>
