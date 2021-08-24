@@ -1,4 +1,5 @@
-<view class="container">
+<header title="编辑个人信息" needReturn="{{true}}"></header>
+<view>
   <view class="deliver">
     <van-row>
       <van-col span="24">
@@ -13,27 +14,38 @@
               src="https://img.yzcdn.cn/vant/cat.jpeg"
             />
           </van-uploader>
-          <view class="font">
-            点击图片修改头像
+          <view class="font" style="margin-top: 11px;">
+            <button class="editBtn" style="color: {{color}};">上传头像</button>
           </view>
         </view>
       </van-col>
     </van-row>
   </view>
-  <view class="deliver">
+  <view style="margin-top: 18px;">
     <van-field
-      value="{{phone}}"
-      label="手机号"
-      disabled
-      input-align="right"
+      value="{{name}}"
+      label="昵称"
+      class="field"
     />
   </view>
   <view class="deliver">
     <van-field
-      value="{{name}}"
-      label="昵称"
-      input-align="right"
+      value="{{sex}}"
+      label="性别"
+      class="field"
+      icon="arrow"
     />
+  </view>
+  <view class="deliver">
+    <van-field
+      value="{{birthday}}"
+      label="生日"
+      class="field"
+      icon="arrow"
+      bind:click-icon="openChooseDate"
+    />
+    <!-- <van-calendar color="{{color}}" show="{{showChooseDate}}" bind:close="closeChooseDate"
+     bind:confirm="chooseDate" max-date="{{maxDate}}"/> -->
   </view>
   <view class="deliver">
     <van-field
@@ -41,38 +53,11 @@
       label="个性签名"
       type="textarea"
       autosize
-      input-align="right"
+      class="field"
     />
   </view>
-  <view class="deliver">
-    <van-field
-      value="{{wetchatNum}}"
-      label="微信号"
-      input-align="right"
-    />
-  </view>
-  <view class="deliver">
-    <van-field
-      value="{{birthday}}"
-      label="生日"
-      input-align="right"
-    />
-  </view>
-  <view class="deliver">
-    <van-field
-      value="{{sex}}"
-      label="性别"
-      input-align="right"
-    />
-  </view>
-  <view class="deliver">
-    <van-row>
-      <van-col span="24">
-        <view style="text-align: center;">
-          <van-button type="primary">确认修改</van-button>
-        </view>
-      </van-col>
-    </van-row>
+  <view>
+    <button class="save">保存</button>
   </view>
   <footer id="footer" name="personal"></footer>
 </view>

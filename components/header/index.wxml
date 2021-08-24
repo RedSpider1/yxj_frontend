@@ -1,0 +1,15 @@
+<!--components/header-default/index.wxml-->
+<view>
+  <van-nav-bar
+    title="{{title}}"
+    left-arrow
+    bind:click-left="back"
+    style="--nav-bar-background-color: {{color}}; --nav-bar-icon-color: white; --nav-bar-title-text-color: white;"
+    wx:if="{{needReturn}}"
+  />
+  <van-nav-bar
+    title="{{title}}"
+    style="--nav-bar-background-color: {{color}}; --nav-bar-icon-color: white; --nav-bar-title-text-color: white;"
+    wx:else
+  />
+</view>

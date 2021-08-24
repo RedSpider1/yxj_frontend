@@ -2,3 +2,44 @@
   margin-top: 40px;
   text-align: center;
 }
+
+.editBtn {
+  background: #F7F7F7;
+  border-radius: 4px;
+  font-family: Microsoft YaHei;
+  font-style: normal;
+  font-weight: 290;
+  font-size: 17px;
+  line-height: 250%;
+  text-align: center;
+  height: 40px;
+  width: 50%;
+}
+
+.editBtn::after {
+  border: none;
+}
+
+.field {
+  font-family: Microsoft YaHei;
+  font-style: normal;
+  font-weight: 290;
+  font-size: 17px;
+  line-height: 23px;
+  height: 56px;
+  --field-label-color: rgba(0, 0, 0, 0.9);
+  --field-input-text-color: rgba(0, 0, 0, 0.3);
+}
+
+.save {
+  background: #06C3ED;
+  border-radius: 3.80435px;
+  color: white;
+  width: 25%;
+  height: 40px;
+  margin-top: 13px;
+}
+
+.save::after {
+  border: none;
+}

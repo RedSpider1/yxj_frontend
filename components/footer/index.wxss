@@ -1,4 +1,3 @@
-/* components/footer/index.wxss */
 .tabbar {
-  --tabbar-background-color: #17bbd1;
+  --tabbar-height: 57px;
 }

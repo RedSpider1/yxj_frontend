@@ -1,3 +1,4 @@
+<header title="友小聚 - {{title}}" needReturn="{{true}}"></header>
 <movable-area class="container" style="width: {{movableBtn.width}}px; height: {{movableBtn.height}}px;">
   <view class="newTag">
     <van-icon name="new" color="red" size="50px"/>

@@ -1,5 +1,5 @@
+<header title="友小聚 - 个人中心"></header>
 <view class="container">
-  <login></login>
   <view class="deliver">
     <van-row>
       <van-col span="24">

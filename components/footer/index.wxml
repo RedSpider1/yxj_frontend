@@ -1,10 +1,44 @@
 <view>
-  <van-tabbar class="tabbar" active="{{ active }}" bind:change="onChange"
+  <van-tabbar class="tabbar" style="--tabbar-background-color: {{color}}" active="{{active}}" bind:change="onChange"
    active-color="#ffffff" inactive-color="#cde7ec" placeholde="{{true}}">
-    <van-tabbar-item name="home" icon="wap-home">{{home}}</van-tabbar-item>
-    <van-tabbar-item name="view" icon="browsing-history">{{view}}</van-tabbar-item>
-    <van-tabbar-item name="create" icon="plus">{{create}}</van-tabbar-item>
-    <van-tabbar-item name="message" icon="chat">{{message}}</van-tabbar-item>
-    <van-tabbar-item name="personal" icon="manager">{{personal}}</van-tabbar-item>
+    <van-tabbar-item name="home">
+      <view class="flex column align-items-center">
+        <van-icon class="iconfont icon-home" style="font-size: 25px;" />
+        <view style="margin-top: 5px; margin-bottom: 10px;">
+          {{home}}
+        </view>
+      </view>
+    </van-tabbar-item>
+    <van-tabbar-item name="view">
+      <view class="flex column align-items-center">
+        <van-icon class="iconfont icon-xiangguan" style="font-size: 25px;" />
+        <view style="margin-top: 5px; margin-bottom: 10px;">
+          {{view}}
+        </view>
+      </view>
+    </van-tabbar-item>
+    <van-tabbar-item name="create">
+      <view class="flex column align-items-center">
+        <van-icon class="iconfont icon-jiahao" style="font-size: 50px;" />
+        <view style="margin-bottom: 5px;">
+        </view>
+      </view>
+    </van-tabbar-item>
+    <van-tabbar-item name="message">
+      <view class="flex column align-items-center">
+        <van-icon class="iconfont icon-xiaoxi" style="font-size: 25px;" />
+        <view style="margin-top: 5px; margin-bottom: 10px;">
+          {{message}}
+        </view>
+      </view>
+    </van-tabbar-item>
+    <van-tabbar-item name="personal">
+      <view class="flex column align-items-center">
+        <van-icon class="iconfont icon-tubiaolunkuo-" style="font-size: 25px;" />
+        <view style="margin-top: 5px; margin-bottom: 10px;">
+          {{personal}}
+        </view>
+      </view>
+    </van-tabbar-item>
   </van-tabbar>
 </view>

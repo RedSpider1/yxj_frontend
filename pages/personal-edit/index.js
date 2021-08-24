@@ -5,14 +5,26 @@ Page({
    * 页面的初始数据
    */
   data: {
+    color: getApp().globalData.curThemeStyle,
     avatar: '', // 头像地址
-    phone: '', // 手机号
     name: '', // 昵称
     birthday: '', // 生日
-    email: '', // 邮箱
     sex: '', // 性别
     slogan: '', // 个性签名
-    wechatNum: '', // 微信号
+
+
+    showChooseDate: false,
+    // minDate: new Date(1979, 0, 1).getTime(),
+    maxDate: new Date(2021, 0, 1).getTime(),
+  },
+  closeChooseDate: function () {
+    this.setData({showChooseDate: false})
+  },
+  openChooseDate: function () {
+    this.setData({showChooseDate: true})
+  },
+  chooseDate: function () {
+    // this
   },
 
   /**

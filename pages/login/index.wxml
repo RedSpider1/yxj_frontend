@@ -1,0 +1,54 @@
+<view wx:if="{{!loginSuccess}}">
+  <header title="友小聚 - 登录" needReturn="{{true}}" id="header"></header>
+  <view class="container" style="height: {{containerHeight}}px;">
+    <view>
+      <view style="justify-content: center;" class="flex row">
+        <button class="loginButton" style="background-color: {{color}}; width: {{loginButtonWidth}}px;"
+          open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" disabled="{{!agreeProtocol}}">
+          微信一键登录
+        </button>
+      </view>
+      <view style="margin-top: 13px; align-items: center;" class="flex column">
+        <van-checkbox value="{{agreeProtocol}}" style="--checkbox-checked-icon-color: #07C160;" 
+          bind:change="agreeProtocol" icon-size="14px">
+          <view class="font">登录代表您已同意</view>
+        </van-checkbox>
+        <view class="policyFont">
+          友小聚用户服务协议
+        </view>
+        <view class="policyFont">
+          友小聚隐私政策
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view wx:else>
+  <header title="友小聚 - 登录成功" needReturn="{{true}}" id="header"></header>
+  <view class="container" style="height: {{containerHeight}}px;">
+    <view>
+      <view>
+        <icon type="success" size="45"></icon>
+      </view>
+      <view class="loginSuccess">
+        恭喜您登录成功！
+      </view>
+      <view class="nextStep">
+        下一步您可以：
+      </view>
+      <view style="justify-content: center; margin-top: 16px;" class="flex row">
+        <button class="loginButton" style="background-color: {{color}}; width: {{loginButtonWidth}}px;"
+          bindtap="goPersonalEdit">
+          完善个人信息
+        </button>
+      </view>
+      <view style="justify-content: center; margin-top: 10px;" class="flex row">
+        <button class="loginButton" style="background-color: #979797; width: {{loginButtonWidth}}px;"
+         bindtap="goIndex">
+          返回首页
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

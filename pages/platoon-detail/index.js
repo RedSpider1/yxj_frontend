@@ -97,8 +97,6 @@ Page({
         pictureUrlArray: pictureUrlArray,
         largeSize: Math.min(wx.getSystemInfoSync().windowHeight, wx.getSystemInfoSync().windowWidth) - 50,
       })
-
-      wx.setNavigationBarTitle({title: '友小聚 - ' + res.title})
     })
 
     http.get(request.groupTeamQueryUsers.url, {groupId: this.data.platoonId}).then(res => {

@@ -1,9 +1,9 @@
 {
+  "navigationStyle": "custom",
   "usingComponents": {
     "platoon-sheet-list": "../../components/platoon-sheet-list/index",
     "van-search": "@vant/weapp/search/index",
     "van-tag": "@vant/weapp/tag/index",
     "footer": "../../components/footer/index"
-  },
-  "navigationBarTitleText": "友小聚 - 首页"
+  }
 }

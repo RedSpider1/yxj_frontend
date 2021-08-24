@@ -1,3 +1,4 @@
+<header title="友小聚 - 首页"></header>
 <view>
   <van-notice-bar left-icon="volume-o" scrollable mode="closeable" text="小程序上线啦！！！" />
   <van-tabs active="{{ active }}" bind:change="onChangeActive">

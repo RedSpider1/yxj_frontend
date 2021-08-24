@@ -1,5 +1,13 @@
-// //filter.js
-// let appData = getApp().globalData;
+//filter.js
+const string = require('./string')
+
+export const isLogin = function () {
+  if (string.isEmpty(getApp().globalData.token)) {
+    wx.navigateTo({
+      url: '/pages/login/index',
+    })
+  }
+}
 
 // export const authFilter = function (pageObj) {
 //     if(pageObj.onShow) {

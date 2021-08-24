@@ -1,6 +1,5 @@
 {
-  "component": true,
-  "navigationBarTitleText": "友小聚 - 登录",
+  "navigationStyle": "custom",
   "usingComponents": {
     "van-field": "@vant/weapp/field/index",
     "van-checkbox": "@vant/weapp/checkbox/index",

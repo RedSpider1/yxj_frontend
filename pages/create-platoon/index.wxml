@@ -1,3 +1,4 @@
+<header title="友小聚 - 创建组队单"></header>
 <view class="container">
   <view class="divider">
     <van-field

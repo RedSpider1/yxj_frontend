@@ -1,4 +1,5 @@
 @import '/miniprogram_npm/@vant/weapp/common/index.wxss';
+@import './icon.wxss';
 
 page {
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
@@ -16,4 +17,20 @@ page {
   font-size: 14px;
   color: rgba(80, 80, 80, 1);
   line-height: 200%;
+}
+
+.flex {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.align-items-center {
+  align-items: center;
 }

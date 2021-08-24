@@ -1,0 +1,66 @@
+.container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divider {
+  margin-bottom: 10px;
+}
+
+.font {
+  font-family: ABeeZee;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center !important;
+  color: #979797;
+}
+
+.policyFont {
+  margin-top: 9px;
+  font-family: ABeeZee;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  color: rgba(0, 170, 255, 0.6);
+}
+
+.loginButton {
+  height: 10%;
+  border-radius: 4px;
+  font-family: ABeeZee;
+  font-weight: normal;
+  font-size: 17px;
+  text-align: center;
+  color: white !important;
+}
+
+.loginButton[disabled] {
+  color: #fff !important;
+  background: #979797 !important;
+}
+
+.loginSuccess {
+  font-family: Microsoft YaHei;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  margin-top: 16px;
+  color: #000000;
+}
+
+.nextStep {
+  font-family: Microsoft YaHei;
+  font-style: normal;
+  font-weight: 290;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  color: #979797;
+  margin-top: 6px;
+}

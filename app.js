@@ -14,8 +14,9 @@ App({
     })
   },
   globalData: {
+    themeStyle: ['#06C3ED', '#D2CB1D', '#D21DAA'], // primary second third
+    curThemeStyle: '#06C3ED',
+    code: null,
     token: null,
-    authFilter: null,
-    code: null
   }
 })

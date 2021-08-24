@@ -1,8 +1,9 @@
 {
-  "navigationBarTitleText": "友小聚 - 修改个人信息",
+  "navigationStyle": "custom",
   "usingComponents": {
     "van-uploader": "@vant/weapp/uploader/index",
     "van-field": "@vant/weapp/field/index",
-    "footer": "../../components/footer/index"
+    "footer": "../../components/footer/index",
+    "van-calendar": "@vant/weapp/calendar/index"
   }
 }

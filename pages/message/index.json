@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "友小聚 - 消息",
+  "navigationStyle": "custom",
   "usingComponents": {
     "footer": "../../components/footer/index"
   }

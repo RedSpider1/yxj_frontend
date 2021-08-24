@@ -1,3 +1,4 @@
+<header title="友小聚 - 我的"></header>
 <view class="container" wx:if="{{showChoose}}">
   <view class="deliver shadow" bindtap="jmp" data-type="view">
     <van-row>

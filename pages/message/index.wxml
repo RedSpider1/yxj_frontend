@@ -1,3 +1,4 @@
+<header title="友小聚 - 消息"></header>
 <view class="container">
   <view>
     <view>你的code：{{code}}</view>
