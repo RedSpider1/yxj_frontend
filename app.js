@@ -1,4 +1,5 @@
-let auth = require('./utils/auth')
+const http = require('./utils/http')
+const request = require('./utils/request')
 
 App({
   onLaunch() {
@@ -8,8 +9,11 @@ App({
 
     wx.login({
       success: res => {
-        console.log(res.code)
         this.globalData.code = res.code
+        let that = this
+        http.post(request.login.url, {jsCode: res.code}).then(res => {
+          that.globalData.token = res.token
+        })
       }
     })
   },

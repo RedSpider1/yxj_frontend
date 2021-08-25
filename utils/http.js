@@ -16,11 +16,15 @@ function fetch(options) {
   return new Promise((resolve, reject) => {
     let header = {}
     if (options.method === 'POST') {
-      let app = getApp()
+      
       header = {
-        'content-type': 'application/json',
-        'Authorization': 'Bearer ' + app.token
+        'ContentType': 'application/json'
       }
+    }
+
+    const app = getApp()
+    if (app.globalData.token !== null) {
+      header.Authorization = 'Bearer ' + app.globalData.token
     }
 
     wx.request({

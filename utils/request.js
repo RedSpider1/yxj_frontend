@@ -30,5 +30,15 @@ export const groupTeamQueryUsers = {
 
 export const labelList = {
   url: 'label/list',
-  desc: '查询所有标签',
+  desc: '查询所有标签'
+}
+
+export const login = {
+  url: 'wx/login',
+  desc: '登录'
+}
+
+export const phone = {
+  url: 'wx/phone',
+  desc: '绑定手机号'
 }
