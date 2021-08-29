@@ -16,15 +16,33 @@ Component({
 
   /**
    * 组件的初始数据
-   */
+   */ 
   data: {
-    color: getApp().globalData.curThemeStyle,
+    primary: getApp().globalData.themes.primary,
+    second: getApp().globalData.themes.second,
     active: '',
-    home: '首页',
-    view: '相关',
-    create: '',
-    message: '消息',
-    personal: '我的',
+    items: [
+      {
+        icon: 'home-o',
+        text: '首页',
+        defaultPath: 'pages/home/index'
+      },
+      {
+        icon: 'like-o',
+        text: '相关',
+        defaultPath: 'pages/relation/index'
+      },
+      {
+        icon: 'chat-o',
+        text: '消息',
+        defaultPath: 'pages/message/index'
+      },
+      {
+        icon: 'user-o',
+        text: '我的',
+        defaultPath: 'pages/me/index'
+      },
+    ]
   },
 
   /**
@@ -32,58 +50,30 @@ Component({
    */
   methods: {
     onChange (event) {
-      const pages = getCurrentPages()
-      const currentPage = pages[pages.length - 1];
-      const route = currentPage.route
-      switch (event.detail) {
-        case 'view':
-          if (route === 'pages/myself/index') {
-            break
-          }
-          wx.navigateTo({
-            url: '/pages/myself/index',
+      this.setData({ active: event.detail });
+      this.data.items.forEach( item => {
+        if(item.text == event.detail) {
+          wx.redirectTo({
+            url: '/' + item.defaultPath,
           })
-          break
-        case 'create':
-          if (route === 'pages/create-platoon/index') {
-            break
-          }
-          wx.navigateTo({
-            url: '/pages/create-platoon/index',
-          })
-          break
-        case 'message':
-          if (route === 'pages/message/index') {
-            break
-          }
-          wx.navigateTo({
-            url: '/pages/message/index',
-          })
-          break
-        case 'personal':
-          if (route === 'pages/personal-center/index') {
-            break
-          }
-          wx.navigateTo({
-            url: '/pages/personal-center/index',
-          })
-          break
-        case 'home':
-        default:
-          if (route === 'pages/index/index') {
-            break
-          }
-          wx.navigateTo({
-            url: '/pages/index/index',
-          })
-          break
-      }
+        }
+      })
     },
     load () {
       // todo
     }
   },
-  attached: function () {
-    this.load()
+  lifetimes: {
+    attached () {
+      const pages = getCurrentPages() //获取加载的页面
+      const currentPage = pages[pages.length-1] //获取当前页面的对象
+      const route = currentPage.route
+      this.data.items.forEach( item => {
+        if(item.defaultPath == route) {
+          this.setData({ active: item.text });
+        }
+      })
+    }
   }
+
 })

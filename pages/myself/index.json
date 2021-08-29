@@ -1,7 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "footer": "../../components/footer/index",
-    "platoon-sheet-list": "../../components/platoon-sheet-list/index"
-  }
-}

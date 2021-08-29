@@ -121,11 +121,8 @@ Page({
     });
   },
   onLoad () {
-    this.list()
-    this.listLabel()
+    // this.list()
+    // this.listLabel()
     // this.listSearchHistory()
   },
-  onShow () {
-    this.selectComponent('#footer').load()
-  }
 })

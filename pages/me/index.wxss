@@ -1,5 +1,5 @@
 .container {
-  margin: 20px;
+  
 }
 
 .deliver {
@@ -8,7 +8,7 @@
 
 .headImg {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .deliver1 {
@@ -19,4 +19,10 @@
   font-size: 14px;
   color: rgba(80, 80, 80, 1);
   line-height: 200%;
+}
+
+.logout-con {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
 }

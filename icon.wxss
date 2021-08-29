@@ -10,7 +10,7 @@
 .iconfont {
   font-family: "iconfont" !important;
   font-size: 16px;
-  font-style: normal;
+  /* font-style: normal; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -19,11 +19,11 @@
   content: "\e726";
 }
 
-.icon-xiangguan:before {
+.icon-relation:before {
   content: "\e6c4";
 }
 
-.icon-tubiaolunkuo-:before {
+.icon-me:before {
   content: "\e60e";
 }
 
@@ -31,6 +31,6 @@
   content: "\e6e2";
 }
 
-.icon-xiaoxi:before {
+.icon-message:before {
   content: "\e74c";
 }

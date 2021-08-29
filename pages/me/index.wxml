@@ -1,0 +1,27 @@
+<header title="友小聚 - 我的"></header>
+<van-dialog id="van-dialog" />
+<view class="container">
+  <view class="deliver">
+    <van-row>
+      <van-col span="24">
+        <view class="headImg">
+          <van-image round width="100px" height="100px" lazy-load fit="cover"
+            src="https://img.yzcdn.cn/vant/cat.jpeg" />
+        </view>
+      </van-col>
+    </van-row>
+  </view>
+  <van-cell-group title="个人信息">
+    <van-cell title="昵称" value="奥特曼" />
+    <van-cell title="手机号" value="13812345678" />
+    <van-cell title="微信号" value="wechatNum" />
+    <van-cell title="生日" value="1991-01-01" />
+    <van-cell title="性别" value="男" />
+    <van-cell title="个性签名" value="这里字可能有点多，这里字可能有点多，这里字可能有点多，这里字可能有点多，这里字可能有点多，" />
+  </van-cell-group>
+  <view class="logout-con">
+    <button class="btn" plain bindtap="logout">注销</button>
+    <button class="btn primary-bg" bindtap="edit">编辑</button>
+  </view>
+  <footer id="footer" name="personal"></footer>
+</view>

@@ -1,5 +1,6 @@
 @import '/miniprogram_npm/@vant/weapp/common/index.wxss';
 @import './icon.wxss';
+@import './theme.wxss';
 
 page {
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
@@ -33,4 +34,14 @@ page {
 
 .align-items-center {
   align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+
+.btn {
+  border-radius: 5px;
+  margin: 10px;
+  padding: 0 15px;
+  font-size: 14px;
 }

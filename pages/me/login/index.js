@@ -1,4 +1,4 @@
-let string = require('../../utils/string')
+let string = require('../../../utils/string')
 
 Page({
 

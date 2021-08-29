@@ -1,6 +1,6 @@
 {
   "navigationStyle": "custom",
   "usingComponents": {
-    "footer": "../../components/footer/index"
+    "footer": "../../../components/footer/index"
   }
 }

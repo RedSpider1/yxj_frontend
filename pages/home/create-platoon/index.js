@@ -1,8 +1,8 @@
-let fileOp = require('../../utils/file')
-let time = require('../../utils/time')
-let request = require('../../utils/request')
-let http = require('../../utils/http')
-let color = require('../../utils/color')
+let fileOp = require('../../../utils/file')
+let time = require('../../../utils/time')
+let request = require('../../../utils/request')
+let http = require('../../../utils/http')
+let color = require('../../../utils/color')
 
 Page({
 

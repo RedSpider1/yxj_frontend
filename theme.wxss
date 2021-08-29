@@ -1,0 +1,21 @@
+.primary {
+  color: #06C3ED;
+}
+.second {
+  color: #D2CB1D;
+}
+.third {
+  color: #D21DAA;
+}
+.primary-bg {
+  background-color: #06C3ED;
+  color: white
+}
+.second-bg {
+  background-color: #D2CB1D;
+  color: white
+}
+.third-bg {
+  background-color: #D21DAA;
+  color: white
+}

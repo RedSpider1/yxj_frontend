@@ -1,13 +1,18 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/platoon-detail/index",
-    "pages/create-platoon/index",
-    "pages/personal-center/index",
-    "pages/personal-edit/index",
-    "pages/myself/index",
-    "pages/login/index",
-    "pages/message/index"
+    "pages/me/edit/index",
+
+
+    "pages/home/index",
+    "pages/home/platoon-detail/index",
+    "pages/home/create-platoon/index",
+
+    "pages/relation/index",
+
+    "pages/message/index",
+
+    "pages/me/index",
+    "pages/me/login/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,6 +42,7 @@
     "van-collapse": "@vant/weapp/collapse/index",
     "van-collapse-item": "@vant/weapp/collapse-item/index",
     "van-icon": "@vant/weapp/icon/index",
-    "van-nav-bar": "@vant/weapp/nav-bar/index"
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-dialog": "@vant/weapp/dialog/index"
   }
 }

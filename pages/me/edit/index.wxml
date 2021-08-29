@@ -14,8 +14,8 @@
               src="https://img.yzcdn.cn/vant/cat.jpeg"
             />
           </van-uploader>
-          <view class="font" style="margin-top: 11px;">
-            <button class="editBtn" style="color: {{color}};">上传头像</button>
+          <view class="flex justify-center">
+            <button class="btn primary-bg">上传头像</button>
           </view>
         </view>
       </van-col>
@@ -56,8 +56,7 @@
       class="field"
     />
   </view>
-  <view>
-    <button class="save">保存</button>
+  <view class="flex justify-center">
+    <button class="btn primary-bg">保存</button>
   </view>
-  <footer id="footer" name="personal"></footer>
 </view>
