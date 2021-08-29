@@ -38,6 +38,10 @@ page {
 .justify-center {
   justify-content: center;
 }
+.justify-between {
+  justify-content: space-between;
+}
+
 
 .btn {
   border-radius: 5px;

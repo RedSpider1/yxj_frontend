@@ -1,5 +1,7 @@
 const http = require('./utils/http')
 const request = require('./utils/request')
+const auth = require('./utils/auth')
+
 
 App({
   onLaunch() {
@@ -16,9 +18,6 @@ App({
     //     })
     //   }
     // })
-    userInfo: {
-      username: 13012345678
-    }
   },
   globalData: {
     themes: {
@@ -31,7 +30,10 @@ App({
     // todo 删除这个
     curThemeStyle: '#06C3ED',
     code: null,
+    // todo 这里为了方便前端开发随便写了个
     token: null,
-    userInfo: null,
+    userInfo: {
+      username: 13012345678
+    }
   }
 })

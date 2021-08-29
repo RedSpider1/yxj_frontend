@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/me/edit/index",
+    "pages/me/index",
 
 
     "pages/home/index",
@@ -11,7 +11,7 @@
 
     "pages/message/index",
 
-    "pages/me/index",
+    "pages/me/edit/index",
     "pages/me/login/index"
   ],
   "window": {
@@ -42,7 +42,10 @@
     "van-collapse": "@vant/weapp/collapse/index",
     "van-collapse-item": "@vant/weapp/collapse-item/index",
     "van-icon": "@vant/weapp/icon/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-toast": "@vant/weapp/toast/index",
     "van-dialog": "@vant/weapp/dialog/index"
   }
 }

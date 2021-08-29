@@ -28,12 +28,12 @@ Page({
   },
   goIndex: function () {
     wx.navigateTo({
-      url: '/pages/index/index',
+      url: '/pages/home/index',
     })
   },
   goPersonalEdit: function () {
     wx.navigateTo({
-      url: '/pages/personal-edit/index',
+      url: '/pages/me/edit/index',
     })
   },
 

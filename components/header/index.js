@@ -33,7 +33,7 @@ Component({
       let pages = getCurrentPages()
       if (pages.length === 1) {
         wx.navigateTo({
-          url: '/pages/index/index',
+          url: '/pages/home/index',
         })
         return
       }
