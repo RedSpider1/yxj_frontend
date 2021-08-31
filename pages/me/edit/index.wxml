@@ -8,10 +8,10 @@
             <van-image round width="100px" height="100px" lazy-load fit="cover" src="{{userInfo.img}}" />
           </van-uploader>
           <view class="flex justify-center">
-            <button class="btn primary-bg">上传头像</button>
+            <button class="btn primary-bg" bindtap="uploadImg">上传头像</button>
           </view>
           <view class="flex justify-center">
-            <button class="btn primary-bg" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信同步</button>
+            <button class="btn primary-bg" bindtap="getUserProfile">同步微信信息</button>
           </view>
         </view>
       </van-col>

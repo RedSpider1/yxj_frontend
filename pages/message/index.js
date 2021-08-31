@@ -11,7 +11,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({code: getApp().globalData.code})
+    wx.login({
+      timeout: 3000,
+      success: (res) => {
+        this.setData({code: res.code})
+      }
+    })
   },
 
   /**

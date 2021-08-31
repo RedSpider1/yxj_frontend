@@ -1,8 +1,5 @@
 {
   "pages": [
-    "pages/me/index",
-
-
     "pages/home/index",
     "pages/home/platoon-detail/index",
     "pages/home/create-platoon/index",
@@ -11,6 +8,7 @@
 
     "pages/message/index",
 
+    "pages/me/index",
     "pages/me/edit/index",
     "pages/me/login/index"
   ],

@@ -81,15 +81,36 @@ Component({
       // todo 回调
       Toast.success('保存成功');
     },
-    bindGetUserInfo (e) {
-      const userInfo = e.detail.userInfo
-      this.setData({
-        'userInfo.img': userInfo.avatarUrl,
-        'userInfo.nickName': userInfo.nickName,
-        'userInfo.sex': userInfo.gender,
+    getUserProfile (e) {
+      wx.getUserProfile({
+        desc: '测试',
+        success: (res) => {
+          this.setData({
+            'userInfo.nickName': res.userInfo.nickName,
+            // todo 这里性别要处理下
+            'userInfo.sex': getSexFromWechatGender(res.userInfo.gender),
+            'userInfo.img': res.userInfo.avatarUrl,
+          })
+        }
       })
     },
-
+    uploadImg() {
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['compressed'],
+        sourceType: ['album', 'camera'],
+        success: (res) => {
+          const tempFilePaths = res.tempFilePaths
+          console.log(tempFilePaths)
+          // 参考https://developers.weixin.qq.com/miniprogram/dev/api/network/upload/wx.uploadFile.html
+          wx.uploadFile({
+            filePath: 'filePath',
+            name: 'name',
+            url: 'url',
+          })
+        }
+      })
+    },
     onLoad: function (options) {
     },
     onPullDownRefresh: function () {
@@ -101,3 +122,13 @@ Component({
     }
   }
 })
+
+function getSexFromWechatGender(gender) {
+  if(gender == 1) {
+    return '男'
+  }
+  if(gender == 2) {
+    return '女'
+  }
+  return '保密'
+}
