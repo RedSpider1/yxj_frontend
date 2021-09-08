@@ -18,10 +18,6 @@
     </van-row>
   </view>
   <view style="margin-top: 18px;">
-    <van-cell-group title="联系方式">
-      <van-cell value="{{userInfo.phoneNum}}" icon="phone" label="手机号(不可修改)"/>
-      <van-field value="{{userInfo.wechatNum}}" left-icon="wechat" label="微信号" class="field" />
-    </van-cell-group>
     <van-cell-group title="个人信息">
     <van-field value="{{userInfo.nickName}}" label="昵称" class="field" left-icon="friends"/>
     <van-cell value="{{userInfo.sex}}" title="性别" bind:click="editSex" is-link  icon="smile"/>

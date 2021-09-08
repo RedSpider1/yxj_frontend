@@ -14,6 +14,7 @@
 </view>
 <van-cell-group title="操作">
   <van-cell title="修改信息" is-link bind:click="edit" />
+  <van-cell title="联系方式" is-link bind:click="contact" />
   <van-cell title="反馈建议" is-link />
   <van-cell title="注销登录" is-link bind:click="logout" />
 </van-cell-group>

@@ -10,7 +10,10 @@
 
     "pages/me/index",
     "pages/me/edit/index",
-    "pages/me/login/index"
+    "pages/me/login/index",
+
+    "pages/me/contact/index",
+    "pages/me/contact/edit/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -44,6 +47,11 @@
     "van-nav-bar": "@vant/weapp/nav-bar/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
     "van-toast": "@vant/weapp/toast/index",
-    "van-dialog": "@vant/weapp/dialog/index"
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index"
   }
 }

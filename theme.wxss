@@ -19,3 +19,8 @@
   background-color: #D21DAA;
   color: white
 }
+
+.warning-bg {
+  background-color: #ff976a;
+  color: white
+}

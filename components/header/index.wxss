@@ -1,1 +1,6 @@
 /* components/header-default/index.wxss */
+.left-icon {
+  color: white;
+  font-size: 24px;
+  margin-right: 10px;
+}

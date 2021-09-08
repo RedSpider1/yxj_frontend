@@ -39,6 +39,11 @@ Component({
       }
 
       wx.navigateBack({delta: 1})
+    },
+    home() {
+      wx.navigateTo({
+        url: '/pages/home/index',
+      })
     }
   }
 })

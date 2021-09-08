@@ -1,0 +1,13 @@
+<header title="联系方式" needReturn="{{true}}"></header>
+<view>
+  <view style="margin-top: 18px;">
+    <van-cell-group title="联系方式">
+      <van-cell wx:for="{{contacts}}" wx:key="id" value="{{item.value}}" left-icon="wechat" label="{{item.type}}"
+        class="field" is-link="{{index != 0}}" data-item="{{item}}" ontap="editContact" />
+    </van-cell-group>
+  </view>
+  <view class="flex justify-center">
+    <button class="btn primary-bg" bindtap="addContact">新建</button>
+  </view>
+</view>
+<van-toast id="van-toast" />

@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-field": "@vant/weapp/field/index",
+    "footer": "../../../components/footer/index",
+    "van-calendar": "@vant/weapp/calendar/index"
+  }
+}

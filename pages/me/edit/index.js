@@ -7,8 +7,6 @@ Component({
     userInfo: {
       img: 'https://img.yzcdn.cn/vant/cat.jpeg',
       nickName: '叮当猫',
-      phoneNum: '13112345678',
-      wechatNum: 'mywechat',
       sex: '男',
       birthday: '1999-01-01',
       slogan: '个性签名限制50字'

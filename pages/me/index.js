@@ -14,6 +14,11 @@ Component({
         url: '/pages/me/edit/index',
       })
     },
+    contact() {
+      wx.navigateTo({
+        url: '/pages/me/contact/index',
+      })
+    },
     logout() {
       Dialog.confirm({
           title: '确定注销登录',
@@ -28,7 +33,7 @@ Component({
         });
     },
     onLoad: function (options) {
-      auth.isLogin()
+      // auth.isLogin()
       // 页面创建时执行
     },
     onPullDownRefresh: function () {
