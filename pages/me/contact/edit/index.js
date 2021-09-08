@@ -28,24 +28,28 @@ Component({
   },
   methods: {
     saveContact() {
-      Toast.success('保存成功');
-      wx.navigateTo({
-        url: '/pages/me/contact/index',
-      })
+      this.toastAndBack('保存成功')
     },
     deleteContact() {
-      Toast.success('删除成功');
-      wx.navigateTo({
-        url: '/pages/me/contact/index',
-      })
+      this.toastAndBack('删除成功')
+    },
+    toastAndBack(msg) {
+      Toast({
+        type: 'success',
+        message: msg,
+        forbidClick: true,
+        duration: 1000,
+        onClose: () => {
+          wx.navigateTo({
+            url: '/pages/me/contact/index',
+          })
+        },
+      });
     },
     onLoad: function (options) {
       this.getOpenerEventChannel().on("contact", (data) => {
-        // todo 这里可以找一下api或者抽一个公共函数，复制对象属性
         this.setData({
-          'currentContact.id': data.id,
-          'currentContact.type': data.type,
-          'currentContact.value': data.value,
+          currentContact: { ...data }
         })
       })
     },

@@ -16,3 +16,4 @@
     <button class="btn primary-bg" bindtap="saveContact">{{currentContact.id == 0 ? '创建' : '保存'}}</button>
   </view>
 </view>
+<van-toast id="van-toast"/>
