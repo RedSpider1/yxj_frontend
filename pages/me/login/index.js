@@ -1,4 +1,6 @@
 let string = require('../../../utils/string')
+const http = require('../../../utils/http')
+const request = require('../../../utils/request')
 
 Page({
 
@@ -6,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    color: getApp().globalData.curThemeStyle,
+    color: getApp().globalData.themes.primary,
     agreeProtocol: false, // 同意注册/登录
     containerHeight: 0,
     loginButtonWidth: 0,
@@ -16,15 +18,16 @@ Page({
     this.setData({agreeProtocol: !this.data.agreeProtocol})
   },
   getPhoneNumber (event) {
-    console.log(event)
-    wx.getUserInfo({
-      success: function (res) {
-        console.log(res)
-      }
+    const phoneDetail = event.detail
+    http.post(request.phone.url, {
+      cloudId: phoneDetail.cloudId,
+      encryptedData: phoneDetail.encryptedData,
+      iv: phoneDetail.iv
+    }).then(res => {
+      this.setData({loginSuccess: true})
+    }).catch(res => {
+      console.log(res)
     })
-    getApp().globalData.token = '1'
-    this.setData({loginSuccess: true})
-    this.reload()
   },
   goIndex: function () {
     wx.navigateTo({
@@ -55,12 +58,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (!string.isEmpty(getApp().globalData.token)) {
-      this.selectComponent('#header').back()
-      return
+    const app = getApp()
+    if (!string.isEmpty(app.globalData.authToken)) {
+      const phone = app.globalData.userInfo.phone
+      if (!string.isEmpty(phone)) {
+        this.selectComponent('#header').back()
+        return
+      }
     }
 
-    this.reload()
+    let that = this
+    http.get(request.getUserInfo.url).then(res => {
+      if (res !== null && !string.isEmpty(res.phone)) {
+        this.selectComponent('#header').back()
+        return
+      } else {
+        that.reload()
+      }
+    })
   },
   reload: function () {
     const query = wx.createSelectorQuery()

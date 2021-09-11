@@ -17,7 +17,10 @@ App({
     // 后段交互toekn
     authToken: null,
     userInfo: {
-      username: null
+      id: null, // id
+      phone: null, // 手机号
+      nickname: null, // 昵称
+      avatar: null, // 头像地址
     }
   }
 })
