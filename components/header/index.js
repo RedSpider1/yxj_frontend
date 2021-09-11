@@ -22,7 +22,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    color: getApp().globalData.curThemeStyle
+    color: getApp().globalData.themes.primary,
   },
 
   /**
