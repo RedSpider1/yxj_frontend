@@ -1,40 +1,11 @@
-<header title="友小聚 - 我的"></header>
-<view class="container" wx:if="{{showChoose}}">
-  <view class="deliver shadow" bindtap="jmp" data-type="view">
-    <van-row>
-      <van-col>
-        <van-icon name="browsing-history" color="#f44336" size="20px"></van-icon>
-      </van-col>
-      <van-col offset="10">
-        <view>我浏览过</view>
-      </van-col>
-    </van-row>
-  </view>
-  <view class="deliver shadow" bindtap="jmp" data-type="join">
-    <van-row>
-      <van-col>
-        <van-icon name="add-square" color="#2196f3" size="20px"></van-icon>
-      </van-col>
-      <van-col offset="10">
-        <view>我参与过</view>
-      </van-col>
-    </van-row>
-  </view>
-  <view class="deliver shadow" bindtap="jmp" data-type="create">
-    <van-row>
-      <van-col>
-        <van-icon name="friends" color="rgb(153, 50, 204)" size="20px"></van-icon>
-      </van-col>
-      <van-col offset="10">
-        <view>我发起的</view>
-      </van-col>
-    </van-row>
-  </view>
+<header title="友小聚 - 相关"></header>
+<view class="container">
+  <van-cell title="我浏览过" is-link icon="eye-o" ontap="jmp" data-type="view"/>
+  <van-cell title="我参与的" is-link icon="passed" ontap="jmp" data-type="join"/>
+  <van-cell title="我创建的" is-link icon="add-o" ontap="jmp" data-type="create"/>
+  <van-cell title="我收藏的" is-link icon="star-o" ontap="jmp" data-type="star"/>
   <footer id="footer" name="view"></footer>
 </view>
 
-<view class="container" wx:else>
-  <platoon-sheet-list items="{{items}}" bind:list="list" height="{{height}}"></platoon-sheet-list>
-  <footer id="footer" name="view"></footer>
-</view>
+
 

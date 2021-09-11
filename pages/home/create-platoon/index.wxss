@@ -38,3 +38,6 @@
   justify-content: flex-start; 
   flex-wrap: wrap;
 }
+.img-con {
+  padding: 0 1em;
+}

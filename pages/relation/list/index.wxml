@@ -1,0 +1,6 @@
+<!--pages/relation/list/index.wxml-->
+<header title="{{title}}" needReturn="{{true}}"></header>
+<view class="container">
+  <platoon-sheet-list items="{{items}}" bind:list="list" height="{{height}}"></platoon-sheet-list>
+  <footer id="footer" name="view"></footer>
+</view>

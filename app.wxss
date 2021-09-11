@@ -4,6 +4,9 @@
 
 page {
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  --primary: #06C3ED;
+  --second: #D2CB1D;
+  --third: #D21DAA;
 }
 
 .container {
@@ -37,6 +40,9 @@ page {
 }
 .justify-center {
   justify-content: center;
+}
+.justify-end {
+  justify-content: flex-end;
 }
 .justify-between {
   justify-content: space-between;

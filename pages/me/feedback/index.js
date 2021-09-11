@@ -1,5 +1,4 @@
-
-
+// pages/me/feedback/index.js
 Page({
 
   /**
@@ -8,15 +7,6 @@ Page({
   data: {
 
   },
-  jmp: function (e) {
-    wx.navigateTo({
-      url: '/pages/relation/list/index',
-      success: (e2) => {
-        e2.eventChannel.emit("type", e.currentTarget.dataset.type)
-      },
-    })
-  },
-
 
   /**
    * 生命周期函数--监听页面加载
@@ -36,7 +26,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.selectComponent('#footer').load()
+
   },
 
   /**

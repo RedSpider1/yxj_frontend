@@ -12,7 +12,7 @@ Page({
   data: {
     submitData: {
       title: '', // 标题
-      minTeamSize: 0, // 最小人数
+      minTeamSize: 1, // 最小人数
       introduce: '', // 描述
       pictureUrlArray: [], // 图片
       expireTime: '', // 截止日期
@@ -20,7 +20,7 @@ Page({
     },
     minTeamSize: 0,
     containMe: false,
-    autosize: {maxHeight: 100, minHeight: 100},
+    autosize: {maxHeight: 100, minHeight: 0},
     showExpireDate: false, // 显示截止日期
     expireDate: null, // 显示截止日期
     expireTime: null, // 时间到分

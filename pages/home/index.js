@@ -115,6 +115,11 @@ Page({
       }
     })
   },
+  add() {
+    wx.navigateTo({
+      url: '/pages/home/create-platoon/index',
+    })
+  },
   onKeyWordChange(e) {
     this.setData({
       "searchParam.keyWord": e.detail,

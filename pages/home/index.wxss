@@ -1,0 +1,14 @@
+.add-btn {
+  position: fixed;
+    right: 10%;
+    bottom: 15%;
+    height: 40px;
+    width: 40px;
+}
+.add-btn button{
+  border-radius: 50%;
+  box-shadow: 2px 2px 5px grey;
+  background-color: var(--primary);
+  border: none;
+  color: white;
+}

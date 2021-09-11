@@ -19,6 +19,11 @@ Component({
         url: '/pages/me/contact/index',
       })
     },
+    feedback() {
+      wx.navigateTo({
+        url: '/pages/me/feedback/index',
+      })
+    },
     logout() {
       Dialog.confirm({
           title: '确定注销登录',
