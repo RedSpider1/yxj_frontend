@@ -1,5 +1,5 @@
 <header title="友小聚 - 组队单详情" needReturn="{{true}}"></header>
-<movable-area class="container" style="width: {{movableBtn.width}}px; height: {{movableBtn.height}}px;">
+<view class="container">
 
   <view class="title">
     {{title}}
@@ -10,16 +10,20 @@
         <van-image round width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" />
         <view class="author-name">{{authorName}}</view>
         <view>
-            <van-icon name="star-o" class="tag-btn primary" size="20" />
-            <van-icon name="share" class="tag-btn second" size="20" />
-          </view>
+          <van-icon name="star-o" class="tag-btn primary" size="20" />
+          <!-- 收藏后变实心 -->
+          <!-- <van-icon name="star" class="tag-btn primary" size="20" /> -->
+          <van-icon name="share" class="tag-btn second" size="20" />
+        </view>
       </view>
       <view class="small grey margin-v">发布于：{{examineTime}}</view>
-      <!-- <view class="small grey flex" wx:if="{{countDownTime > 0 && countDownTime < 10 * 24 * 60 * 60 * 1000}}"> -->
-      <view class="small grey flex margin-v">
+      <view class="small grey flex margin-v" wx:if="{{countDownTime > 0 && countDownTime < 10 * 24 * 60 * 60 * 1000}}">
         <text>将于：</text>
         <van-count-down time="{{countDownTime}}" format="DD天HH时mm分ss秒" class="count-down" />
         <text>后截止</text>
+      </view>
+      <view class="small grey margin-v" wx:else>
+        <text>已截止</text>
       </view>
     </van-col>
     <van-col span="8">
@@ -113,4 +117,4 @@
     <button class="btn operation second-bg" wx:if="{{showBtn.edit}}">修改</button>
     <button class="btn operation primary-bg" wx:if="{{showBtn.pass}}">提前成功</button>
   </view>
-</movable-area>
+</view>
