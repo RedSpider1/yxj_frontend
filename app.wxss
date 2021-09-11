@@ -26,6 +26,9 @@ page {
 .flex {
   display: flex;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
 
 .row {
   flex-direction: row;

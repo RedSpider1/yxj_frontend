@@ -32,7 +32,7 @@ Component({
     back: function () {
       let pages = getCurrentPages()
       if (pages.length === 1) {
-        wx.navigateTo({
+        wx.reLaunch({
           url: '/pages/home/index',
         })
         return
@@ -41,7 +41,7 @@ Component({
       wx.navigateBack({delta: 1})
     },
     home() {
-      wx.navigateTo({
+      wx.reLaunch({
         url: '/pages/home/index',
       })
     }

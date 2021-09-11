@@ -41,3 +41,6 @@
 .img-con {
   padding: 0 1em;
 }
+.tag-con {
+  padding: 1em;
+}

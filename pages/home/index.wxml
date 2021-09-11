@@ -1,7 +1,7 @@
 <header title="友小聚 - 首页" ></header>
 <view>
   <!-- <van-notice-bar left-icon="volume-o" scrollable mode="closeable" text="小程序上线啦！！！" /> -->
-  <van-tabs active="{{ active }}" bind:change="onChangeActive">
+  <van-tabs active="{{ active }}" bind:change="onChangeActive" class="tabs" color="{{primary}}">
     <van-tab title="最新">
       <platoon-sheet-list items="{{items}}" bind:list="list" height="{{height}}"></platoon-sheet-list>
     </van-tab>

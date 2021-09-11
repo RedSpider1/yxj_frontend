@@ -5,6 +5,7 @@ let color = require('../../utils/color')
 
 Page({
   data: {
+    primary: getApp().globalData.themes.primary,
     active: 0, // 0: 最新, 1: 搜索
     items: [],
     searchItems: [],
@@ -46,15 +47,6 @@ Page({
         if (alreadyExistId.indexOf(row.id) !== -1) {
           continue
         }
-        // items.push({
-        //   id: row.id,
-        //   title: row.title,
-        //   introduce: row.introduce,
-        //   subtitle: row.createName + ' 发布于 ' + row.examineTime,
-        //   person: row.currentJoinNum + ' / ' + row.needNum,
-        //   status: status.team_status[row.teamStatus],
-        // })
-        // console.log(row)
         items.push(row)
       }
       that.setData({items: items, alreadyExistId: alreadyExistId, pageNum: ++pageNum, pageSize: pageSize})

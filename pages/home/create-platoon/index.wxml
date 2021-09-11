@@ -17,7 +17,7 @@
   </view>
   <van-row>
     <van-col span="12">
-      <van-field label="包含我：" readonly required/>
+      <van-field label="包含我：" readonly required />
     </van-col>
     <van-col span="12">
       <view class="flex justify-end">
@@ -28,18 +28,20 @@
 
   <view class="divider">
     <view>
-      <van-field border="false" value="{{submitData.introduce}}" type="textarea" label="描述：" placeholder="请输入描述" autosize="{{autosize}}"
-        maxlength="200" border="{{true}}" clearable custom-style="border-color: black;" show-word-limit/>
+      <van-field border="false" value="{{submitData.introduce}}" type="textarea" label="描述：" placeholder="请输入描述"
+        autosize="{{autosize}}" maxlength="200" border="{{true}}" clearable custom-style="border-color: black;"
+        show-word-limit />
     </view>
   </view>
   <view>
     <view class="img-con">
       <van-uploader file-list="{{pictureUrlArray}}" use-before-read bind:before-read="beforeReadPicture"
-      bind:after-read="afterReadPicture" />
+        bind:after-read="afterReadPicture" />
     </view>
   </view>
-  <van-field value="{{submitData.expireTime}}" readonly placeholder="请选择截止时间" label="截止时间：" bindtap="openShowExpireDate"/>
-  
+  <van-field value="{{submitData.expireTime}}" readonly placeholder="请选择截止时间" label="截止时间："
+    bindtap="openShowExpireDate" />
+
   <view>
     <van-calendar show="{{showExpireDate}}" bind:close="closeShowExpireDate" bind:confirm="confirmShowExpireDate" />
     <van-popup show="{{showExpireTime}}" position="bottom" custom-style="height: 50%;" bind:close="closeShowExpireTime">
@@ -48,8 +50,16 @@
     </van-popup>
   </view>
 
-  <van-field readonly placeholder="请选择标签" label="标签：" bindtap="openShowTag"/>
+  <van-field readonly placeholder="请选择标签" label="标签：" bindtap="openShowTag" />
   <view class="divider">
+    <view class="tag-con flex flex-wrap">
+      <view wx:for="{{chooseLabelArr}}" wx:key="key" style="margin-right: 5px; margin-bottom: 5px;">
+        <van-tag round type="success" size="large" style="--tag-success-color: {{item.color}};" bind:close="closeTag"
+          data-item="{{item}}" closeable>
+          {{item.name}}
+        </van-tag>
+      </view>
+    </view>
     <!-- <view class="tag" bindtap="openShowTag">
       <view style="display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap;">
         <view wx:for="{{chooseLabelArr}}" wx:key="key" style="margin-right: 5px; margin-bottom: 5px;">

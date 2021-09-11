@@ -1,4 +1,4 @@
-<header title="友小聚 - {{title}}" needReturn="{{true}}"></header>
+<header title="友小聚 - 组队单详情" needReturn="{{true}}"></header>
 <movable-area class="container" style="width: {{movableBtn.width}}px; height: {{movableBtn.height}}px;">
   <view class="newTag">
     <van-icon name="new" color="red" size="50px"/>
@@ -69,7 +69,7 @@
             style="--circle-text-color: {{personColor}}"
             layer-color="#eeeeee"
             color="{{personColor}}"
-            text="{{statusDesc}}" clockwise="{{false}}"/>
+            text="{{statusDesc}}"/>
           </van-col>
         </van-row>
       </van-col>

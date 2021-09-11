@@ -1,23 +1,10 @@
 <!--components/header-default/index.wxml-->
 <view>
-  <!-- <van-nav-bar
-    title="{{title}}"
-    style="--nav-bar-background-color: {{color}}; --nav-bar-icon-color: white; --nav-bar-title-text-color: white;"
-
-  >
-  <van-icon name="left-arrow" slot="left"/>
-  <van-icon name="home" slot="left"/>
-  
-  </van-nav-bar> -->
-  <!-- <van-nav-bar
-    title="{{title}}"
-    style="--nav-bar-background-color: {{color}}; --nav-bar-icon-color: white; --nav-bar-title-text-color: white;"
-    wx:else
-  /> -->
-
   <van-nav-bar
     title="{{title}}"
     style="--nav-bar-background-color: {{color}}; --nav-bar-icon-color: white; --nav-bar-title-text-color: white;"
+    fixed
+    placeholder
   >
   <van-icon name="arrow-left" slot="left" class="left-icon" wx:if="{{needReturn}}" ontap="back"/>
   <van-icon name="wap-home-o" slot="left" class="left-icon" wx:if="{{needReturn}}" ontap="home"/>
