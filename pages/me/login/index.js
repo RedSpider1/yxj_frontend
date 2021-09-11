@@ -13,10 +13,13 @@ Page({
     containerHeight: 0,
     loginButtonWidth: 0,
     loginSuccess: false,
+    sourceRoute: null,
   },
+
   agreeProtocol () {
     this.setData({agreeProtocol: !this.data.agreeProtocol})
   },
+
   getPhoneNumber (event) {
     const phoneDetail = event.detail
     http.post(request.phone.url, {
@@ -29,11 +32,20 @@ Page({
       console.log(res)
     })
   },
+
   goIndex: function () {
-    wx.navigateTo({
-      url: '/pages/home/index',
-    })
+    const sourceRoute = this.data.sourceRoute
+    if (!string.isEmpty(sourceRoute)) {
+      wx.navigateTo({
+        url: `/${sourceRoute}`,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/home/index',
+      })
+    }
   },
+
   goPersonalEdit: function () {
     wx.navigateTo({
       url: '/pages/me/edit/index',
@@ -43,7 +55,10 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onLoad: function (options) {
+    if (!string.isEmpty(options.sourceRoute)) {
+      this.setData({sourceRoute: options.sourceRoute})
+    }
     const app = getApp()
     if (!string.isEmpty(app.globalData.authToken)) {
       const phone = app.globalData.userInfo.phone
@@ -63,6 +78,7 @@ Page({
       }
     })
   },
+
   reload: function () {
     const query = wx.createSelectorQuery()
     query.select('#header').boundingClientRect()
@@ -76,39 +92,4 @@ Page({
       that.setData({containerHeight: containerHeight, loginButtonWidth: 0.6 * systemInfo.screenWidth})
     })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

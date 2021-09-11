@@ -47,3 +47,18 @@ export const getUserInfo = {
   url: 'user/getUserInfo',
   desc: '获取登录用户信息'
 }
+
+export const groupTeamQueryInvolveGroups = {
+  url: 'groupTeam/query/involveGroups',
+  desc: '我参与过的组队单'
+}
+
+export const groupTeamQueryViewedGroups = {
+  url: 'groupTeam/query/viewedGroups',
+  desc: '我浏览过的组队单'
+}
+
+export const groupTeamQueryListByUser = {
+  url: 'groupTeam/query/listByUser',
+  desc: '我创建的组队单'
+}

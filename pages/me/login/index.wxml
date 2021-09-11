@@ -46,7 +46,7 @@
       <view style="justify-content: center; margin-top: 10px;" class="flex row">
         <button class="loginButton" style="background-color: #979797; width: {{loginButtonWidth}}px;"
          bindtap="goIndex">
-          返回首页
+          返回
         </button>
       </view>
     </view>

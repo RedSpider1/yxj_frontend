@@ -5,13 +5,15 @@ const request = require('./request')
 
 function login () {
   const app = getApp()
+  const pages = getCurrentPages()
+  const sourceRoute = pages[pages.length - 1].route
   wx.login({
     success: res => {
       app.globalData.code = res.code
       http.post(request.login.url, {jsCode: res.code}).then(res => {
         app.globalData.authToken = res.token
         wx.navigateTo({
-          url: '/pages/me/login/index',
+          url: `/pages/me/login/index?sourceRoute=${sourceRoute}`,
         })
       })
     }
