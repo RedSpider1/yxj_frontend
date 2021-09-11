@@ -1,27 +1,27 @@
 //filter.js
 const string = require('./string')
 
-export const isLogin = function () {
-  if (string.isEmpty(getApp().globalData.token)) {
+function login () {
+  wx.login({
+    success: res => {
+      this.globalData.code = res.code
+      let that = this
+      http.post(request.login.url, {jsCode: res.code}).then(res => {
+        that.globalData.authToken = res.token
+      })
+    }
+  })
+}
+
+export const checkLogin = function () {
+  if (string.isEmpty(getApp().globalData.authToken)) {
+    login()
+  }
+
+  if (string.isEmpty(getApp().globalData.authToken)) {
     wx.navigateTo({
       url: '/pages/me/login/index',
     })
   }
 }
 
-export const authFilter = function (pageObj) {
-    if(pageObj.onShow) {
-        let _onShow = pageObj.onShow
-        pageObj.onShow = function () {
-          appData.promise.then(() => {
-            wx.redirectTo({
-              url: "/pages"
-            })
-          }, () => {
-              let currentInstance = getPageInstance()
-              _onShow.call(currentInstance);
-          })
-        }
-    }
-    return pageObj;
-}

@@ -6,7 +6,6 @@ Component({
     addGlobalClass: true
   },
   data: {
-    text: "This is page data."
   },
   methods: {
     edit() {
@@ -38,7 +37,6 @@ Component({
         });
     },
     onLoad: function (options) {
-      // auth.isLogin()
       // 页面创建时执行
     },
     onPullDownRefresh: function () {
@@ -47,6 +45,9 @@ Component({
     // 事件响应函数
     viewTap: function () {
       // ...
+    },
+    onShow: function () {
+      auth.checkLogin()
     }
   }
 })

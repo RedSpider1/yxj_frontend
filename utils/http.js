@@ -23,8 +23,8 @@ function fetch(options) {
     }
 
     const app = getApp()
-    if (app.globalData.token !== null) {
-      header.Authorization = 'Bearer ' + app.globalData.token
+    if (app.globalData.authToken !== null) {
+      header.Authorization = 'Bearer ' + app.globalData.authToken
     }
 
     wx.request({

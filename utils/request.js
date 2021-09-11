@@ -42,3 +42,8 @@ export const phone = {
   url: 'wx/phone',
   desc: '绑定手机号'
 }
+
+export const getUserInfo = {
+  url: 'user/getUserInfo',
+  desc: '获取登录用户信息'
+}
