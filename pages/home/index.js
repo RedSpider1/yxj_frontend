@@ -126,8 +126,8 @@ Page({
     });
   },
   onLoad () {
-    // this.list()
-    // this.listLabel()
-    // this.listSearchHistory()
+    this.list()
+    this.listLabel()
+    this.listSearchHistory()
   },
 })
