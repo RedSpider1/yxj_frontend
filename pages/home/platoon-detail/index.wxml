@@ -1,2 +1,155 @@
-<!--pages/home/platoon-detail/index.wxml-->
-<text>pages/home/platoon-detail/index.wxml</text>
+<header title="友小聚 - {{title}}" needReturn="{{true}}"></header>
+<movable-area class="container" style="width: {{movableBtn.width}}px; height: {{movableBtn.height}}px;">
+  <view class="newTag">
+    <van-icon name="new" color="red" size="50px"/>
+  </view>
+
+  <van-row>
+    <van-col span="24">
+      <view class="title">
+        {{title}}
+      </view>
+    </van-col>
+  </van-row>
+
+  <view class="shareTag">
+    <van-button icon="share" type="default" bindtap="openShowShare" class="shareTagBtn" size="small"></van-button>
+  </view>
+
+  <van-divider contentPosition="center">组队单信息</van-divider>
+  <view style="display: flex; flex-direction: row; justify-content: space-between;">
+    <van-row>
+      <van-col span="24">
+        <van-row>
+          <view style="display: flex; flex-direction: row;" bindtap="">
+            <view>
+              <van-tag round type="primary" class="firstAuthorNameChar">
+                {{firstAuthorNameChar}}
+              </van-tag>
+            </view>
+            <view class="authorName">{{authorName}}</view>
+          </view>
+        </van-row>
+        <van-row>
+          <view class="examineTime">发布时间：{{examineTime}}</view>
+        </van-row>
+        <van-row>
+          <view class="expireTime">截止时间：{{expireTime}}</view>
+        </van-row>
+        <van-row>
+          <view class="countDownTime">
+            <view>距离截止时间还剩：</view>
+            <van-count-down time="{{countDownTime}}" format="DD天HH时mm分ss秒" />
+          </view>
+        </van-row>
+        <van-row>
+          <view style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start;">
+            <view class="labelArray" style="margin-bottom: 5px !important;">标签：</view>
+            <view wx:for="{{labelArray}}" wx:key="key">
+              <view class="label">
+                <van-tag round type="primary" style="--tag-primary-color: {{item.color}}; --tag-font-size: 14px;">
+                  {{item.name}}
+                </van-tag>
+              </view>
+            </view>
+          </view>
+        </van-row>
+      </van-col>
+    </van-row>
+    <van-row>
+      <van-col span="24">
+        <van-row>
+          <van-col span="24">
+            <view class="personRateDesc" style="color: {{personColor}};">{{personRateDesc}}</view>
+          </van-col>
+        </van-row>
+        <van-row>
+          <van-col span="24">
+            <van-circle value="{{personRate}}" size="80" stroke-width="4" 
+            style="--circle-text-color: {{personColor}}"
+            layer-color="#eeeeee"
+            color="{{personColor}}"
+            text="{{statusDesc}}" clockwise="{{false}}"/>
+          </van-col>
+        </van-row>
+      </van-col>
+    </van-row>
+  </view>
+  <van-divider contentPosition="center">介绍</van-divider>
+  <view class="introduce">
+    {{introduce}}
+  </view>
+  <van-divider contentPosition="center" wx:if="{{pictureUrlArray.length !== 0}}">图片</van-divider>
+  <view>
+    <van-image
+      width="100"
+      height="100"
+      lazy-load
+      src="{{item}}"
+      wx:for="{{pictureUrlArray}}"
+      wx:key="key"
+      use-error-slot
+      bindtap="enlargeImg"
+      data-url="{{item}}"
+    >
+      <text slot="error">加载失败</text>
+    </van-image>
+    <van-popup show="{{enlargeImg}}" bind:close="ensmallImg">
+      <view>
+        <van-image width="{{largeSize}}" height="{{largeSize}}" src="{{largeImg}}" lazy-load use-error-slot>
+          <text slot="error">加载失败</text>
+        </van-image>
+      </view>
+    </van-popup>
+  </view>
+  <van-divider contentPosition="center">组队成员</van-divider>
+  <view>
+    <view wx:if="{{joinerInfos.length !== 0}}">
+      <view wx:for="{{joinerInfos}}" wx:key="key" class="joiner">
+        <view>
+          <van-image round fit="cover" width="30px" height="30px" src="{{item.avatar}}" lazy-load use-loading-slot>
+            <text slot="error">加载失败</text>
+          </van-image>
+        </view>
+        <view>{{item.name}}</view>
+        <view>{{item.type}}：{{item.contact}}</view>
+      </view>
+    </view>
+    <view wx:else>
+      <van-row>
+        <van-col span="24" class="noJoiner">
+          暂无参与者
+        </van-col>
+      </van-row>
+    </view>
+  </view>
+
+  <view style="margin-bottom: 200px; width: 1px; height: 1px;"></view>
+
+  <view class="btnGroup">
+    <van-button type="default" round class="btn" 
+      style="--button-default-background-color: green;">
+      等待同意
+    </van-button>
+    <van-button type="default" round class="btn" 
+      style="--button-default-background-color: rgba(255, 87, 51, 1);">
+      退出
+    </van-button>
+    <van-button type="default" round class="btn" 
+      style="--button-default-background-color: rgba(0, 150, 136, 1);">
+      参与
+    </van-button>
+    <van-button type="default" round class="btn" 
+      style="--button-default-background-color: #17bbd1;">
+      去登录
+    </van-button>
+  </view>
+
+  <van-share-sheet
+    show="{{showShare}}"
+    title="立即分享给好友"
+    options="{{showOptions}}"
+    bind:select="selectShowShare"
+    bind:close="closeShowShare"
+  />
+</movable-area>

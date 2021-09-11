@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "van-share-sheet": "@vant/weapp/share-sheet/index",
+    "van-count-down": "@vant/weapp/count-down/index"
+  }
+}
