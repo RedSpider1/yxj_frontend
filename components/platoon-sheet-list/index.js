@@ -1,4 +1,10 @@
+const computedBehavior = require("../../miniprogram_npm/miniprogram-computed/index").behavior;
+const enums = require("../../utils/enums")
 Component({
+  behaviors: [computedBehavior],
+  options: {
+    addGlobalClass: true
+  },
   /**
    * 组件的属性列表
    * 
@@ -13,14 +19,38 @@ Component({
   properties: {
     items: {
       type: Array,
-      value: []
+      value: [],
+      // observer: function(newVal, oldVal) {
+      //   this.setData({itemData: newVal})
+      // }
     },
     height: {
       type: Number,
       value: 0
     },
   },
+  computed: {
+    wrapperItems(data) {
+      for(let item of data.items) {
+        let status = item.teamStatus
+        item.statusLabel = enums.team_status[status]
+        var statusTagType = 'primary'
+          if(status == 1) {
+            statusTagType =  'primary'
+          }
+          if(status == 2) {
+            statusTagType = 'success'
+          }
+          if(status == 3) {
+            statusTagType = 'warning'
+          }
+        item.statusTagType = statusTagType
+        item.circleValue = (1 - item.currentJoinNum * 1.0 / item.needNum) * 100
 
+      }
+      return data.items
+    },
+  },
   /**
    * 组件的初始数据
    */
@@ -31,8 +61,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    list () {
+
+    list() {
       this.triggerEvent('list')
+    },
+    getStatus(item) {
+      console.log(item)
     },
     jmp (event) {
       let id = event.currentTarget.dataset.id

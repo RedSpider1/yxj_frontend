@@ -1,6 +1,49 @@
-<scroll-view class="container" scroll-y='true' style="height: {{height}}px;" bindscrolltolower="list">
-  <view wx:for="{{items}}" class="subContainer" wx:key="key" bindtap="jmp" data-id="{{item.id}}">
+<scroll-view scroll-y='true' style="height: {{height}}px;" bindscrolltolower="list">
+  <view wx:for="{{wrapperItems}}" class="subContainer" wx:key="id" bindtap="jmp" data-id="{{item.id}}">
     <van-row>
+      <van-col span="16">
+        <view class="hide title primary">
+          {{item.title}}
+        </view>
+      </van-col>
+      <van-col span="8">
+        <view class="flex justify-end">
+          <van-circle class="circle" value="{{ item.circleValue }}" layer-color="#999" stroke-width="2" size="20" wx:if="{{item.teamStatus == 1}}" />
+          <van-tag type="{{item.statusTagType}}" size="medium">{{item.statusLabel}}</van-tag>
+        </view>
+      </van-col>
+    </van-row>
+
+    <!-- 如果有图片就这样搞，否则就占满 -->
+    <van-row>
+      <van-col span="16">
+        <view class="van-multi-ellipsis--l2 subtitle">
+          {{item.introduce}}
+        </view>
+
+        <view class="create-info">
+          {{item.createName + ' ' + item.createTime}}
+        </view>
+      </van-col>
+      <van-col span="8">
+        <view class="flex align-items-end">
+          <image class="img" mode="aspectFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+        </view>
+      </van-col>
+    </van-row>
+
+    <!-- 否则 -->
+    <!-- <van-row>
+      <van-col span="24">
+        <view class="van-multi-ellipsis--l2 subtitle">
+          {{item.introduce}}
+        </view>
+      </van-col>
+    </van-row> -->
+
+
+
+    <!-- <van-row>
       <van-col span="18" class="hide">
         {{item.title}}
       </van-col>
@@ -28,7 +71,8 @@
           {{item.person}}
         </van-col>
       </van-row>
-    </view>
+    </view> -->
     <van-divider></van-divider>
   </view>
+  <text class="has-no-more grey flex justify-center">没有更多了~</text>
 </scroll-view>

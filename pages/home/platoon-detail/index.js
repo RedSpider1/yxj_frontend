@@ -1,7 +1,7 @@
 // pages/home/platoon-detail/index.js
 const http = require('../../../utils/http')
 const request = require('../../../utils/request')
-const status = require('../../../utils/status')
+const status = require('../../../utils/enums')
 const color = require('../../../utils/color')
 const file = require('../../../utils/file')
 

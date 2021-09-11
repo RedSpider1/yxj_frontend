@@ -13,6 +13,7 @@
   "author": "CoolerWu (1447186835@qq.com)",
   "license": "ISC",
   "dependencies": {
-    "@vant/weapp": "^1.8.2"
+    "@vant/weapp": "^1.8.2",
+    "miniprogram-computed": "^4.2.1"
   }
 }

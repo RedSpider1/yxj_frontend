@@ -1,6 +1,6 @@
 let http = require('../../utils/http')
 let request = require('../../utils/request')
-let status = require('../../utils/status')
+let enums = require('../../utils/enums')
 let color = require('../../utils/color')
 
 Page({
@@ -19,12 +19,16 @@ Page({
     alreadyExistId: [],
     pageNum: 1,
     pageSize: 20,
-    height: wx.getSystemInfoSync().windowHeight - 0.25 * wx.getSystemInfoSync().windowHeight
+    height: wx.getSystemInfoSync().windowHeight - 0.25 * wx.getSystemInfoSync().windowHeight,
+    hasNoMore: false,
   },
   onChangeActive (event) {
     console.log(event)
   },
   list () {
+    if(this.data.hasNoMore) {
+      return
+    }
     let that = this
     let pageNum = this.data.pageNum
     let pageSize = this.data.pageSize
@@ -33,10 +37,7 @@ Page({
       pageSize: pageSize
     }).then(res => {
       if (res === null || res.length === 0) {
-        wx.showToast({
-          title: '没有更多数据了哦',
-          icon: 'none'
-        })
+        this.setData({hasNoMore: true})
         return
       }
       let alreadyExistId = that.data.alreadyExistId
@@ -45,14 +46,16 @@ Page({
         if (alreadyExistId.indexOf(row.id) !== -1) {
           continue
         }
-        items.push({
-          id: row.id,
-          title: row.title,
-          introduce: row.introduce,
-          subtitle: row.createName + ' 发布于 ' + row.examineTime,
-          person: row.currentJoinNum + ' / ' + row.needNum,
-          status: status.team_status[row.teamStatus],
-        })
+        // items.push({
+        //   id: row.id,
+        //   title: row.title,
+        //   introduce: row.introduce,
+        //   subtitle: row.createName + ' 发布于 ' + row.examineTime,
+        //   person: row.currentJoinNum + ' / ' + row.needNum,
+        //   status: status.team_status[row.teamStatus],
+        // })
+        // console.log(row)
+        items.push(row)
       }
       that.setData({items: items, alreadyExistId: alreadyExistId, pageNum: ++pageNum, pageSize: pageSize})
     })
@@ -82,7 +85,7 @@ Page({
           introduce: row.introduce,
           subtitle: row.createName + ' 发布于 ' + row.examineTime,
           person: row.currentJoinNum + ' / ' + row.needNum,
-          status: status.team_status[row.teamStatus],
+          status: enums.team_status[row.teamStatus],
         })
       }
       that.setData({searchItems: items, "searchParam.pageNum": searchParam.pageNum + 1})

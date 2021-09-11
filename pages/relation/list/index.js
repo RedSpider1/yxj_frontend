@@ -1,7 +1,7 @@
 // pages/relation/list/index.js
 let http = require('../../../utils/http')
 let request = require('../../../utils/request')
-let status = require('../../../utils/status')
+let status = require('../../../utils/enums')
 Page({
 
   /**

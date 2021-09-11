@@ -24,3 +24,7 @@
   background-color: #ff976a;
   color: white
 }
+
+.grey {
+  color: grey;
+}

@@ -38,6 +38,9 @@ page {
 .align-items-center {
   align-items: center;
 }
+.align-items-end {
+  align-items: end;
+}
 .justify-center {
   justify-content: center;
 }
