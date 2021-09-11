@@ -22,8 +22,9 @@ function login () {
 
 export const checkLogin = function () {
   const app = getApp()
-  if (string.isEmpty(app.globalData.authToken) || string.isEmpty(app.globalData.userInfo.phone)) {
-    login()
-  }
+  // todo 等接口好了放开注释
+  // if (string.isEmpty(app.globalData.authToken) || string.isEmpty(app.globalData.userInfo.phone)) {
+  //   login()
+  // }
 }
 

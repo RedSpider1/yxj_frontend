@@ -11,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    primary: getApp().globalData.themes.primary,
     platoonId: null, // 组队单id
     title: '', // 标题
     introduce: '', // 内容
@@ -40,7 +41,17 @@ Page({
     movableBtn: {
       width: wx.getSystemInfoSync().windowWidth - 40,
       height: wx.getSystemInfoSync().windowHeight - 40
-    } // 导航按钮
+    }, // 导航按钮
+    // 这里聚合按钮的显示逻辑，要根据当前用户的登录状态或id来判断
+    showBtn: {
+      join: true, // 参与
+      exit: true, // 退出
+      login: true, // 登录
+      abandon: true, // 废弃
+      edit: true, // 修改
+      pass: true, // 提前成功
+      postpone: true, // 延期
+    }
   },
 
   /**
@@ -79,8 +90,7 @@ Page({
           pictureUrlArray.push(file.default.getImgUrl(pictureUrl))
         }
       }
-      let countDownTime = res.expireTimestamp - new Date().getTime()
-
+      let countDownTime = parseInt(res.expireTimestamp) / 1000 - new Date().getTime()
       that.setData({
         title: res.title, 
         introduce: res.introduce,

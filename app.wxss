@@ -12,6 +12,9 @@ page {
 .container {
   margin: 20px;
 }
+.container-v {
+  margin: 20px 0;
+}
 
 .deliver {
   margin-bottom: 10px;
@@ -25,6 +28,10 @@ page {
 
 .flex {
   display: flex;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
 }
 .flex-wrap {
   flex-wrap: wrap;
@@ -60,4 +67,8 @@ page {
   margin: 10px;
   padding: 0 15px;
   font-size: 14px;
+}
+
+.small {
+  font-size: .8rem;
 }

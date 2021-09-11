@@ -1,26 +1,17 @@
 .container {
   margin: 20px;
 }
-
-.newTag {
-  position: absolute;
-  left: 0;
-  top: -20px;
+.tag-btn {
+  margin-left: 10px;
 }
-
-.shareTag {
-  position: absolute;
-  right: 0;
-  top: -20px;
-}
-
-.shareTagBtn {
+/* 
+.tag-btn {
   --button-border-radius: 0 0 25% 25%;
   --button-default-background-color: rgb(5, 133, 253);
   --button-default-color: white;
   --button-small-min-width: 35px;
   --button-small-height: 40px;
-}
+} */
 
 .title {
   color: rgba(56, 56, 56, 1);
@@ -37,13 +28,10 @@
   --tag-text-color: white;
 }
 
-.authorName {
+.author-name {
   color: rgba(42, 130, 228, 1);
-	font-size: 14px;
-	line-height: 150%;
-  text-align: left;
-  margin-bottom: 10px;
   margin-left: 5px;
+  font-size: 14px;
 }
 
 .examineTime, .expireTime, .labelArray {
@@ -103,11 +91,21 @@
 
 .btnGroup {
   position: fixed;
-  right: 10px;
+  left: 0;
   bottom: 50px;
 }
 
-.btnGroup .btn {
-  --button-default-color: white;
+
+
+.margin-v {
+  margin: 1em 0;
+}
+.count-down {
   margin-right: 5px;
+}
+.van-circle__text {
+  font-size: .6rem;
+}
+.van-tabs__scroll {
+  margin: 0 !important;
 }

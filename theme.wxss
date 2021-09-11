@@ -25,6 +25,11 @@
   color: white
 }
 
+.danger-bg {
+  background-color: #ee0a24;
+  color: white
+}
+
 .grey {
   color: grey;
 }
