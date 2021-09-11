@@ -35,14 +35,12 @@ Component({
     },
     editContact(e) {
       // 这里要判断下是不是第一个联系方式，如果是第一个，不能编辑的 直接return
-      if(this.data.contacts[0].id == e.currentTarget.dataset.item.id) {
+      let id = e.currentTarget.dataset.item.id
+      if(this.data.contacts[0].id == id) {
         return
       }
       wx.navigateTo({
-        url: '/pages/me/contact/edit/index',
-        success: (e2) => {
-          e2.eventChannel.emit("contact", e.currentTarget.dataset.item)
-        }
+        url: `/pages/me/contact/edit/index?id=${id}`
       })
     },
     onLoad: function (options) {},

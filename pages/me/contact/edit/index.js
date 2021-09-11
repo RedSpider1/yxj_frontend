@@ -47,11 +47,12 @@ Component({
       });
     },
     onLoad: function (options) {
-      this.getOpenerEventChannel().on("contact", (data) => {
+      if(options.id != 0) {
+        // todo 这里通过id从后台拿联系方式，然后设值
         this.setData({
-          currentContact: { ...data }
+          // currentContact: { ...data }
         })
-      })
+      }
     },
     onPullDownRefresh: function () {
       // 下拉刷新时执行

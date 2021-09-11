@@ -32,7 +32,7 @@ Page({
       case 'star':
         title = '我收藏的'
         break;
-      default: 
+      default:
         title = '相关'
     }
     return '友小聚 - ' + title
@@ -81,14 +81,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getOpenerEventChannel().on("type", (data) => {
-      this.setData({
-        type: data,
-        title: this.getTitleByType(data)
-      })
-      // todo 这里根据不同的type拉数据，然后设置到items上
-      this.list()
+    this.setData({
+      type: options.type,
+      title: this.getTitleByType(options.type)
     })
+    // todo 这里根据不同的type拉数据，然后设置到items上
+    this.list()
   },
 
   /**

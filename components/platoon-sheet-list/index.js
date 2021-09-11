@@ -37,7 +37,7 @@ Component({
     jmp (event) {
       let id = event.currentTarget.dataset.id
       wx.navigateTo({
-        url: `/pages/platoon-detail/index?id=${id}`,
+        url: `/pages/home/platoon-detail/index?id=${id}`,
       })
     }
   },

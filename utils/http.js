@@ -38,10 +38,11 @@ function fetch(options) {
         }
        
         if (res.data.code != 200) {
+          console.log(options.url)
           wx.showToast({
-            title: res.errMsg,
+            title: res.data.message,
             mask: "true",
-            icon: 'none',
+            icon: 'error',
             duration: 3000
           })
           reject(res.data)

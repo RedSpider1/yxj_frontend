@@ -9,11 +9,9 @@ Page({
 
   },
   jmp: function (e) {
+    const type = e.currentTarget.dataset.type
     wx.navigateTo({
-      url: '/pages/relation/list/index',
-      success: (e2) => {
-        e2.eventChannel.emit("type", e.currentTarget.dataset.type)
-      },
+      url: `/pages/relation/list/index?type=${type}`,
     })
   },
 
