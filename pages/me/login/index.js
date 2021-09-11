@@ -23,7 +23,7 @@ Page({
   getPhoneNumber (event) {
     const phoneDetail = event.detail
     http.post(request.phone.url, {
-      cloudId: phoneDetail.cloudId,
+      cloudId: phoneDetail.cloudID,
       encryptedData: phoneDetail.encryptedData,
       iv: phoneDetail.iv
     }).then(res => {
