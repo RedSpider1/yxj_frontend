@@ -1,5 +1,5 @@
 <header title="友小聚 - 组队单详情" needReturn="{{true}}"></header>
-<view class="container">
+<view class="container margin-bottom">
 
   <view class="title">
     {{title}}
