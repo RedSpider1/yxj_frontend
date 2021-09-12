@@ -1,9 +1,8 @@
 {
   "pages": [
-    
     "pages/home/index",
-    "pages/home/create-platoon/index",
     "pages/home/platoon-detail/index",
+    "pages/home/create-platoon/index",
 
     "pages/relation/index",
     "pages/relation/list/index",

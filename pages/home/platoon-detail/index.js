@@ -118,7 +118,9 @@ Page({
           name: joinerInfo.name,
           avatar: file.default.getImgUrl(joinerInfo.avatar),
           type: joinerInfo.type === 0 ? '手机' : '微信',
-          contact: joinerInfo.type === 0 ? joinerInfo.phone : joinerInfo.wechatNum
+          contact: joinerInfo.type === 0 ? joinerInfo.phone : joinerInfo.wechatNum,
+          // todo 这里的逻辑要确认下，现在先取创建时间
+          createTime: joinerInfo.createTime,
         })
       }
       that.setData({joinerInfos: joinerInfos})

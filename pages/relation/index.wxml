@@ -1,11 +1,28 @@
-<header title="友小聚 - 相关"></header>
-<view class="container">
-  <van-cell title="我浏览过" is-link icon="eye-o" ontap="jmp" data-type="view"/>
-  <van-cell title="我参与的" is-link icon="passed" ontap="jmp" data-type="join"/>
-  <van-cell title="我创建的" is-link icon="add-o" ontap="jmp" data-type="create"/>
-  <van-cell title="我收藏的" is-link icon="star-o" ontap="jmp" data-type="star"/>
+<header title="友小聚 - 相关" id="header"></header>
+<view class="flex-col" style="height: {{containerHeight}}px;">
+  <view class="flex-1 flex">
+    <view ontap="jmp" data-type="view" class="flex-1 flex-col justify-center align-items-center white"
+      style="background-color: #006699;">
+      <van-icon name="eye-o" size="2rem" />
+      <text class="container-v">我浏览过</text>
+    </view>
+    <view ontap="jmp" data-type="join" class="flex-1 flex-col justify-center align-items-center white"
+      style="background-color: #993399;">
+      <van-icon name="passed" size="2rem" />
+      <text class="container-v">我参与的</text>
+    </view>
+  </view>
+  <view class="flex-1 flex">
+    <view ontap="jmp" data-type="create" class="flex-1 flex-col justify-center align-items-center white"
+      style="background-color: #CC3333;">
+      <van-icon name="add-o" size="2rem" />
+      <text class="container-v">我创建的</text>
+    </view>
+    <view ontap="jmp" data-type="star" class="flex-1 flex-col justify-center align-items-center white"
+      style="background-color: #FF9900;">
+      <van-icon name="star-o" size="2rem" />
+      <text class="container-v">我收藏的</text>
+    </view>
+  </view>
   <footer id="footer" name="view"></footer>
 </view>
-
-
-

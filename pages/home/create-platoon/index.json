@@ -1,7 +1,6 @@
 {
   "navigationStyle": "custom",
   "usingComponents": {
-    "footer": "../../components/footer/index",
     "van-field": "@vant/weapp/field/index",
     "van-stepper": "@vant/weapp/stepper/index",
     "van-switch": "@vant/weapp/switch/index",

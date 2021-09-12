@@ -56,41 +56,33 @@
   <van-tabs type="card" active="detail" sticky animated swipeable line-height="0" color="{{primary}}">
     <van-tab title="详情" name="detail">
       <view class="container-v">
-        <view>
-          <view class="introduce">
-            {{introduce}}
-          </view>
+        <view class="introduce">
+          {{introduce}}
         </view>
         <view class="margin-v">
-          <van-image width="100" height="100" lazy-load src="{{item}}" wx:for="{{pictureUrlArray}}" wx:key="key"
-            use-error-slot bindtap="enlargeImg" data-url="{{item}}">
-            <text slot="error">加载失败</text>
+          <van-image width="100" height="100" src="{{item}}" wx:for="{{pictureUrlArray}}" wx:key="key"
+            bindtap="enlargeImg" data-url="{{item}}">
           </van-image>
-          <van-popup show="{{enlargeImg}}" bind:close="ensmallImg">
-            <view>
-              <van-image width="{{largeSize}}" height="{{largeSize}}" src="{{largeImg}}" lazy-load use-error-slot>
-                <text slot="error">加载失败</text>
-              </van-image>
-            </view>
-          </van-popup>
         </view>
       </view>
     </van-tab>
     <van-tab title="参与人" name="joined">
       <view class="container-v">
         <view wx:if="{{joinerInfos.length > 0}}">
-          <view wx:for="{{joinerInfos}}" wx:key="key" class="flex justify-between margin-v">
+          <view wx:for="{{joinerInfos}}" wx:key="key" class="joiner-item margin-v">
             <view class="flex">
               <van-image round width="20" height="20" src="{{item.avatar}}" />
               <view class="author-name">{{item.name}}</view>
             </view>
-            <view>{{item.type}}：{{item.contact}}</view>
+            <!-- todo 以后联系方式会有多个 -->
+            <view class="contact">{{item.type}} ：{{item.contact}}</view>
+            <view class="contact">{{item.type}} ：{{item.contact}}</view>
           </view>
         </view>
         <view wx:else>
           <van-row>
-            <van-col span="24" class="noJoiner">
-              暂无参与者
+            <van-col span="24" class="noJoiner flex justify-center">
+              <text class="small grey">暂无参与者~</text>
             </van-col>
           </van-row>
         </view>
@@ -98,7 +90,27 @@
     </van-tab>
     <van-tab title="记录" name="record">
       <view class="container-v">
-        操作记录，记录参与、退出的记录
+        <!-- todo 这里数据对接后修改逻辑 -->
+        <view wx:for="{{joinerInfos}}" wx:key="key" class="record-item margin-v">
+          <view class="flex justify-between align-items-center">
+            <view class="flex">
+              <van-image round width="20" height="20" src="{{item.avatar}}" />
+              <view class="author-name">{{item.name}}</view>
+            </view>
+            <text class="small grey">{{item.createTime}}</text>
+          </view>
+          <!-- todo 参与和退出都可以留消息。这里有的话就会展示 -->
+          <view class="container-v">
+            <view class="small grey">
+              {{introduce}}
+            </view>
+            <view class="margin-v">
+              <van-image width="40" height="40" src="{{item}}" wx:for="{{pictureUrlArray}}" wx:key="key"
+                bindtap="enlargeImg" data-url="{{item}}">
+              </van-image>
+            </view>
+          </view>
+        </view>
       </view>
     </van-tab>
     <van-tab title="评论" name="comment">
@@ -109,12 +121,20 @@
   </van-tabs>
 
   <view class="flex flex-wrap justify-center btnGroup">
-    <button class="btn operation primary-bg" wx:if="{{showBtn.join}}">参与</button>
-    <button class="btn operation warning-bg" wx:if="{{showBtn.exit}}">退出</button>
-    <button class="btn operation primary-bg" wx:if="{{showBtn.login}}">登录</button>
-    <button class="btn operation primary-bg" wx:if="{{showBtn.postpone}}">延期</button>
-    <button class="btn operation danger-bg" wx:if="{{showBtn.abandon}}">废弃</button>
-    <button class="btn operation second-bg" wx:if="{{showBtn.edit}}">修改</button>
-    <button class="btn operation primary-bg" wx:if="{{showBtn.pass}}">提前成功</button>
+    <button class="btn operation primary-bg shadow" wx:if="{{showBtn.join}}">参与</button>
+    <button class="btn operation warning-bg shadow" wx:if="{{showBtn.exit}}">退出</button>
+    <button class="btn operation primary-bg shadow" wx:if="{{showBtn.login}}">登录</button>
+    <button class="btn operation primary-bg shadow" wx:if="{{showBtn.postpone}}">延期</button>
+    <button class="btn operation danger-bg shadow" wx:if="{{showBtn.abandon}}">废弃</button>
+    <button class="btn operation second-bg shadow" wx:if="{{showBtn.edit}}">修改</button>
+    <button class="btn operation primary-bg shadow" wx:if="{{showBtn.pass}}">提前成功</button>
   </view>
 </view>
+
+<van-popup show="{{enlargeImg}}" bind:close="ensmallImg">
+  <view>
+    <van-image width="{{largeSize}}" height="{{largeSize}}" src="{{largeImg}}" lazy-load use-error-slot>
+      <text slot="error">加载失败</text>
+    </van-image>
+  </view>
+</van-popup>

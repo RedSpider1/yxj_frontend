@@ -31,7 +31,7 @@
 .author-name {
   color: rgba(42, 130, 228, 1);
   margin-left: 5px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .examineTime, .expireTime, .labelArray {
@@ -67,9 +67,6 @@
 }
 
 .introduce {
-  text-indent: 24px;
-	color: rgba(80, 80, 80, 1);
-	font-size: 14px;
 	line-height: 150%;
 }
 
@@ -108,4 +105,18 @@
 }
 .van-tabs__scroll {
   margin: 0 !important;
+}
+.joiner-item {
+  border-bottom: 1px dashed var(--primary);
+  margin: .5rem 0;
+  padding-bottom: .5rem;
+}
+.contact {
+  text-align: right;
+  color: grey;
+}
+.record-item {
+  border-bottom: 1px dashed var(--primary);
+  margin: .5rem 0;
+  padding-bottom: .5rem;
 }

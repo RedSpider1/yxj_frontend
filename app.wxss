@@ -7,6 +7,7 @@ page {
   --primary: #06C3ED;
   --second: #D2CB1D;
   --third: #D21DAA;
+  background-color: #f5f6f7;
 }
 
 .container {
@@ -28,6 +29,15 @@ page {
 
 .flex {
   display: flex;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-2 {
+  flex: 2;
+}
+.flex-3 {
+  flex: 3;
 }
 .flex-col {
   display: flex;

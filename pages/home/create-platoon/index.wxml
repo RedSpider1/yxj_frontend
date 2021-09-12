@@ -1,43 +1,19 @@
 <header title="友小聚 - 创建组队单" needReturn="{{true}}"></header>
 <view class="container">
-  <view class="divider">
-    <van-field value="{{submitData.title}}" required clearable label="标题：" auto-focus placeholder="请输入标题" />
-  </view>
-  <view>
-    <van-row>
-      <van-col span="12">
-        <van-field label="人数：" readonly required />
-      </van-col>
-      <van-col span="12">
-        <view class="flex justify-end">
-          <van-stepper value="{{submitData.minTeamSize}}" min="{{minTeamSize}}" />
-        </view>
-      </van-col>
-    </van-row>
-  </view>
-  <van-row>
-    <van-col span="12">
-      <van-field label="包含我：" readonly required />
-    </van-col>
-    <van-col span="12">
-      <view class="flex justify-end">
-        <van-switch checked="{{containMe}}" size="24px" bind:change="changeContainMe" />
-      </view>
-    </van-col>
-  </van-row>
+  <van-field value="{{submitData.title}}" required clearable label="标题：" auto-focus placeholder="请输入标题" />
+  <van-field label="人数：" readonly required use-button-slot>
+    <van-stepper slot="button" value="{{submitData.minTeamSize}}" min="{{minTeamSize}}" />
+  </van-field>
+  <van-field label="包含我：" readonly required use-button-slot>
+    <van-switch slot="button" checked="{{containMe}}" size="24px" bind:change="changeContainMe" />
+  </van-field>
 
-  <view class="divider">
-    <view>
-      <van-field border="false" value="{{submitData.introduce}}" type="textarea" label="描述：" placeholder="请输入描述"
-        autosize="{{autosize}}" maxlength="200" border="{{true}}" clearable custom-style="border-color: black;"
-        show-word-limit />
-    </view>
-  </view>
-  <view>
-    <view class="img-con">
-      <van-uploader file-list="{{pictureUrlArray}}" use-before-read bind:before-read="beforeReadPicture"
-        bind:after-read="afterReadPicture" />
-    </view>
+  <van-field border="false" value="{{submitData.introduce}}" type="textarea" label="描述：" placeholder="请输入描述"
+    autosize="{{autosize}}" maxlength="200" border="{{true}}" clearable custom-style="border-color: black;"
+    show-word-limit />
+  <view class="img-con white-bg">
+    <van-uploader file-list="{{pictureUrlArray}}" use-before-read bind:before-read="beforeReadPicture"
+      bind:after-read="afterReadPicture" />
   </view>
   <van-field value="{{submitData.expireTime}}" readonly placeholder="请选择截止时间" label="截止时间："
     bindtap="openShowExpireDate" />
@@ -52,7 +28,7 @@
 
   <van-field readonly placeholder="请选择标签" label="标签：" bindtap="openShowTag" />
   <view class="divider">
-    <view class="tag-con flex flex-wrap">
+    <view class="tag-con flex flex-wrap white-bg">
       <view wx:for="{{chooseLabelArr}}" wx:key="key" style="margin-right: 5px; margin-bottom: 5px;">
         <van-tag round type="success" size="large" style="--tag-success-color: {{item.color}};" bind:close="closeTag"
           data-item="{{item}}" closeable>
@@ -60,15 +36,6 @@
         </van-tag>
       </view>
     </view>
-    <!-- <view class="tag" bindtap="openShowTag">
-      <view style="display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap;">
-        <view wx:for="{{chooseLabelArr}}" wx:key="key" style="margin-right: 5px; margin-bottom: 5px;">
-          <van-tag round type="success" size="large" style="--tag-success-color: {{item.color}};">
-            {{item.name}}
-          </van-tag>
-        </view>
-      </view>
-    </view> -->
     <van-popup show="{{showTag}}" round closeable position="bottom" custom-style="height: 50%"
       bind:close="closeShowTag">
       <view class="container">

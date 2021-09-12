@@ -29,7 +29,18 @@
   background-color: #ee0a24;
   color: white
 }
+.white-bg {
+  background-color: white;
+}
 
 .grey {
   color: grey;
+}
+
+.white {
+  color: white;
+}
+
+.shadow {
+  box-shadow: 1px 1px 5px grey;
 }
