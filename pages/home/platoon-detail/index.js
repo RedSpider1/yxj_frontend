@@ -11,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    headerHeight: 0,
     primary: getApp().globalData.themes.primary,
     platoonId: null, // 组队单id
     title: '', // 标题
@@ -58,6 +59,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const query = wx.createSelectorQuery()
+    query.select('#header').boundingClientRect()
+    query.exec(res => {
+      this.setData({headerHeight: res[0].height})
+    })
+
     let platoonId = options.id
     if (platoonId === null || typeof platoonId === 'undefined' || platoonId === '') {
       wx.navigateTo({

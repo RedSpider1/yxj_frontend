@@ -1,4 +1,4 @@
-<header title="友小聚 - 组队单详情" needReturn="{{true}}"></header>
+<header title="友小聚 - 组队单详情" needReturn="{{true}}" id="header"></header>
 <view class="container margin-bottom">
 
   <view class="title">
@@ -29,10 +29,9 @@
     <van-col span="8">
       <view class="flex justify-end">
         <view class="flex-col align-items-center">
-
           <view class="personRateDesc" style="color: {{personColor}};">{{personRateDesc}}</view>
-          <van-circle value="{{personRate}}" size="60" stroke-width="4" style="--circle-text-color: {{personColor}}"
-            layer-color="#eeeeee" color="{{personColor}}" text="{{statusDesc}}" />
+          <van-circle class="circle" value="{{personRate}}" size="60" stroke-width="4" style="--circle-text-color: {{personColor}}"
+            layer-color="#eeeeee" color="{{personColor}}" text="{{statusDesc}}"/>
         </view>
       </view>
     </van-col>
@@ -53,7 +52,7 @@
     <view class="small" wx:else>无</view>
   </view>
   <van-divider></van-divider>
-  <van-tabs type="card" active="detail" sticky animated swipeable line-height="0" color="{{primary}}">
+  <van-tabs type="card" active="detail" sticky animated swipeable line-height="0" color="{{primary}}"  offset-top="{{headerHeight}}">
     <van-tab title="详情" name="detail">
       <view class="container-v">
         <view class="introduce">

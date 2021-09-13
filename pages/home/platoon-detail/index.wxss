@@ -106,6 +106,9 @@
 .van-circle__text {
   font-size: .6rem;
 }
+.circle {
+  z-index: -1;
+}
 .van-tabs__scroll {
   margin: 0 !important;
 }

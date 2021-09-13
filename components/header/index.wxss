@@ -5,7 +5,5 @@
   margin-right: 10px;
 }
 .nav-bar {
-  position: fix;
-  top: 0;
-  left: 0;
+  z-index: 2;
 }
