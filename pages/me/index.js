@@ -6,6 +6,8 @@ Component({
     addGlobalClass: true
   },
   data: {
+    nickname: null,
+    avatar: null,
   },
   methods: {
     edit() {
@@ -28,26 +30,22 @@ Component({
           title: '确定注销登录',
           message: '注销后某些功能将不可用，确定注销？',
         }).then(() => {
-          getApp().globalData.token = null;
+          auth.logout()
           wx.navigateTo({
-            url: '/pages/me/login/index',
+            url: '/pages/home/index',
           })
         })
         .catch(() => {
         });
     },
     onLoad: function (options) {
-      // 页面创建时执行
-    },
-    onPullDownRefresh: function () {
-      // 下拉刷新时执行
-    },
-    // 事件响应函数
-    viewTap: function () {
-      // ...
-    },
-    onShow: function () {
       auth.checkLogin()
-    }
+      setTimeout(() => {
+        this.setData({
+          nickname: getApp().globalData.userInfo.nickname,
+          avatar: getApp().globalData.userInfo.avatar
+        })
+      }, 1000);
+    },
   }
 })

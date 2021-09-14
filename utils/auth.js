@@ -20,7 +20,7 @@ function login () {
         })
       }
     })
-  } else {
+  } else if (string.isEmpty(app.globalData.userInfo.phone)) {
     wx.navigateTo({
       url: `/pages/me/login/index?sourceRoute=${sourceRoute}`,
     })
@@ -29,9 +29,22 @@ function login () {
 
 export const checkLogin = function () {
   const app = getApp()
-  // todo 等接口好了放开注释
-  // if (string.isEmpty(app.globalData.authToken) || string.isEmpty(app.globalData.userInfo.phone)) {
-  //   login()
-  // }
+  if (string.isEmpty(app.globalData.authToken) || string.isEmpty(app.globalData.userInfo.phone)) {
+    login()
+  }
 }
 
+export const logout = function () {
+  const app = getApp()
+  app.globalData.authToken = null
+  app.globalData.userInfo = {
+    id: null, // id
+    phone: null, // 手机号
+    nickname: null, // 昵称
+    avatar: null, // 头像地址
+    wechatNum: null, // 微信号
+    sex: '男', // 性别
+    slogan: '', // 个性签名
+    birthday: '1970-01-01', // 生日
+  }
+}

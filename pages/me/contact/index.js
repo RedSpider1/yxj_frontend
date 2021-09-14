@@ -1,5 +1,5 @@
-const time = require('../../../utils/time.js')
-import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
+const auth = require('../../../utils/auth')
+const string = require('../../../utils/string')
 
 Component({
   data: {
@@ -43,13 +43,26 @@ Component({
         url: `/pages/me/contact/edit/index?id=${id}`
       })
     },
-    onLoad: function (options) {},
-    onPullDownRefresh: function () {
-      // 下拉刷新时执行
+    onLoad: function (options) {
+      auth.checkLogin()
+
+      const userInfo = getApp().globalData.userInfo
+      const contacts = []
+      contacts.push({
+        id: 1,
+        type: "手机号",
+        value: userInfo.phone,
+      })
+
+      if (string.isNotEmpty(userInfo.wechatNum)) {
+        contacts.push({
+          id: 2,
+          type: "微信号",
+          value: userInfo.wechatNum,
+        })
+      }
+
+      this.setData({contacts: contacts})
     },
-    // 事件响应函数
-    viewTap: function () {
-      // ...
-    }
   }
 })

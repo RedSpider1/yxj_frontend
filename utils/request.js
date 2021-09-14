@@ -62,3 +62,8 @@ export const groupTeamQueryListByUser = {
   url: 'groupTeam/query/listByUser',
   desc: '我创建的组队单'
 }
+
+export const updateUserInfo = {
+  url: 'user/updateUserInfo',
+  desc: '更新用户信息'
+}

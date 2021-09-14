@@ -1,6 +1,7 @@
-let string = require('../../../utils/string')
+const string = require('../../../utils/string')
 const http = require('../../../utils/http')
 const request = require('../../../utils/request')
+const image = require('../../../utils/image')
 
 Page({
 
@@ -71,6 +72,15 @@ Page({
     let that = this
     http.get(request.getUserInfo.url).then(res => {
       if (res !== null && !string.isEmpty(res.phone)) {
+        app.globalData.userInfo.id = res.id
+        app.globalData.userInfo.phone = res.phone
+        app.globalData.userInfo.wechatNum = res.wechatNum
+        app.globalData.userInfo.nickname = string.isEmpty(res.name) ? '' : res.name
+        app.globalData.userInfo.avatar = string.isEmpty(res.avatar) ? image.defaultAvatar : res.avatar
+        app.globalData.userInfo.sex = res.sex === null ? 1 : res.sex
+        app.globalData.userInfo.slogan = string.isEmpty(res.slogan) ? '' : res.slogan
+        app.globalData.userInfo.birthday = string.isEmpty(res.birthday) ? '1970-01-01' : res.birthday
+
         this.selectComponent('#header').back()
         return
       } else {

@@ -1,15 +1,19 @@
 const time = require('../../../utils/time.js')
-import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
+const auth = require('../../../utils/auth')
+const string = require('../../../utils/string')
+const file = require('../../../utils/file')
+const request = require('../../../utils/request')
+const http = require('../../../utils/http')
+import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 
 Component({
   data: {
-    text: "This is page data.",
     userInfo: {
-      img: 'https://img.yzcdn.cn/vant/cat.jpeg',
-      nickName: '叮当猫',
+      img: null,
+      nickName: null,
       sex: '男',
       birthday: '1999-01-01',
-      slogan: '个性签名限制50字'
+      slogan: ''
     },
     showSexSheet: false,
     showBirthdaySheet: false,
@@ -36,13 +40,6 @@ Component({
     },
   },
   methods: {
-    useWechatInfo() {
-      wx.getUserInfo({
-        success: (res => {
-
-        })
-      });
-    },
     editSex() {
       this.setData({
         showSexSheet: true
@@ -58,7 +55,6 @@ Component({
         showSexSheet: false
       })
     },
-
     editBirthday() {
       this.setData({
         showBirthdaySheet: true
@@ -76,16 +72,33 @@ Component({
       })
     },
     saveUserInfo() {
-      // todo 回调
-      Toast.success('保存成功');
+      const userInfo = this.data.userInfo
+      http.post(request.updateUserInfo.url, {
+        phone: getApp().globalData.userInfo.phone,
+        wechatNum: getApp().globalData.userInfo.wechatNum,
+        name: userInfo.nickName,
+        birthday: userInfo.birthday,
+        sex: userInfo.sex === '男' ? 1 : 0,
+        avatar: userInfo.img,
+        slogan: userInfo.slogan,
+      }).then(res => {
+        Toast.success('保存成功')
+        const globalData = getApp().globalData
+        globalData.userInfo.nickname = userInfo.nickName
+        globalData.userInfo.birthday = userInfo.birthday
+        globalData.userInfo.sex = userInfo.sex === '男' ? 1 : 0
+        globalData.userInfo.avatar = userInfo.img
+        globalData.userInfo.slogan = userInfo.slogan
+        wx.navigateTo({
+          url: '/pages/me/index',
+        })
+      })
     },
-    getUserProfile (e) {
+    getUserProfile () {
       wx.getUserProfile({
-        desc: '测试',
         success: (res) => {
           this.setData({
             'userInfo.nickName': res.userInfo.nickName,
-            // todo 这里性别要处理下
             'userInfo.sex': getSexFromWechatGender(res.userInfo.gender),
             'userInfo.img': res.userInfo.avatarUrl,
           })
@@ -98,26 +111,28 @@ Component({
         sizeType: ['compressed'],
         sourceType: ['album', 'camera'],
         success: (res) => {
-          const tempFilePaths = res.tempFilePaths
-          console.log(tempFilePaths)
-          // 参考https://developers.weixin.qq.com/miniprogram/dev/api/network/upload/wx.uploadFile.html
-          wx.uploadFile({
-            filePath: 'filePath',
-            name: 'name',
-            url: 'url',
+          const tempFilePaths = res.tempFilePaths[0]
+          file.default.upload(tempFilePaths).then(key => {
+            this.setData({
+              'userInfo.img': file.default.getImgUrl(key)
+            })
           })
         }
       })
     },
     onLoad: function (options) {
+      auth.checkLogin()
+      const app = getApp()
+      const userInfo = {
+        img: app.globalData.userInfo.avatar,
+        nickName: app.globalData.userInfo.nickname,
+        sex: getSexFromWechatGender(app.globalData.userInfo.sex),
+        birthday: app.globalData.userInfo.birthday,
+        slogan: app.globalData.userInfo.slogan
+      }
+
+      this.setData({userInfo: userInfo})
     },
-    onPullDownRefresh: function () {
-      // 下拉刷新时执行
-    },
-    // 事件响应函数
-    viewTap: function () {
-      // ...
-    }
   }
 })
 

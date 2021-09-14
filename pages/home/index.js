@@ -122,7 +122,7 @@ Page({
   },
   onLoad () {
     this.list()
-    this.listLabel()
+    // this.listLabel()
     // todo 这里会报没权限 检查一下
     // this.listSearchHistory()
   },

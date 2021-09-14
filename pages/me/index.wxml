@@ -4,13 +4,13 @@
   <van-row>
     <van-col span="24">
       <view class="headImg">
-        <van-image round width="100px" height="100px" lazy-load fit="cover" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+        <van-image round width="100px" height="100px" lazy-load fit="cover" src="{{avatar}}" />
       </view>
     </van-col>
   </van-row>
 </view>
 <view class="flex, justify-center">
-  昵称
+  {{ nickname }}
 </view>
 <van-cell-group title="操作">
   <van-cell title="修改信息" is-link bind:click="edit" />

@@ -21,6 +21,10 @@ App({
       phone: null, // 手机号
       nickname: null, // 昵称
       avatar: null, // 头像地址
+      wechatNum: null, // 微信号
+      sex: '男', // 性别
+      slogan: '', // 个性签名
+      birthday: '', // 生日
     }
   }
 })

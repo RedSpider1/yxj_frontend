@@ -1,6 +1,6 @@
-let http = require('./http')
-let request = require('./request')
-let time = require('./time')
+const http = require('./http')
+const request = require('./request')
+const time = require('./time')
 
 export default {
   getPrefixUrl () {
@@ -62,21 +62,21 @@ export default {
    */
   upload(file) { 
     return new Promise((resolve, reject) => {
-      // http.get(request.getFileToken.url).then(res => {
+      http.get(request.getFileToken.url).then(token => {
         let key = this.getRandomFilePath() + '.jpg'
         wx.uploadFile({
           url: 'https://upload-z2.qiniup.com',
-          filePath: file.url,
+          filePath: file,
           name: 'file',
-          formData: {token: 'moBj1pPeF_UlP60zB38u0Fy6gtZ43m6zR-txoY2s:MfJEIG7tV3206HkkVxYI6Jx0dd0=:eyJzY29wZSI6InJlZHNwaWRlci1wc3MiLCJkZWFkbGluZSI6MTYyOTU4MTE3NX0=', key: key},
+          formData: {token: token, key: key},
           success (res) {
-            resolve(res.data.key)
+            resolve(JSON.parse(res.data).key)
           },
           fail (res) {
             reject(res)
           }
         })
-      // })
+      })
     })
   },
 
