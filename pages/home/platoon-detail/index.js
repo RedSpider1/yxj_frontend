@@ -62,7 +62,7 @@ Page({
     const query = wx.createSelectorQuery()
     query.select('#header').boundingClientRect()
     query.exec(res => {
-      this.setData({headerHeight: res[0].height})
+      this.setData({headerHeight: res[0].height - 1})
     })
 
     let platoonId = options.id

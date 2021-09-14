@@ -104,10 +104,8 @@
   margin-right: 5px;
 }
 .van-circle__text {
-  font-size: .6rem;
-}
-.circle {
   z-index: -1;
+  font-size: .6rem;
 }
 .van-tabs__scroll {
   margin: 0 !important;
@@ -125,4 +123,10 @@
   border-bottom: 1px dashed var(--primary);
   margin: .5rem 0;
   padding-bottom: .5rem;
+}
+.tab-item {
+  min-height: 800px;
+}
+.record-tag {
+  margin-left: 10px;
 }
