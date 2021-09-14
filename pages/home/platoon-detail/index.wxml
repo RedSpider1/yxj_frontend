@@ -30,8 +30,10 @@
       <view class="flex justify-end">
         <view class="flex-col align-items-center">
           <view class="personRateDesc" style="color: {{personColor}};">{{personRateDesc}}</view>
-          <van-circle class="circle" value="{{personRate}}" size="60" stroke-width="4" style="--circle-text-color: {{personColor}}"
-            layer-color="#eeeeee" color="{{personColor}}" text="{{statusDesc}}"/>
+          <van-circle class="circle" value="{{personRate}}" size="60" stroke-width="4"
+            style="--circle-text-color: {{personColor}}" layer-color="#eeeeee" color="{{personColor}}"
+            type="2d"
+            text="{{statusDesc}}" />
         </view>
       </view>
     </van-col>
@@ -39,22 +41,19 @@
 
 
   <view class="flex flex-wrap">
-    <view class="small">标签：</view>
-    <view wx:if="{{labelArray.length > 0}}">
-      <view wx:for="{{labelArray}}" wx:key="key">
-        <view class="label">
-          <van-tag plain type="primary" style="--tag-primary-color: {{item.color}};">
-            {{item.name}}
-          </van-tag>
-        </view>
-      </view>
+    <view>标签：</view>
+    <view wx:if="{{labelArray.length > 0}}" class="flex align-items-center">
+      <van-tag wx:for="{{labelArray}}" wx:key="key" plain type="primary" style="--tag-primary-color: {{item.color}};">
+        {{item.name}}
+      </van-tag>
     </view>
-    <view class="small" wx:else>无</view>
+    <view wx:else>无</view>
   </view>
   <van-divider></van-divider>
-  <van-tabs type="card" active="detail" sticky animated swipeable line-height="0" color="{{primary}}"  offset-top="{{headerHeight}}">
+  <van-tabs type="card" active="detail" sticky animated swipeable line-height="0" color="{{primary}}"
+    offset-top="{{headerHeight}}">
     <van-tab title="详情" name="detail">
-      <view class="container-v">
+      <view class="container-v tab-item">
         <view class="introduce">
           {{introduce}}
         </view>
@@ -66,7 +65,7 @@
       </view>
     </van-tab>
     <van-tab title="参与人" name="joined">
-      <view class="container-v">
+      <view class="container-v tab-item">
         <view wx:if="{{joinerInfos.length > 0}}">
           <view wx:for="{{joinerInfos}}" wx:key="key" class="joiner-item margin-v">
             <view class="flex">
@@ -88,7 +87,37 @@
       </view>
     </van-tab>
     <van-tab title="记录" name="record">
-      <view class="container-v">
+      <view class="container-v tab-item">
+        <!-- todo 这里数据对接后修改逻辑 -->
+        <view wx:for="{{joinerInfos}}" wx:key="key" class="record-item margin-v">
+          <view class="flex justify-between align-items-center">
+            <view class="flex">
+              <van-image round width="20" height="20" src="{{item.avatar}}" />
+              <view class="author-name">{{item.name}}</view>
+            </view>
+            <view>
+              <text class="small grey">{{item.createTime}}</text>
+              <!-- todo 这里只展示加入和退出的记录 -->
+              <van-tag plain type="primary" class="record-tag" wx:if="{{index == 0}}">加入</van-tag>
+              <van-tag plain type="warning" class="record-tag" wx:else>退出</van-tag>
+            </view>
+          </view>
+          <!-- todo 参与和退出都可以留消息。这里有的话就会展示 -->
+          <view class="container-v">
+            <view class="small grey">
+              {{introduce}}
+            </view>
+            <view class="margin-v">
+              <van-image width="40" height="40" src="{{item}}" wx:for="{{pictureUrlArray}}" wx:key="key"
+                bindtap="enlargeImg" data-url="{{item}}">
+              </van-image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </van-tab>
+    <van-tab title="评论" name="comment">
+      <view class="container-v tab-item">
         <!-- todo 这里数据对接后修改逻辑 -->
         <view wx:for="{{joinerInfos}}" wx:key="key" class="record-item margin-v">
           <view class="flex justify-between align-items-center">
@@ -110,11 +139,6 @@
             </view>
           </view>
         </view>
-      </view>
-    </van-tab>
-    <van-tab title="评论" name="comment">
-      <view class="container-v">
-        评论
       </view>
     </van-tab>
   </van-tabs>

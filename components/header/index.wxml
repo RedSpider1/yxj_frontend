@@ -1,5 +1,5 @@
 <!--components/header-default/index.wxml-->
-<view>
+<view class="header" id="header">
   <van-nav-bar
     title="{{title}}"
     style="--nav-bar-background-color: {{color}}; --nav-bar-icon-color: white; --nav-bar-title-text-color: white;"
