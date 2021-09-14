@@ -1,8 +1,10 @@
-let fileOp = require('../../../utils/file')
-let time = require('../../../utils/time')
-let request = require('../../../utils/request')
-let http = require('../../../utils/http')
-let color = require('../../../utils/color')
+const fileOp = require('../../../utils/file')
+const auth = require('../../../utils/auth')
+const time = require('../../../utils/time')
+const request = require('../../../utils/request')
+const http = require('../../../utils/http')
+const color = require('../../../utils/color')
+const string = require('../../../utils/string')
 
 Page({
 
@@ -11,13 +13,14 @@ Page({
    */
   data: {
     submitData: {
-      title: '', // 标题
       minTeamSize: 1, // 最小人数
-      introduce: '', // 描述
       pictureUrlArray: [], // 图片
       expireTime: '', // 截止日期
       labelArr: [], // 标签选择
     },
+    title: '', // 标题
+    introduce: '', // 描述
+    pictureUrlArray: [],
     minTeamSize: 0,
     containMe: false,
     autosize: {maxHeight: 100, minHeight: 0},
@@ -47,8 +50,17 @@ Page({
   },
   afterReadPicture (event) {
     const {file} = event.detail
-    console.log(file)
-    fileOp.default.upload(file)
+    const that = this
+    fileOp.default.upload(file.url).then(key => {
+      const pictureUrlArray = that.data.submitData.pictureUrlArray
+      pictureUrlArray.push(key)
+      const sPictureUrlArray = that.data.pictureUrlArray
+      sPictureUrlArray.push(fileOp.default.getImgUrl(key))
+      that.setData({
+        'submitData.pictureUrlArray': pictureUrlArray,
+        pictureUrlArray: sPictureUrlArray
+      })
+    })
   },
   openShowExpireDate () {
     this.setData({showExpireDate: true})
@@ -74,8 +86,9 @@ Page({
     if (this.data.expireTime != null) {
       time += this.data.expireTime
     } else {
-      time += '00: 00'
+      time += '00:00'
     }
+    time += ':00'
     return time
   },
   confirmShowExpireTime (event) {
@@ -94,11 +107,53 @@ Page({
     const { file, callback } = event.detail;
     callback(file.type === 'image');
   },
+  save () {
+    if (string.isEmpty(this.data.title)) {
+      wx.showToast({
+        title: '标题为空',
+        type: 'warn',
+        duration: 2000
+      })      
+      return
+    }
+    if (string.isEmpty(this.data.submitData.expireTime)) {
+      wx.showToast({
+        title: '截止时间为空',
+        type: 'warn',
+        duration: 2000
+      })      
+      return
+    }
 
+    http.post(request.groupTeamSaveTeam.url, {
+      area: null,
+      city: null,
+      confirmStatus: 0,
+      containMe: this.data.containMe ? 1 : 0,
+      expireTime: string.isEmpty(this.data.submitData.expireTime) ? null : this.data.submitData.expireTime + '',
+      // "id": 0,
+      introduce: this.data.introduce,
+      labelIdArray: this.data.submitData.labelArr,
+      lat: null,
+      lon: null,
+      maxTeamSize: this.data.submitData.minTeamSize,
+      minTeamSize: this.data.submitData.minTeamSize,
+      pictureUrlArray: this.data.submitData.pictureUrlArray,
+      place: null,
+      province: null,
+      releaseStatus: 1,
+      title: this.data.title
+    }).then(id => {
+      wx.navigateTo({
+        url: `/pages/home/platoon-detail/index?id=${id}`,
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    auth.checkLogin()
     let that = this
     http.get(request.labelList.url).then(res => {
       let labelArr = []
@@ -146,52 +201,4 @@ Page({
     submitData.labelArr.splice(index, 1)
     this.setData({labelArr: labelArr, chooseLabelArr: chooseLabelArr, submitData: submitData})
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

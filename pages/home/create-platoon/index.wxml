@@ -1,6 +1,6 @@
 <header title="友小聚 - 创建组队单" needReturn="{{true}}"></header>
 <view class="container">
-  <van-field value="{{submitData.title}}" required clearable label="标题：" auto-focus placeholder="请输入标题" />
+  <van-field model:value="{{title}}" required clearable label="标题：" auto-focus placeholder="请输入标题" />
   <van-field label="人数：" readonly required use-button-slot>
     <van-stepper slot="button" value="{{submitData.minTeamSize}}" min="{{minTeamSize}}" />
   </van-field>
@@ -8,16 +8,15 @@
     <van-switch slot="button" checked="{{containMe}}" size="24px" bind:change="changeContainMe" />
   </van-field>
 
-  <van-field border="false" value="{{submitData.introduce}}" type="textarea" label="描述：" placeholder="请输入描述"
+  <van-field border="false" model:value="{{introduce}}" type="textarea" label="描述：" placeholder="请输入描述"
     autosize="{{autosize}}" maxlength="200" border="{{true}}" clearable custom-style="border-color: black;"
     show-word-limit />
   <view class="img-con white-bg">
     <van-uploader file-list="{{pictureUrlArray}}" use-before-read bind:before-read="beforeReadPicture"
       bind:after-read="afterReadPicture" />
   </view>
-  <van-field value="{{submitData.expireTime}}" readonly placeholder="请选择截止时间" label="截止时间："
+  <van-field model:value="{{submitData.expireTime}}" readonly placeholder="请选择截止时间" label="截止时间："
     bindtap="openShowExpireDate" />
-
   <view>
     <van-calendar show="{{showExpireDate}}" bind:close="closeShowExpireDate" bind:confirm="confirmShowExpireDate" />
     <van-popup show="{{showExpireTime}}" position="bottom" custom-style="height: 50%;" bind:close="closeShowExpireTime">
@@ -69,7 +68,7 @@
   </view>
   <van-row>
     <van-col span="8" offset="8">
-      <button class="btn primary-bg">确认添加</button>
+      <button class="btn primary-bg" bindtap="save">确认添加</button>
     </van-col>
   </van-row>
   <footer id="footer" name="create"></footer>

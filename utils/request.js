@@ -67,3 +67,8 @@ export const updateUserInfo = {
   url: 'user/updateUserInfo',
   desc: '更新用户信息'
 }
+
+export const groupTeamSaveTeam = {
+  url: 'groupTeam/saveTeam',
+  desc: '保存/更新用户信息'
+}
