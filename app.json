@@ -21,6 +21,7 @@
     "navigationBarTitleText": "友小聚",
     "navigationBarTextStyle": "white"
   },
+  "entryPagePath": "pages/home/index",
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
     "header": "./components/header/index",

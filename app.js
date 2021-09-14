@@ -1,8 +1,3 @@
-const http = require('./utils/http')
-const request = require('./utils/request')
-const auth = require('./utils/auth')
-
-
 App({
   onLaunch() {
   },
