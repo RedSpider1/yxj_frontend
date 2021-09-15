@@ -1,15 +1,22 @@
 const http = require('./http')
 const request = require('./request')
 const time = require('./time')
+const string = require('./string')
 
 export default {
+  getImgUrl (key) {
+    if (string.isEmpty(key)) {
+      return null
+    } else if (key.startsWith('http')) {
+      return key
+    } else {
+      return getPrefixUrl() + imgKey
+    }
+  },
+
   getPrefixUrl () {
     return 'https://file.youxiaoju.com/'
   },
-
-  getImgUrl (imgKey) {
-    return this.getPrefixUrl() + imgKey
-  }, 
 
   //移除数组中的某个元素
   removeArrayChild (array, element) {

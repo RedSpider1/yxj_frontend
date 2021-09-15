@@ -72,3 +72,13 @@ export const groupTeamSaveTeam = {
   url: 'groupTeam/saveTeam',
   desc: '保存/更新用户信息'
 }
+
+export const getUserInfoById = {
+  url: 'user/getUserInfoById',
+  desc: '根据用户id获取用户信息'
+}
+
+export const groupTeamSelelctGroupTeamUserStatus = {
+  url: (id) => `groupTeam/selelctGroupTeamUserStatus/${id}`,
+  desc: '获取用户与组队单关系'
+}

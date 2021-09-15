@@ -7,7 +7,7 @@
   <van-row>
     <van-col span="16">
       <view class="flex">
-        <van-image round width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+        <van-image round width="20" height="20" src="{{authorAvatar}}" />
         <view class="author-name">{{authorName}}</view>
         <view>
           <van-icon name="star-o" class="tag-btn primary" size="20" />
@@ -73,7 +73,6 @@
               <view class="author-name">{{item.name}}</view>
             </view>
             <!-- todo 以后联系方式会有多个 -->
-            <view class="contact">{{item.type}} ：{{item.contact}}</view>
             <view class="contact">{{item.type}} ：{{item.contact}}</view>
           </view>
         </view>

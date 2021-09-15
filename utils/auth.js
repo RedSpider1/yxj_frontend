@@ -3,7 +3,7 @@ const string = require('./string')
 const http = require('./http')
 const request = require('./request')
 
-function login () {
+function login (tryLogin) {
   const app = getApp()
   const pages = getCurrentPages()
   const sourceRoute = pages[pages.length - 1].route
@@ -14,23 +14,38 @@ function login () {
         app.globalData.code = res.code
         http.post(request.login.url, {jsCode: res.code}).then(res => {
           app.globalData.authToken = res.token
-          wx.navigateTo({
-            url: `/pages/me/login/index?sourceRoute=${sourceRoute}`,
-          })
+          if (!tryLogin) {
+            wx.navigateTo({
+              url: `/pages/me/login/index?sourceRoute=${sourceRoute}`,
+            })
+          }
         })
       }
     })
-  } else if (string.isEmpty(app.globalData.userInfo.phone)) {
+  } else if (string.isEmpty(app.globalData.userInfo.phone) && !tryLogin) {
     wx.navigateTo({
       url: `/pages/me/login/index?sourceRoute=${sourceRoute}`,
     })
   }
 }
 
+/**
+ * 尝试登录
+ */
+export const tryLogin = function () {
+  const app = getApp()
+  if (string.isEmpty(app.globalData.authToken) || string.isEmpty(app.globalData.userInfo.phone)) {
+    login(true)
+  }
+}
+
+/**
+ * 登录校验
+ */
 export const checkLogin = function () {
   const app = getApp()
   if (string.isEmpty(app.globalData.authToken) || string.isEmpty(app.globalData.userInfo.phone)) {
-    login()
+    login(false)
   }
 }
 

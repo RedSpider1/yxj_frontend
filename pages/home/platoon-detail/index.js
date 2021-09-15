@@ -3,7 +3,9 @@ const http = require('../../../utils/http')
 const request = require('../../../utils/request')
 const status = require('../../../utils/enums')
 const color = require('../../../utils/color')
+const string = require('../../../utils/string')
 const file = require('../../../utils/file')
+const auth = require('../../../utils/auth')
 
 Page({
 
@@ -16,7 +18,9 @@ Page({
     platoonId: null, // 组队单id
     title: '', // 标题
     introduce: '', // 内容
-    authorName: '', // 用户名
+    authorId: '', // 作者id
+    authorName: '', // 作者名
+    authorAvatar: '', // 作者头像
     firstAuthorNameChar: '', // 首字母
     examineTime: '', // 发布时间
     expireTime: '', // 截止时间
@@ -59,6 +63,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    auth.tryLogin()
+
     const query = wx.createSelectorQuery()
     query.select('#header').boundingClientRect()
     query.exec(res => {
@@ -101,6 +107,7 @@ Page({
       that.setData({
         title: res.title, 
         introduce: res.introduce,
+        authorId: res.creatorId,
         authorName: res.createName,
         firstAuthorNameChar: res.createName.substring(0, 1),
         examineTime: res.examineTime,
@@ -114,6 +121,13 @@ Page({
         statusDesc: status.team_status[res.teamStatus],
         pictureUrlArray: pictureUrlArray,
         largeSize: Math.min(wx.getSystemInfoSync().windowHeight, wx.getSystemInfoSync().windowWidth) - 50,
+      })
+
+      http.get(request.getUserInfoById.url, {userId: that.data.authorId}).then(res => {
+        that.setData({
+          authorAvatar: file.default.getImgUrl(res.avatar),
+          authorName: res.name
+        })
       })
     })
 
@@ -132,6 +146,12 @@ Page({
       }
       that.setData({joinerInfos: joinerInfos})
     })
+
+    if (string.isNotEmpty(getApp().globalData.authToken)) {
+      http.get(request.groupTeamSelelctGroupTeamUserStatus.url(this.data.platoonId)).then(res => {
+        // todo
+      })
+    }
   },
   enlargeImg: function (event) {
     let pictureUrl = event.currentTarget.dataset.url
