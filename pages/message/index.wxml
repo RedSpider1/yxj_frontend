@@ -4,3 +4,5 @@
     <view>你的code：{{code}}</view>
   </view>
 </view>
+
+<footer id="footer" name="message"></footer>

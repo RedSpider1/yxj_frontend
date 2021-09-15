@@ -123,15 +123,14 @@ Component({
     onLoad: function (options) {
       auth.checkLogin()
       const app = getApp()
-      const userInfo = {
-        img: app.globalData.userInfo.avatar,
-        nickName: app.globalData.userInfo.nickname,
-        sex: getSexFromWechatGender(app.globalData.userInfo.sex),
-        birthday: app.globalData.userInfo.birthday,
-        slogan: app.globalData.userInfo.slogan
-      }
 
-      this.setData({userInfo: userInfo})
+      this.setData({
+        'userInfo.img': app.globalData.userInfo.avatar,
+        'userInfo.nickName': app.globalData.userInfo.nickname,
+        'userInfo.sex': getSexFromWechatGender(app.globalData.userInfo.sex),
+        'userInfo.birthday': app.globalData.userInfo.birthday,
+        'userInfo.slogan': app.globalData.userInfo.slogan
+      })
     },
   }
 })
