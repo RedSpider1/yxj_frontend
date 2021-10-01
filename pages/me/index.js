@@ -6,8 +6,8 @@ Component({
     addGlobalClass: true
   },
   data: {
-    nickname: null,
-    avatar: null,
+    nickname: '',
+    avatar: '',
   },
   methods: {
     edit() {
@@ -32,20 +32,16 @@ Component({
         }).then(() => {
           auth.logout()
           wx.navigateTo({
-            url: '/pages/home/index',
+            url: '/pages/me/login/index',
           })
         })
-        .catch(() => {
-        });
+        .catch(() => {});
     },
-    onLoad: function (options) {
-      auth.checkLogin()
-      setTimeout(() => {
-        this.setData({
-          nickname: getApp().globalData.userInfo.nickname,
-          avatar: getApp().globalData.userInfo.avatar
-        })
-      }, 1000);
+    onLoad(options) {
+      this.setData({
+        nickname: getApp().globalData.userInfo.nickname,
+        avatar: getApp().globalData.userInfo.avatar
+      })
     },
   }
 })

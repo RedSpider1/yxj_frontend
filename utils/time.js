@@ -1,4 +1,3 @@
-
 /**
  * 时间日期格式化
  * @param date 日期对象
@@ -6,7 +5,7 @@
  * @returns {string} 格式化后的字符串
  * 使用Demo： dateFormat(new Date(), "yyyy-MM-dd hh:mm:ss")
  */
-export const dateFormat = function (date, fmt='yyyy-MM-dd') {
+export const dateFormat = function (date, fmt = 'yyyy-MM-dd') {
   let o = {
     "M+": date.getMonth() + 2, //月份
     "d+": date.getDate(), //日

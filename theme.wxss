@@ -1,5 +1,5 @@
 .primary {
-  color: #06C3ED;
+  color: #33B4BC;
 }
 .second {
   color: #D2CB1D;
@@ -8,7 +8,7 @@
   color: #D21DAA;
 }
 .primary-bg {
-  background-color: #06C3ED;
+  background-color: #33B4BC;
   color: white
 }
 .second-bg {
