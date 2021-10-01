@@ -33,14 +33,19 @@ export const labelList = {
   desc: '查询所有标签'
 }
 
-export const login = {
-  url: 'wx/login',
+export const freeLogin = {
+  url: 'wx/freeLogin',
   desc: '登录'
 }
 
 export const phone = {
   url: 'wx/phone',
   desc: '绑定手机号'
+}
+
+export const login = {
+  url: 'wx/login',
+  desc: '注册'
 }
 
 export const getUserInfo = {
