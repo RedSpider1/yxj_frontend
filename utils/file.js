@@ -10,7 +10,7 @@ export default {
     } else if (key.startsWith('http')) {
       return key
     } else {
-      return getPrefixUrl() + imgKey
+      return this.getPrefixUrl() + key
     }
   },
 

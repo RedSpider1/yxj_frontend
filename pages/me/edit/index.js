@@ -12,7 +12,7 @@ Component({
       img: null,
       nickName: null,
       sex: '男',
-      birthday: '1999-01-01',
+      birthday: '2000-01-01',
       slogan: ''
     },
     showSexSheet: false,
@@ -60,6 +60,16 @@ Component({
         showBirthdaySheet: true
       })
     },
+    changeSlogan(e) {
+      this.setData({
+        'userInfo.slogan': e.detail
+      })
+    },
+    changeNickName(e) {
+      this.setData({
+        'userInfo.nickName': e.detail
+      })
+    },
     onSelectBirthday(event) {
       this.setData({
         'userInfo.birthday': time.dateFormat(new Date(event.detail)),
@@ -73,6 +83,7 @@ Component({
     },
     saveUserInfo() {
       const userInfo = this.data.userInfo
+      console.log(userInfo)
       http.post(request.updateUserInfo.url, {
         phone: getApp().globalData.userInfo.phone,
         wechatNum: getApp().globalData.userInfo.wechatNum,
@@ -94,16 +105,14 @@ Component({
         })
       })
     },
-    getUserProfile () {
-      wx.getUserProfile({
-        success: (res) => {
-          this.setData({
-            'userInfo.nickName': res.userInfo.nickName,
-            'userInfo.sex': getSexFromWechatGender(res.userInfo.gender),
-            'userInfo.img': res.userInfo.avatarUrl,
-          })
-        }
-      })
+    getUserProfile() {
+      wx.getUserProfile({desc: '同步微信信息'}).then(res => {
+        this.setData({
+          'userInfo.nickName': res.userInfo.nickName,
+          'userInfo.sex': getSexFromWechatGender(res.userInfo.gender),
+          'userInfo.img': res.userInfo.avatarUrl,
+        })})
+        .catch(e => console.log(e))
     },
     uploadImg() {
       wx.chooseImage({
@@ -136,10 +145,10 @@ Component({
 })
 
 function getSexFromWechatGender(gender) {
-  if(gender == 1) {
+  if (gender == 1) {
     return '男'
   }
-  if(gender == 2) {
+  if (gender == 2) {
     return '女'
   }
   return '保密'

@@ -10,32 +10,33 @@
           <view class="flex justify-center">
             <button class="btn primary-bg" bindtap="uploadImg">上传头像</button>
           </view>
-          <view class="flex justify-center">
-            <button class="btn primary-bg" bindtap="getUserProfile">同步微信信息</button>
-          </view>
+
         </view>
       </van-col>
     </van-row>
   </view>
   <view style="margin-top: 18px;">
     <van-cell-group title="个人信息">
-    <van-field value="{{userInfo.nickName}}" label="昵称" class="field" left-icon="friends"/>
-    <van-cell value="{{userInfo.sex}}" title="性别" bind:click="editSex" is-link  icon="smile"/>
-    <van-action-sheet show="{{ showSexSheet }}" actions="{{ sexOptions }}" bind:select="onSelectSex"
-      bind:close="closeSex" />
-    <van-cell value="{{userInfo.birthday}}" title="生日" is-link bind:click="editBirthday"  icon="fire" />
-    <van-action-sheet show="{{ showBirthdaySheet }}" title="选择生日" bind:close="closeBirthday">
-      <view>
-        <van-datetime-picker type="datetime" type="date" value="{{ defaultValue }}" min-date="{{ minBirthday }}" max-date="{{ maxBirthday }}"
-      bind:confirm="onSelectBirthday" bind:cancel="closeBirthday"/>
-      </view>
-    </van-action-sheet>
-    <van-field value="{{userInfo.slogan}}" label="个性签名" type="textarea" autosize class="field" show-word-limit
-      maxlength="50"  left-icon="audio"/>
+      <van-field value="{{userInfo.nickName}}" bind:change="changeNickName" label="昵称" class="field" left-icon="friends" />
+      <van-cell value="{{userInfo.sex}}" title="性别" bind:click="editSex" is-link icon="smile" />
+      <van-action-sheet show="{{ showSexSheet }}" actions="{{ sexOptions }}" bind:select="onSelectSex"
+        bind:close="closeSex" />
+      <van-cell value="{{userInfo.birthday}}" title="生日" is-link bind:click="editBirthday" icon="fire" />
+      <van-action-sheet show="{{ showBirthdaySheet }}" title="选择生日" bind:close="closeBirthday">
+        <view>
+          <van-datetime-picker type="datetime" type="date" value="{{ defaultValue }}" min-date="{{ minBirthday }}"
+            max-date="{{ maxBirthday }}" bind:confirm="onSelectBirthday" bind:cancel="closeBirthday" />
+        </view>
+      </van-action-sheet>
+      <van-field value="{{userInfo.slogan}}" bind:change="changeSlogan" label="个性签名" type="textarea" autosize class="field" show-word-limit
+        maxlength="50" left-icon="audio" />
     </van-cell-group>
 
   </view>
-  <view class="flex justify-center">
+  <view class="flex justify-between">
+    <view class="flex justify-between">
+      <button class="btn second-bg" bindtap="getUserProfile">同步微信信息</button>
+    </view>
     <button class="btn primary-bg" bindtap="saveUserInfo">保存</button>
   </view>
 </view>
