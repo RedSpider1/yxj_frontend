@@ -1,14 +1,16 @@
-.add-btn {
+
+.add-btn-con {
   position: fixed;
-    right: 10%;
-    bottom: 15%;
-    height: 40px;
-    width: 40px;
+  left: 0;
+  bottom: 60px;
+  width: 100%;
+  height: 60px;
+  z-index: 9;
 }
 .add-btn button{
   border-radius: 50%;
-  box-shadow: 2px 2px 5px grey;
-  background-color: var(--primary);
+  box-shadow: 0 0 15px grey;
+  background-color: var(--third);
   border: none;
   color: white;
 }

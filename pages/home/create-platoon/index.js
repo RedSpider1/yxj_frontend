@@ -14,7 +14,6 @@ Page({
   data: {
     submitData: {
       minTeamSize: 1, // 最小人数
-      pictureUrlArray: [], // 图片
       expireTime: '', // 截止日期
       labelArr: [], // 标签选择
     },
@@ -52,14 +51,18 @@ Page({
     const {file} = event.detail
     const that = this
     fileOp.default.upload(file.url).then(key => {
-      const pictureUrlArray = that.data.submitData.pictureUrlArray
-      pictureUrlArray.push(key)
       const sPictureUrlArray = that.data.pictureUrlArray
-      sPictureUrlArray.push(fileOp.default.getImgUrl(key))
+      sPictureUrlArray.push({ ...file, url: fileOp.default.getImgUrl(key) })
       that.setData({
-        'submitData.pictureUrlArray': pictureUrlArray,
         pictureUrlArray: sPictureUrlArray
       })
+    })
+  },
+  deletePicture(e) {
+    const picArr = this.data.pictureUrlArray
+    picArr.splice(e.detail.index, 1)
+    this.setData({
+      pictureUrlArray: picArr
     })
   },
   openShowExpireDate () {
@@ -124,7 +127,8 @@ Page({
       })      
       return
     }
-
+    // 这里要看一下，存的是url还是path。path的话，需要在这个对象里面单独搞一个字段。
+    const picArr = this.data.pictureUrlArray.map(x => x.url)
     http.post(request.groupTeamSaveTeam.url, {
       area: null,
       city: null,
@@ -138,7 +142,7 @@ Page({
       lon: null,
       maxTeamSize: this.data.submitData.minTeamSize,
       minTeamSize: this.data.submitData.minTeamSize,
-      pictureUrlArray: this.data.submitData.pictureUrlArray,
+      pictureUrlArray: picArr,
       place: null,
       province: null,
       releaseStatus: 1,
