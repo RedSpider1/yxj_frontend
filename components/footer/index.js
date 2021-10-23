@@ -21,6 +21,7 @@ Component({
     primary: getApp().globalData.themes.primary,
     second: getApp().globalData.themes.second,
     active: '',
+    footerHeight: 0,
     items: [
       {
         icon: 'home-o',
@@ -59,9 +60,11 @@ Component({
         }
       })
     },
-    load () {
-      // todo
-    }
+    add() {
+      wx.navigateTo({
+        url: '/pages/home/create-platoon/index',
+      })
+    },
   },
   lifetimes: {
     attached () {
@@ -73,7 +76,9 @@ Component({
           this.setData({ active: item.text });
         }
       })
+
     }
+    
   }
 
 })

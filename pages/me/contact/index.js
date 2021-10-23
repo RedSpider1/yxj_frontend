@@ -1,5 +1,6 @@
 const auth = require('../../../utils/auth')
 const string = require('../../../utils/string')
+const http = require('../../../utils/http')
 
 Component({
   data: {
@@ -48,6 +49,9 @@ Component({
 
       const userInfo = getApp().globalData.userInfo
       const contacts = []
+      http.get('/pss/contactinformation/').then(res => {
+        console.log(res)
+      })
       contacts.push({
         id: 1,
         type: "手机号",

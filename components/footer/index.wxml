@@ -5,4 +5,7 @@
     {{item.text}}
     </van-tabbar-item>
   </van-tabbar>
+  <view class="add-btn-con flex justify-center align-items-center">
+    <van-button icon="plus" class="add-btn" ontap="add" />
+  </view>
 </view>

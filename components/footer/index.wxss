@@ -6,3 +6,24 @@
   width: 24px;
   height: 24px;
 }
+
+
+.add-btn-con {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  padding-bottom: env(safe-area-inset-bottom);
+  width: 0;
+  z-index: 9;
+}
+.add-btn {
+  position: relative;
+  bottom: 30px;
+}
+.add-btn button{
+  border-radius: 50%;
+  box-shadow: 0 0 3px white;
+  background-color: var(--primary);
+  border: none;
+  color: white;
+}

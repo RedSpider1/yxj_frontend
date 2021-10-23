@@ -28,9 +28,9 @@
       <platoon-sheet-list items="{{searchItems}}" bind:list="search" height="{{height}}"></platoon-sheet-list>
     </van-tab>
   </van-tabs>
-  <view class="add-btn-con flex justify-center align-items-center">
+  <!-- <view class="add-btn-con flex justify-center align-items-center">
     <van-button icon="plus" class="add-btn" ontap="add" />
-  </view>
+  </view> -->
 
   <footer id="footer" name="home">
   </footer>

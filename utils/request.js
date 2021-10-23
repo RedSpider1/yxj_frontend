@@ -1,3 +1,8 @@
+export const getEnums = {
+  url: 'workcommon/apiEnums',
+  desc: '查询枚举'
+}
+
 export const groupTeamQueryList = {
   url: 'groupTeam/query/list',
   desc: '查询组队单'

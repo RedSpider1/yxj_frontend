@@ -20,7 +20,7 @@ Page({
     alreadyExistId: [],
     pageNum: 1,
     pageSize: 20,
-    height: wx.getSystemInfoSync().windowHeight - 0.25 * wx.getSystemInfoSync().windowHeight,
+    height: wx.getSystemInfoSync().windowHeight - 0.25 * wx.getSystemInfoSync().windowHeight + 20,
     hasNoMore: false,
   },
   onChangeActive (event) {
@@ -110,11 +110,7 @@ Page({
       }
     })
   },
-  add() {
-    wx.navigateTo({
-      url: '/pages/home/create-platoon/index',
-    })
-  },
+
   onKeyWordChange(e) {
     this.setData({
       "searchParam.keyWord": e.detail,

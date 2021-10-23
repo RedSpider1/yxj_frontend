@@ -10,7 +10,7 @@
       </van-dropdown-menu>
     </van-col>
   </van-row>
-  <van-field label="联系方式" placeholder="请输入联系方式值" value="{{currentContact.value}}" />
+  <van-field label="联系方式" placeholder="请输入联系方式值" value="{{currentContact.contactInformation}}" />
   <view class="flex justify-center">
     <button class="btn warning-bg" bindtap="deleteContact" wx:if="{{currentContact.id != 0}}">删除</button>
     <button class="btn primary-bg" bindtap="saveContact">{{currentContact.id == 0 ? '创建' : '保存'}}</button>

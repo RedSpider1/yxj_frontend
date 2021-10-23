@@ -23,7 +23,7 @@ function fetch(options) {
     }
 
     const app = getApp()
-    if (app.globalData.authToken !== null) {
+    if (app && app.globalData.authToken !== null) {
       header.Authorization = 'Bearer ' + app.globalData.authToken
     }
 
