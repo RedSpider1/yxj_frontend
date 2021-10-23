@@ -2,7 +2,7 @@
 <view>
   <view style="margin-top: 18px;">
     <van-cell-group title="联系方式">
-      <van-cell wx:for="{{contacts}}" wx:key="id" value="{{item.value}}" left-icon="wechat" label="{{item.type}}"
+      <van-cell wx:for="{{contacts}}" wx:key="id" value="{{item.value}}" left-icon="wechat" label="{{item.typeStr}}"
         class="field" is-link="{{index != 0}}" data-item="{{item}}" ontap="editContact" />
     </van-cell-group>
   </view>

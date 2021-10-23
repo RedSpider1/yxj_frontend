@@ -1,16 +1,18 @@
 <header title="{{currentContact.id == 0 ? '创建' : '编辑'}}个人信息" needReturn="{{true}}"></header>
 <view>
+  <van-dialog id="van-dialog" />
+
   <van-row>
     <van-col span="12">
       <van-cell title="联系类型" />
     </van-col>
     <van-col span="12">
       <van-dropdown-menu>
-        <van-dropdown-item value="{{ currentContact.type }}" options="{{ contactTypes }}" overlay="false" />
+        <van-dropdown-item value="{{ currentContact.type }}" options="{{ contactTypes }}" overlay="false" bind:change="onTypeChange" />
       </van-dropdown-menu>
     </van-col>
   </van-row>
-  <van-field label="联系方式" placeholder="请输入联系方式值" value="{{currentContact.contactInformation}}" />
+  <van-field label="联系方式" placeholder="请输入联系方式值" value="{{currentContact.contactInformation}}" bind:change="changeInfo" />
   <view class="flex justify-center">
     <button class="btn warning-bg" bindtap="deleteContact" wx:if="{{currentContact.id != 0}}">删除</button>
     <button class="btn primary-bg" bindtap="saveContact">{{currentContact.id == 0 ? '创建' : '保存'}}</button>

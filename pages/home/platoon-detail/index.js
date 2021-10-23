@@ -63,8 +63,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    auth.tryLogin()
-
     const query = wx.createSelectorQuery()
     query.select('#header').boundingClientRect()
     query.exec(res => {
@@ -87,10 +85,10 @@ Page({
     }
     this.setData({platoonId: platoonId})
     let that = this
-    http.get(request.groupTeamDetails.url + platoonId).then(res => {
+    http.get(`pss/group/id/${platoonId}`).then(res => {
       let labelArray = []
-      if (res.labelIdArray !== null && typeof res.labelIdArray !== undefined) {
-        for (let label of res.labelIdArray) {
+      if (res.labels !== null && typeof res.labels !== undefined) {
+        for (let label of res.labels) {
           labelArray.push({
             color: color.randomColor(),
             name: label
@@ -98,24 +96,24 @@ Page({
         }
       }
       let pictureUrlArray = []
-      if (res.pictureUrlArray !== null && typeof res.pictureUrlArray !== undefined) {
-        for (let pictureUrl of res.pictureUrlArray) {
+      if (res.resourceList !== null && typeof res.resourceList !== undefined) {
+        for (let pictureUrl of res.resourceList) {
           pictureUrlArray.push(file.default.getImgUrl(pictureUrl))
         }
       }
-      let countDownTime = parseInt(res.expireTimestamp) / 1000 - new Date().getTime()
+      let countDownTime = parseInt(res.endTime) / 1000 - new Date().getTime()
       that.setData({
         title: res.title, 
         introduce: res.introduce,
-        authorId: res.creatorId,
+        authorId: res.ownerId,
         authorName: res.createName,
-        firstAuthorNameChar: res.createName.substring(0, 1),
+        firstAuthorNameChar: res.ownerId,
         examineTime: res.examineTime,
-        expireTime: res.expireTime,
+        expireTime: res.endTime,
         countDownTime: countDownTime,
         labelArray: labelArray,
-        personRateDesc: `${res.currentJoinNum} / ${res.needNum}`,
-        personRate: res.currentJoinNum * 1.0 / res.needNum * 100,
+        personRateDesc: `${res.currentJoinNum} / ${res.condition.minTeamSize}`,
+        personRate: res.currentJoinNum * 1.0 / res.condition.minTeamSize * 100,
         personColor: res.teamStatus === 3 ? '#e15141' : (res.teamStatus === 2 ? '#07c160' : '#3d8af2'),
         status: res.teamStatus,
         statusDesc: status.team_status[res.teamStatus],
@@ -147,11 +145,11 @@ Page({
       that.setData({joinerInfos: joinerInfos})
     })
 
-    if (string.isNotEmpty(getApp().globalData.authToken)) {
-      http.get(request.groupTeamSelelctGroupTeamUserStatus.url(this.data.platoonId)).then(res => {
-        // todo
-      })
-    }
+    // if (string.isNotEmpty(getApp().globalData.authToken)) {
+    //   http.get(request.groupTeamSelelctGroupTeamUserStatus.url(this.data.platoonId)).then(res => {
+    //     // todo
+    //   })
+    // }
   },
   enlargeImg: function (event) {
     let pictureUrl = event.currentTarget.dataset.url

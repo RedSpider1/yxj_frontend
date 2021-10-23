@@ -78,6 +78,32 @@ export function post(url, params, loading = true) {
 }
 
 /**
+ * DELETE 请求
+ */
+export function del(url, params, loading = true) {
+  var option = {
+    url: url,
+    data: params,
+    method: 'DELETE',
+    loading
+  }
+  return fetch(option)
+}
+
+/**
+ * PUT 请求
+ */
+export function put(url, params, loading = true) {
+  var option = {
+    url: url,
+    data: params,
+    method: 'PUT',
+    loading
+  }
+  return fetch(option)
+}
+
+/**
  * GET请求
  */
 export function get(urls, params, loading = true) {

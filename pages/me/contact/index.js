@@ -1,25 +1,11 @@
 const auth = require('../../../utils/auth')
-const string = require('../../../utils/string')
 const http = require('../../../utils/http')
+const enums = require('../../../utils/enums')
+
 
 Component({
   data: {
-    contacts: [{
-        id: 1,
-        type: "手机号",
-        value: "12345678"
-      },
-      {
-        id: 2,
-        type: "微信号",
-        value: "wechatNum"
-      },
-      {
-        id: 3,
-        type: "地址",
-        value: "南天门"
-      },
-    ]
+    contacts: [],
   },
   methods: {
     addContact() {
@@ -37,11 +23,16 @@ Component({
     editContact(e) {
       // 这里要判断下是不是第一个联系方式，如果是第一个，不能编辑的 直接return
       let id = e.currentTarget.dataset.item.id
-      if(this.data.contacts[0].id == id) {
+      if (this.data.contacts[0].id == id) {
         return
       }
       wx.navigateTo({
-        url: `/pages/me/contact/edit/index?id=${id}`
+        url: `/pages/me/contact/edit/index?id=${id}`,
+        success: function (res) {
+          res.eventChannel.emit('sendData', {
+            data: e.currentTarget.dataset.item
+          })
+        }
       })
     },
     onLoad: function (options) {
@@ -49,24 +40,22 @@ Component({
 
       const userInfo = getApp().globalData.userInfo
       const contacts = []
-      http.get('/pss/contactinformation/').then(res => {
-        console.log(res)
-      })
-      contacts.push({
-        id: 1,
-        type: "手机号",
-        value: userInfo.phone,
-      })
-
-      if (string.isNotEmpty(userInfo.wechatNum)) {
-        contacts.push({
-          id: 2,
-          type: "微信号",
-          value: userInfo.wechatNum,
+      http.get('pss/contactinformation/', null, false).then(res => {
+        for (const contact of res) {
+          contacts.push({
+            id: contact.id,
+            type: contact.type,
+            typeStr: this.getContactStr(contact.type),
+            value: contact.contactInformation,
+          })
+        }
+        this.setData({
+          contacts: contacts
         })
-      }
-
-      this.setData({contacts: contacts})
+      })
     },
+    getContactStr(type) {
+      return enums.contact_type[type]
+    }
   }
 })

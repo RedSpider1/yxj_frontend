@@ -100,7 +100,7 @@ Component({
         globalData.userInfo.sex = userInfo.sex === '男' ? 1 : 0
         globalData.userInfo.avatar = userInfo.img
         globalData.userInfo.slogan = userInfo.slogan
-        wx.navigateTo({
+        wx.redirectTo({
           url: '/pages/me/index',
         })
       })

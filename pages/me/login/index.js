@@ -52,7 +52,7 @@ Page({
         url: `/${sourceRoute}`,
       })
     } else {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/home/index',
       })
     }

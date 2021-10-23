@@ -34,7 +34,7 @@ export const groupTeamQueryUsers = {
 }
 
 export const labelList = {
-  url: 'label/list',
+  url: 'pss/label/list',
   desc: '查询所有标签'
 }
 

@@ -12,6 +12,16 @@ export const team_status = {
   4: '已废弃'
 }
 
+/**
+ * 联系方式类型枚举
+ */
+export const contact_type = {
+  0: '手机号',
+  1: '微信号',
+  2: 'QQ号',
+  3: '邮箱'
+}
+
 export function getEnums () {
   http.get(request.getEnums.url, null, false).then((res) => {
     // todo qisu 这个接口没数据

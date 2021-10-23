@@ -148,7 +148,7 @@ Page({
       releaseStatus: 1,
       title: this.data.title
     }).then(id => {
-      wx.navigateTo({
+      wx.redirectTo({
         url: `/pages/home/platoon-detail/index?id=${id}`,
       })
     })
