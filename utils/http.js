@@ -14,9 +14,12 @@ function fetch(options) {
     })
   }
   return new Promise((resolve, reject) => {
+    if (options.url.indexOf('/') === 0) {
+      options.url = options.url.substring(1)
+    }
+
     let header = {}
     if (options.method === 'POST') {
-      
       header = {
         'ContentType': 'application/json'
       }
