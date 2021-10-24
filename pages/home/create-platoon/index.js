@@ -245,6 +245,7 @@ Page({
       return
     }
 
+    let userInfo = getApp().globalData.userInfo
     http.post('/pss/group', {
       // addressId: 0,
       // auditId: 0,
@@ -261,10 +262,10 @@ Page({
       // id: 0,
       introduction: data.inputIntroduce,
       labels: data.labelOpInfo.chooseLabelInfos.map(x => x.id),
-      // ownerId: 0,
-      // resourceList: [
-      //   "string"
-      // ],
+      ownerId: userInfo.id,
+      resourceList: [
+        data.pictureOpInfo.choosePictures.map(x => x.url)
+      ],
       startTime: new Date().getTime(),
       title: data.title
     }).then(id => {
