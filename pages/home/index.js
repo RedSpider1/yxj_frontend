@@ -2,11 +2,15 @@ let http = require('../../utils/http')
 let request = require('../../utils/request')
 let enums = require('../../utils/enums')
 let color = require('../../utils/color')
+let auth = require('../../utils/auth')
 
 Page({
   data: {
+    // 一级颜色
     primary: getApp().globalData.themes.primary,
-    active: 0, // 0: 最新, 1: 搜索
+    // 0: 最新, 1: 搜索
+    active: 0,
+    // 组队单数据
     items: [],
     searchItems: [],
     historyLabels: [],
@@ -30,26 +34,30 @@ Page({
     if(this.data.hasNoMore) {
       return
     }
-    let that = this
+    // let that = this
     let pageNum = this.data.pageNum
     let pageSize = this.data.pageSize
-    http.get(request.groupTeamQueryList.url, {
+    http.get('/pss/group/list', {
       pageNum: pageNum,
-      pageSize: pageSize
+      pageSize: pageSize,
+      // 组队单列表类型 0首页, 1我参与过, 2我浏览过, 3收藏列表
+      type: 0
     }).then(res => {
       if (res === null || res.length === 0) {
         this.setData({hasNoMore: true})
         return
       }
-      let alreadyExistId = that.data.alreadyExistId
-      let items = that.data.items
+      let alreadyExistId = this.data.alreadyExistId
+      let items = this.data.items
       for (let row of res) {
         if (alreadyExistId.indexOf(row.id) !== -1) {
           continue
         }
         items.push(row)
       }
-      that.setData({items: items, alreadyExistId: alreadyExistId, pageNum: ++pageNum, pageSize: pageSize})
+      this.setData({items: items, alreadyExistId: alreadyExistId, pageNum: ++pageNum, pageSize: pageSize})
+    }).catch(res => {
+      console.log(res)
     })
   },
   search() {
@@ -117,7 +125,7 @@ Page({
     });
   },
   onLoad () {
-    this.list()
+    auth.checkAuthAndExecCallback(() => this.list())
     // this.listLabel()
     // todo 这里会报没权限 检查一下
     // this.listSearchHistory()

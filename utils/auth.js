@@ -1,85 +1,80 @@
-//filter.js
 const string = require('./string')
 const http = require('./http')
 const request = require('./request')
 const image = require('./image')
 
-function login(tryLogin) {
-  const app = getApp()
-  const pages = getCurrentPages()
-  const sourceRoute = pages[pages.length - 1].route
-  // 有无token来进行处理
-  if (string.isEmpty(app.globalData.authToken)) {
-    wx.login({
-      success: res => {
-        app.globalData.code = res.code
-        http.post(request.login.url, {
-          jsCode: res.code
-        }).then(res => {
-          if(!string.isEmpty(res.token)) {}
-          app.globalData.authToken = res.token
-          if (!tryLogin) {
-            wx.navigateTo({
-              url: `/pages/me/login/index?sourceRoute=${sourceRoute}`,
-            })
-          }
-        })
-      }
-    })
-  } else if (string.isEmpty(app.globalData.userInfo.phone) && !tryLogin) {
-    wx.navigateTo({
-      url: `/pages/me/login/index?sourceRoute=${sourceRoute}`,
-    })
-  }
-}
-
 /**
- * 尝试登录
+ * 登出
  */
-export const tryLogin = function () {
-  const app = getApp()
-  if (string.isEmpty(app.globalData.authToken) || string.isEmpty(app.globalData.userInfo.phone)) {
-    login(true)
-  }
-}
-
-/**
- * 登录校验
- */
-export const checkLogin = function () {
-  const app = getApp()
-  if (string.isEmpty(app.globalData.authToken) || string.isEmpty(app.globalData.userInfo.phone)) {
-    login(false)
-  }
-}
-
 export function logout() {
   const app = getApp()
   app.globalData.authToken = null
   app.globalData.userInfo = null
 }
 
-// 微信免登
-export function freeLogin(app) {
-  // 使用微信免登
-  wx.login({
-    success: res => {
-      http.post(request.freeLogin.url, {
-        jsCode: res.code
-      }).then(res => {
-        if(res) {
-          app.globalData.authToken = res
-          getCurrentUser(app)
-        } else {
-          goToLoginPage(app)
-        }
-      })
-    }
+/**
+ * 微信免登
+ * @param {*} app 微信小程序app
+ */
+function freeLogin(app) {
+  return new Promise((resolve, reject) => {
+    // 使用微信免登
+    wx.login({
+      success: res => {
+        http.post('/wx/freeLogin', {
+          jsCode: res.code
+        }).then(res => {
+          if(res) {
+            app.globalData.authToken = res
+            getCurrentUser(app)
+            resolve()
+          } else {
+            goToLoginPage(app)
+          }
+        })
+      }
+    })
   })
 }
 
+/**
+ * 鉴权，执行回调函数
+ * @param {*} app 微信小程序app
+ * @param  {...any} callback 回调函数
+ */
+export function doCheckAuthAndExecCallback(app, callback) {
+  if (string.isEmpty(app.globalData.authToken)) {
+    freeLogin(app).then(() => {
+      execCallback(callback)
+    })
+  } else {
+    execCallback(callback)
+  }
+}
 
-// 获取当前登录用户的个人信息并设置到globalData
+/**
+ * 鉴权，执行回调函数
+ * @param  {...any} callback 回调函数
+ */
+export function checkAuthAndExecCallback(callback) {
+  let app = getApp()
+  doCheckAuthAndExecCallback(app, callback)
+}
+
+/**
+ * 串行执行回调函数
+ * @param  {...any} callback 回调函数
+ */
+function execCallback(callback) {
+  if (typeof callback === 'function') {
+    callback()
+  }
+}
+
+/**
+ * 获取当前登录用户的个人信息并设置到globalData
+ * @param {*} app 微信小程序app
+ */
 export function getCurrentUser(app) {
   http.get(request.getUserInfo.url).then(res => {
     if (res !== null && !string.isEmpty(res.phone)) {
@@ -101,6 +96,9 @@ export function getCurrentUser(app) {
   })
 }
 
+/**
+ * 跳转登录页
+ */
 function goToLoginPage() {
   wx.reLaunch({
     url: `/pages/me/login/index`,

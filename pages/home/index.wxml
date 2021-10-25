@@ -5,6 +5,7 @@
     <van-tab title="最新">
       <platoon-sheet-list items="{{items}}" bind:list="list" height="{{height}}"></platoon-sheet-list>
     </van-tab>
+
     <van-tab title="搜索">
       <van-search placeholder="请输入搜索关键词" bind:change="onKeyWordChange" bind:search="search"></van-search>
       <view style="margin: 0px 20px;">
@@ -28,10 +29,8 @@
       <platoon-sheet-list items="{{searchItems}}" bind:list="search" height="{{height}}"></platoon-sheet-list>
     </van-tab>
   </van-tabs>
-  <!-- <view class="add-btn-con flex justify-center align-items-center">
-    <van-button icon="plus" class="add-btn" ontap="add" />
-  </view> -->
 
+  <!-- bottom -->
   <footer id="footer" name="home">
   </footer>
 </view>

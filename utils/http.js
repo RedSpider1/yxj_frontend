@@ -39,9 +39,8 @@ function fetch(options) {
         if (options.loading) {
           wx.hideLoading()
         }
-       
+        
         if (res.data.code != 200) {
-          console.log(options.url)
           wx.showToast({
             title: res.data.message,
             mask: "true",
