@@ -17,11 +17,11 @@
     <van-row>
       <van-col span="16">
         <view class="van-multi-ellipsis--l2 subtitle">
-          {{item.introduce}}
+          {{item.introduction}}
         </view>
 
         <view class="create-info">
-          {{item.createName + ' ' + item.createTime}}
+          {{item.ownerInfo.name + ' ' + item.startTime}}
         </view>
       </van-col>
       <van-col span="8">

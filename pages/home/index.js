@@ -71,7 +71,7 @@ Page({
       this.setData({
         'newOpInfo.items': items, 
         'newOpInfo.alreadyExistId': alreadyExistId, 
-        'newOpInfo.pageNum': ++pageNum
+        'newOpInfo.pageNum': ++newOpInfo.pageNum
       })
     }).catch(res => {
       console.log(res)

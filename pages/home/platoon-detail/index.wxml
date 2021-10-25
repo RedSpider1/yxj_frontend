@@ -17,7 +17,7 @@
         </view>
       </view>
       <view class="small grey margin-v">发布于：{{examineTime}}</view>
-      <view class="small grey flex margin-v" wx:if="{{countDownTime > 0 && countDownTime < 10 * 24 * 60 * 60 * 1000}}">
+      <view class="small grey flex margin-v" wx:if="{{countDownTime > 0 }}">
         <text>将于：</text>
         <van-count-down time="{{countDownTime}}" format="DD天HH时mm分ss秒" class="count-down" />
         <text>后截止</text>

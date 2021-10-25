@@ -293,13 +293,6 @@ Page({
   },
 
   /**
-   * 校验用户是否登录
-   */
-  checkUserIsLogin: () => {
-    auth.checkLogin()
-  },
-
-  /**
    * 加载标签信息
    */
   loadLabelData: (that) => {
@@ -325,9 +318,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 1.校验用户是否登录
-    this.checkUserIsLogin(this)
+    // 校验用户是否登录并执行
+    auth.checkAuthAndExecCallback(this.init)
+  },
 
+  /**
+   * 初始化
+   */
+  init () {
     // 2.填充地址信息
     this.fillAddressInfo(this)
 

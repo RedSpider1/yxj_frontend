@@ -1,5 +1,7 @@
 const computedBehavior = require("../../miniprogram_npm/miniprogram-computed/index").behavior;
 const enums = require("../../utils/enums")
+const time = require('../../utils/time')
+
 Component({
   behaviors: [computedBehavior],
   options: {
@@ -20,9 +22,6 @@ Component({
     items: {
       type: Array,
       value: [],
-      // observer: function(newVal, oldVal) {
-      //   this.setData({itemData: newVal})
-      // }
     },
     height: {
       type: Number,
@@ -46,7 +45,7 @@ Component({
           }
         item.statusTagType = statusTagType
         item.circleValue = (1 - item.currentJoinNum * 1.0 / item.needNum) * 100
-
+        item.startTime = new Date(item.startTime).toISOString()
       }
       return data.items
     },
@@ -61,7 +60,6 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
     list() {
       this.triggerEvent('list')
     },
