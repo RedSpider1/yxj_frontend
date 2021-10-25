@@ -232,7 +232,7 @@ Page({
       wx.showToast({
         title: '标题为空',
         type: 'warn',
-        duration: 2000
+        duration: 1000
       })      
       return
     }
@@ -240,9 +240,13 @@ Page({
       wx.showToast({
         title: '人数必须大于0',
         type: 'warn',
-        duration: 2000
+        duration: 1000
       })      
       return
+    }
+
+    if (data.expireTimeOpInfo.finalExpireTime === null) {
+      data.expireTimeOpInfo.finalExpireTime = new Date().getTime()
     }
 
     let userInfo = getApp().globalData.userInfo
@@ -257,15 +261,13 @@ Page({
       },
       // contactInfo: "string",
       // contactType: 0,
-      containMe: data.personOpInfo.containMe,
+      containMe: data.personOpInfo.containMe ? 0 : 1,
       endTime: new Date(data.expireTimeOpInfo.finalExpireTime).getTime(),
       // id: 0,
       introduction: data.inputIntroduce,
       labels: data.labelOpInfo.chooseLabelInfos.map(x => x.id),
       ownerId: userInfo.id,
-      resourceList: [
-        data.pictureOpInfo.choosePictures.map(x => x.url)
-      ],
+      resourceList: data.pictureOpInfo.choosePictures.map(x => x.url),
       startTime: new Date().getTime(),
       title: data.title
     }).then(id => {
