@@ -1,11 +1,14 @@
 <header title="友小聚 - 首页"></header>
 <view>
-  <!-- <van-notice-bar left-icon="volume-o" scrollable mode="closeable" text="小程序上线啦！！！" /> -->
+  <!-- tab -->
   <van-tabs active="{{ active }}" bind:change="onChangeActive" class="tabs" color="{{primary}}">
+    <!-- 最新 -->
     <van-tab title="最新">
-      <platoon-sheet-list items="{{items}}" bind:list="list" height="{{height}}"></platoon-sheet-list>
+      <platoon-sheet-list items="{{newOpInfo.items}}" bind:list="newList" height="{{newOpInfo.height}}">
+      </platoon-sheet-list>
     </van-tab>
 
+    <!-- 搜索 -->
     <van-tab title="搜索">
       <van-search placeholder="请输入搜索关键词" bind:change="onKeyWordChange" bind:search="search"></van-search>
       <view style="margin: 0px 20px;">
