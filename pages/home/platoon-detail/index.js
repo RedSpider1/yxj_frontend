@@ -93,7 +93,7 @@ Page({
         introduce: res.introduction,
         authorId: res.ownerInfo.id,
         authorName: res.ownerInfo.name,
-        authorAvatar: res.ownerInfo.avatar,
+        authorAvatar: file.default.getImgUrl(res.ownerInfo.avatar),
         examineTime: new Date(res.startTime).toISOString(),
         expireTime: new Date(res.endTime).toISOString(),
         countDownTime: res.endTime - new Date().getTime(),
