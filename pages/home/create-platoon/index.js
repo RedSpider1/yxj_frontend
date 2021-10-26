@@ -109,9 +109,10 @@ Page({
    */
   afterReadPicture (event) {
     const {file} = event.detail
-    fileOp.default.upload(file.url).then(key => {
-      const choosePictures = this.data.pictureOpInfo.choosePictures
-      choosePictures.push({ ...file, url: fileOp.default.getImgUrl(key) })
+    fileOp.default.upload(file.url).then((data) => {
+      let {key, id} = data
+      let choosePictures = this.data.pictureOpInfo.choosePictures
+      choosePictures.push({ ...file, url: fileOp.default.getImgUrl(key), resourceId: id})
       this.setData({
         'pictureOpInfo.choosePictures': choosePictures
       })
@@ -184,6 +185,7 @@ Page({
       time += '00:00'
     }
     time += ':00'
+    console.log(time)
     return time
   },
 
@@ -245,8 +247,10 @@ Page({
       return
     }
 
-    if (data.expireTimeOpInfo.finalExpireTime === null) {
-      data.expireTimeOpInfo.finalExpireTime = new Date().getTime()
+    if (data.expireTimeOpInfo.finalExpireTime === null || data.expireTimeOpInfo.finalExpireTime === '') {
+      data.expireTimeOpInfo.finalExpireTime = new Date()
+    } else {
+      data.expireTimeOpInfo.finalExpireTime = new Date(data.expireTimeOpInfo.finalExpireTime)
     }
 
     let userInfo = getApp().globalData.userInfo
@@ -262,12 +266,12 @@ Page({
       // contactInfo: "string",
       // contactType: 0,
       containMe: data.personOpInfo.containMe ? 0 : 1,
-      endTime: new Date(data.expireTimeOpInfo.finalExpireTime).getTime(),
+      endTime: data.expireTimeOpInfo.finalExpireTime.getTime(),
       // id: 0,
       introduction: data.inputIntroduce,
       labels: data.labelOpInfo.chooseLabelInfos.map(x => x.id),
       ownerId: userInfo.id,
-      resourceList: data.pictureOpInfo.choosePictures.map(x => x.url),
+      resourceList: data.pictureOpInfo.choosePictures.map(x => x.resourceId),
       startTime: new Date().getTime(),
       title: data.title
     }).then(id => {

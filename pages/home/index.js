@@ -1,7 +1,4 @@
 let http = require('../../utils/http')
-let request = require('../../utils/request')
-let enums = require('../../utils/enums')
-let color = require('../../utils/color')
 let auth = require('../../utils/auth')
 
 Page({

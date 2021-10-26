@@ -25,7 +25,7 @@ Component({
         url: '/pages/me/feedback/index',
       })
     },
-    logout() {
+    logout () {
       Dialog.confirm({
           title: '确定注销登录',
           message: '注销后某些功能将不可用，确定注销？',
@@ -37,11 +37,14 @@ Component({
         })
         .catch(() => {});
     },
-    onLoad(options) {
+    onLoad () {
+      auth.checkAuthAndExecCallback(() => this.init())
+    },
+    init () {
       this.setData({
         nickname: getApp().globalData.userInfo.nickname,
         avatar: getApp().globalData.userInfo.avatar
       })
-    },
+    }
   }
 })

@@ -31,21 +31,18 @@ Component({
   computed: {
     wrapperItems(data) {
       for(let item of data.items) {
-        let status = item.teamStatus
-        item.statusLabel = enums.team_status[status]
-        var statusTagType = 'primary'
-          if(status == 1) {
-            statusTagType =  'primary'
-          }
-          if(status == 2) {
-            statusTagType = 'success'
-          }
-          if(status == 3) {
-            statusTagType = 'warning'
-          }
+        let status = item.status
+        item.statusLabel = status
+        let statusTagType = 'primary'
+        if(status === 'SUCCESS') {
+          statusTagType = 'success'
+        }
+        if(status === 'FAIL' || status === 'CANCEL') {
+          statusTagType = 'warning'
+        }
         item.statusTagType = statusTagType
-        item.circleValue = (1 - item.currentJoinNum * 1.0 / item.needNum) * 100
-        item.startTime = new Date(item.startTime).toISOString()
+        item.circleValue = (1 - item.condition.currentTeamSize * 1.0 / item.condition.minTeamSize) * 100
+        item.startTime = time.timestap2Str(item.startTime)
       }
       return data.items
     },

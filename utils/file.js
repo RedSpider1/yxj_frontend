@@ -77,7 +77,20 @@ export default {
           name: 'file',
           formData: {token: token, key: key},
           success (res) {
-            resolve(JSON.parse(res.data).key)
+            let ossKey = JSON.parse(res.data).key
+            http.post('/pss/resource', [{
+                // id: 0,
+                name: ossKey,
+                ossKey: ossKey,
+                path: ossKey
+            }]).then(x => {
+              resolve({
+                key: ossKey,
+                id: x[0]
+              })
+            }).catch(x => {
+              reject(x)
+            })
           },
           fail (res) {
             reject(res)
