@@ -1,5 +1,5 @@
 <view wx:if="{{!loginSuccess}}">
-  <header title="友小聚 - 登录" needReturn="{{true}}" id="header"></header>
+  <header title="友小聚 - 登录" needReturn="{{false}}" id="header"></header>
   <view class="container" style="height: {{containerHeight}}px;">
     <view>
       <view style="justify-content: center;" class="flex row">

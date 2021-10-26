@@ -36,9 +36,6 @@ Component({
       })
     },
     onLoad: function (options) {
-      auth.checkLogin()
-
-      const userInfo = getApp().globalData.userInfo
       const contacts = []
       http.get('pss/contactinformation/', null, false).then(res => {
         for (const contact of res) {

@@ -130,7 +130,6 @@ Component({
       })
     },
     onLoad: function (options) {
-      auth.checkLogin()
       const app = getApp()
 
       this.setData({

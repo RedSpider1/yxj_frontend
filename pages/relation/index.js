@@ -26,7 +26,5 @@ Page({
       let containerHeight = systemInfo.windowHeight - systemInfo.statusBarHeight - res[0].height
       this.setData({containerHeight: containerHeight})
     })
-    auth.checkLogin()
-    this.selectComponent('#footer').load()
   },
 })
