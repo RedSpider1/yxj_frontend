@@ -61,6 +61,7 @@ Component({
       })
     },
     add() {
+      console.log('add')
       wx.navigateTo({
         url: '/pages/home/create-platoon/index',
       })

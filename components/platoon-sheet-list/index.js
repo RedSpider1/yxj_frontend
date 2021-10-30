@@ -42,7 +42,7 @@ Component({
         }
         item.statusTagType = statusTagType
         item.circleValue = (1 - item.condition.currentTeamSize * 1.0 / item.condition.minTeamSize) * 100
-        item.startTime = time.timestap2Str(item.startTime)
+        item.startTimeStr = time.timestap2Str(item.startTime)
       }
       return data.items
     },

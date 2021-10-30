@@ -21,7 +21,7 @@
         </view>
 
         <view class="create-info">
-          {{item.ownerInfo.name + ' ' + item.startTime}}
+          {{item.ownerInfo.name + ' ' + item.startTimeStr}}
         </view>
       </van-col>
       <van-col span="8">

@@ -7,7 +7,7 @@ Page({
     primary: getApp().globalData.themes.primary,
     // 0: 最新, 1: 搜索
     active: 0,
-    
+    items: [],
     // 最新组队单操作信息
     newOpInfo: {
       // 组队单列表
@@ -140,7 +140,7 @@ Page({
   //     "searchParam.keyWord": e.detail,
   //   });
   // },
-  onLoad () {
+  onShow () {
     auth.checkAuthAndExecCallback(this.init)
   },
 
