@@ -14,7 +14,7 @@
     </van-row>
 
     <!-- 如果有图片就这样搞，否则就占满 -->
-    <van-row>
+    <van-row wx:if="{{item.resourceObjList.length > 0}}">
       <van-col span="16">
         <view class="van-multi-ellipsis--l2 subtitle">
           {{item.introduction}}
@@ -26,23 +26,27 @@
       </van-col>
       <van-col span="8">
         <view class="flex align-items-end">
-          <image class="img" mode="aspectFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+          <image class="img" mode="aspectFill" src="{{'https://file.youxiaoju.com/' + item.resourceObjList[0].path}}"></image>
         </view>
       </van-col>
     </van-row>
 
     <!-- 否则 -->
-    <!-- <van-row>
+    <van-row wx:else>
       <van-col span="24">
         <view class="van-multi-ellipsis--l2 subtitle">
-          {{item.introduce}}
+          {{item.introduction}}
+        </view>
+
+        <view class="create-info">
+          {{item.ownerInfo.name + ' ' + item.startTimeStr}}
         </view>
       </van-col>
-    </van-row> -->
+    </van-row>
 
 
-
-    <!-- <van-row>
+<!-- 
+    <van-row>
       <van-col span="18" class="hide">
         {{item.title}}
       </van-col>
