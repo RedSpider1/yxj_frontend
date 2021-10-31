@@ -22,7 +22,7 @@ Page({
     })
     http.get(request.getEnums.url, null, false).then((res) => {
       getApp().globalData.enums = res
-      console.log('getEnum result', res)
+      console.log(res)
     }).then( () => {
       auth.freeLogin(getApp())
     }).then( () => {

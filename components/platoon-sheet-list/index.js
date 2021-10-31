@@ -57,10 +57,6 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    getStatusLabel(status) {
-      statusList = enums.getEnumByAlias('组队单状态')
-      console.log(statusList)
-    },
     list() {
       this.triggerEvent('list')
     },
@@ -76,7 +72,7 @@ Component({
 function getStatusLabel(status) {
   const statusList = enums.getEnumByAlias('组队单状态').enumDescriptionVOS
   for (const item of statusList) {
-    if (item.code = status) {
+    if (item.code == status) {
       return item.description
     }
   }
