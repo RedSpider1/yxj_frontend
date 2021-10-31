@@ -1,0 +1,8 @@
+<view class="flex-col" style="height: {{containerHeight}}px;">
+  <view class="flex-1 flex">
+    <view ontap="jmp" data-type="view" class="flex-1 flex-col justify-center align-items-center white primary-bg">
+      <van-icon name="replay" size="2rem" />
+      <text class="container-v">加载中...</text>
+    </view>
+  </view>
+</view>

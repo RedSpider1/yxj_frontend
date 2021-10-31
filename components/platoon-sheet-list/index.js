@@ -32,7 +32,7 @@ Component({
     wrapperItems(data) {
       for(let item of data.items) {
         let status = item.status
-        item.statusLabel = status
+        item.statusLabel = getStatusLabel(status)
         let statusTagType = 'primary'
         if(status === 'SUCCESS') {
           statusTagType = 'success'
@@ -57,11 +57,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    getStatusLabel(status) {
+      statusList = enums.getEnumByAlias('组队单状态')
+      console.log(statusList)
+    },
     list() {
       this.triggerEvent('list')
-    },
-    getStatus(item) {
-      console.log(item)
     },
     jmp (event) {
       let id = event.currentTarget.dataset.id
@@ -71,3 +72,12 @@ Component({
     }
   },
 })
+
+function getStatusLabel(status) {
+  const statusList = enums.getEnumByAlias('组队单状态').enumDescriptionVOS
+  for (const item of statusList) {
+    if (item.code = status) {
+      return item.description
+    }
+  }
+}

@@ -3,8 +3,6 @@ const enums = require('./utils/enums')
 
 App({
   onLaunch() {
-    // 进入小程序，就会校验登录态
-    auth.doCheckAuthAndExecCallback(this, () => enums.getEnums())
   },
   globalData: {
     themes: {
@@ -14,6 +12,7 @@ App({
     },
     // 后段交互toekn
     authToken: null,
-    userInfo: null
+    userInfo: null,
+    enums: [],
   }
 })

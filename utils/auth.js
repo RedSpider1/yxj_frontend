@@ -16,14 +16,14 @@ export function logout() {
  * 微信免登
  * @param {*} app 微信小程序app
  */
-function freeLogin(app) {
+export function freeLogin(app) {
   return new Promise((resolve, reject) => {
     // 使用微信免登
     wx.login({
       success: res => {
         http.post('/wx/freeLogin', {
           jsCode: res.code
-        }).then(res => {
+        }, false).then(res => {
           if(res) {
             app.globalData.authToken = res
             getCurrentUser(app)
@@ -76,7 +76,7 @@ function execCallback(callback) {
  * @param {*} app 微信小程序app
  */
 export function getCurrentUser(app) {
-  http.get(request.getUserInfo.url).then(res => {
+  http.get(request.getUserInfo.url, false).then(res => {
     if (res !== null && !string.isEmpty(res.phone)) {
       app.globalData.userInfo = {
         id: res.id,

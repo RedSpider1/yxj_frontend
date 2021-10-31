@@ -1,6 +1,7 @@
 {
   "pages": [
-    "pages/message/index",
+
+    "pages/init",
     
     "pages/home/index",
     "pages/home/platoon-detail/index",
@@ -9,6 +10,7 @@
     "pages/relation/index",
     "pages/relation/list/index",
 
+    "pages/message/index",
 
     "pages/me/index",
     "pages/me/edit/index",
@@ -22,7 +24,7 @@
     "navigationBarTitleText": "友小聚",
     "navigationBarTextStyle": "white"
   },
-  "entryPagePath": "pages/message/index",
+  "entryPagePath": "pages/init",
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
     "header": "./components/header/index",
