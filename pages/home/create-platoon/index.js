@@ -17,6 +17,7 @@ Page({
       latitude: null,
       longitude: null
     },
+    contacts: [],
 
     // 标题
     title: null,
@@ -323,7 +324,7 @@ Page({
    */
   onLoad: function (options) {
     // 校验用户是否登录并执行
-    auth.checkAuthAndExecCallback(this.init)
+    this.init()
   },
 
   /**
@@ -331,10 +332,16 @@ Page({
    */
   init () {
     // 2.填充地址信息
-    this.fillAddressInfo(this)
+    // this.fillAddressInfo(this)
 
     // 3.填充全局标签信息
     this.loadLabelData(this)
+
+    // 4. 拿我的联系方式(联系方式的选择，抽成公共组件)
+    http.get('pss/contactinformation/', null, false).then(res => {
+      console.log(res)
+    })
+
   },
 
   /**
