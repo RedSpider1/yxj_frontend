@@ -6,6 +6,8 @@ const color = require('../../../utils/color')
 const string = require('../../../utils/string')
 const file = require('../../../utils/file')
 const auth = require('../../../utils/auth')
+const time = require('../../../utils/time')
+
 
 Page({
 
@@ -88,16 +90,23 @@ Page({
 
     this.setData({platoonId: platoonId})
     http.get(`pss/group/id/${platoonId}`).then(res => {
+      let pictureUrlArray = []
+      if (res.resourceObjList !== null && typeof res.resourceObjList !== undefined) {
+        for (let pictureUrl of res.resourceObjList) {
+          pictureUrlArray.push(file.default.getImgUrl(pictureUrl.path))
+        }
+      }
       this.setData({
         title: res.title,
         introduce: res.introduction,
         authorId: res.ownerInfo.id,
         authorName: res.ownerInfo.name,
         authorAvatar: file.default.getImgUrl(res.ownerInfo.avatar),
-        examineTime: new Date(res.startTime).toISOString(),
+        examineTime: time.timestap2Str(new Date(res.startTime)),
         expireTime: new Date(res.endTime).toISOString(),
         countDownTime: res.endTime - new Date().getTime(),
-        personRate: res.condition.currentTeamSize / res.condition.minTeamSize
+        personRate: res.condition.currentTeamSize / res.condition.minTeamSize,
+        pictureUrlArray: pictureUrlArray,
       })
       console.log(this.data)
       // let labelArray = []
@@ -109,12 +118,7 @@ Page({
       //     })
       //   }
       // }
-      // let pictureUrlArray = []
-      // if (res.resourceList !== null && typeof res.resourceList !== undefined) {
-      //   for (let pictureUrl of res.resourceList) {
-      //     pictureUrlArray.push(file.default.getImgUrl(pictureUrl))
-      //   }
-      // }
+      
       // let countDownTime = parseInt(res.endTime) / 1000 - new Date().getTime()
       // that.setData({
       //   title: res.title, 
