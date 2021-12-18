@@ -2,53 +2,41 @@
 <view class="container">
   <!-- 标题 -->
   <van-field model:value="{{title}}" required clearable label="标题：" auto-focus placeholder="请输入标题" />
-  
+
   <!-- 人数操作 -->
   <van-field label="人数：" readonly required use-button-slot>
-    <van-stepper slot="button" value="{{personOpInfo.inputPerson}}" min="{{personOpInfo.minPerson}}"   
-      bind:change="changeInputPerson"/>
+    <van-stepper slot="button" value="{{personOpInfo.inputPerson}}" min="{{personOpInfo.minPerson}}" bind:change="changeInputPerson" />
   </van-field>
   <van-field label="包含我：" readonly required use-button-slot>
     <van-switch slot="button" checked="{{personOpInfo.containMe}}" size="24px" bind:change="changeContainMe" />
   </van-field>
 
   <!-- 描述 -->
-  <van-field model:value="{{inputIntroduce}}" type="textarea" 
-    label="描述：" placeholder="请输入描述"
-    autosize="{{introduceOpInfo.autosize}}" maxlength="200" border="{{introduceOpInfo.border}}" 
-    clearable custom-style="border-color: black;"
-    show-word-limit />
-  
+  <van-field model:value="{{inputIntroduce}}" type="textarea" label="描述：" placeholder="请输入描述" autosize="{{introduceOpInfo.autosize}}" maxlength="200" border="{{introduceOpInfo.border}}" clearable custom-style="border-color: black;" show-word-limit />
+
   <!-- 照片 -->
   <view class="img-con white-bg">
-    <van-uploader file-list="{{pictureOpInfo.choosePictures}}" use-before-read bind:before-read="beforeReadPicture"
-      bind:after-read="afterReadPicture"  max-count="9" bind:delete="deletePicture"/>
+    <van-uploader file-list="{{pictureOpInfo.choosePictures}}" use-before-read bind:before-read="beforeReadPicture" bind:after-read="afterReadPicture" max-count="9" bind:delete="deletePicture" />
   </view>
 
-  <!-- 截止时间 -->
-  <van-field model:value="{{expireTimeOpInfo.finalExpireTime}}" readonly placeholder="请选择截止时间" label="截止时间："
-    bindtap="openShowExpireDate"/>
-  <view>
-    <van-calendar show="{{expireTimeOpInfo.displayExpireDatePopUps}}" bind:close="closeShowExpireDate" bind:confirm="confirmShowExpireDate" />
+  <view class="divider">
+    <van-field model:value="{{endTimeStr}}" readonly placeholder="请选择截止时间" label="截止时间：" bindtap="openShowExpireDate" />
     <van-popup show="{{expireTimeOpInfo.displayExpireTimePopUps}}" position="bottom" custom-style="height: 50%;" bind:close="closeShowExpireTime">
-      <van-datetime-picker type="time" value="{{expireTimeOpInfo.chooseExpireTime}}" bind:input="onInput" 
-        bind:close="closeShowExpireTime" bind:confirm="confirmShowExpireTime" />
+      <van-datetime-picker type="datetime" formatter="{{ formatter }}" value="{{endTime}}" bind:close="closeShowExpireTime" bind:confirm="confirmShowExpireTime" />
     </van-popup>
   </view>
 
   <!-- 标签 -->
-  <van-field readonly placeholder="请选择标签" label="标签：" bindtap="openShowTag"/>
+  <van-field readonly placeholder="请选择标签" label="标签：" bindtap="openShowTag" />
   <view class="divider">
     <view class="tag-con flex flex-wrap white-bg">
       <view wx:for="{{labelOpInfo.chooseLabelInfos}}" wx:key="key" style="margin-right: 5px; margin-bottom: 5px;">
-        <van-tag round type="success" size="large" style="--tag-success-color: {{item.color}};" bind:close="closeTag"
-          data-item="{{item}}" closeable>
+        <van-tag round type="success" size="large" style="--tag-success-color: {{item.color}};" bind:close="closeTag" data-item="{{item}}" closeable>
           {{item.name}}
         </van-tag>
       </view>
     </view>
-    <van-popup show="{{labelOpInfo.displayLabelPopUps}}" round closeable position="bottom" custom-style="height: 50%"
-      bind:close="closeShowTag">
+    <van-popup show="{{labelOpInfo.displayLabelPopUps}}" round closeable position="bottom" custom-style="height: 50%" bind:close="closeShowTag">
       <view class="container">
         <van-row>
           <van-col span="24">
@@ -60,16 +48,14 @@
         <view class="font">已选标签：</view>
         <view style="display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap;">
           <view wx:for="{{labelOpInfo.chooseLabelInfos}}" wx:key="key" style="margin-right: 5px; margin-bottom: 5px;">
-            <van-tag round type="success" size="large" style="--tag-success-color: {{item.color}};"
-              bind:close="closeTag" data-item="{{item}}" closeable>
+            <van-tag round type="success" size="large" style="--tag-success-color: {{item.color}};" bind:close="closeTag" data-item="{{item}}" closeable>
               {{item.name}}
             </van-tag>
           </view>
         </view>
         <view class="font">可选标签：</view>
         <view class="tagItem">
-          <view wx:for="{{labelOpInfo.unchooseLabelInfos}}" wx:key="key" style="margin-right: 5px; margin-bottom: 5px;" bindtap="chooseTag"
-            data-item="{{item}}">
+          <view wx:for="{{labelOpInfo.unchooseLabelInfos}}" wx:key="key" style="margin-right: 5px; margin-bottom: 5px;" bindtap="chooseTag" data-item="{{item}}">
             <van-tag round type="success" size="large" style="--tag-success-color: {{item.color}};">
               {{item.name}}
             </van-tag>

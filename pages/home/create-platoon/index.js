@@ -43,7 +43,10 @@ Page({
     // 描述操作信息
     introduceOpInfo: {
       // 文本域的大小
-      autosize: {maxHeight: 100, minHeight: 0},
+      autosize: {
+        maxHeight: 100,
+        minHeight: 0
+      },
       // 描述的边框展示
       border: true
     },
@@ -55,17 +58,11 @@ Page({
     },
 
     // 截止时间操作信息
+    endTime: new Date().getTime(),
+    endTimeStr: time.timestap2Str(new Date().getTime()),
     expireTimeOpInfo: {
-      // 用户选择的日期
-      chooseExpireDate: null,
-      // 是否展示日期弹窗
-      displayExpireDatePopUps: false,
-      // 用户选择的时间
-      chooseExpireTime: null,
       // 是否展示时间弹窗
-      displayExpireTimePopUps: false,
-      // 最终给后端的时间，包含日期+时间
-      finalExpireTime: null,
+      displayExpireTimePopUps: false
     },
 
     // 标签操作信息
@@ -79,13 +76,31 @@ Page({
       // 用户选择的标签
       chooseLabelInfos: []
     },
+    formatter(type, value) {
+      if (type === 'year') {
+        return `${value}年`;
+      }
+      if (type === 'month') {
+        return `${value}月`;
+      }
+      if (type === 'day') {
+        return `${value}日`;
+      }
+      if (type === 'hour') {
+        return `${value}时`;
+      }
+      if (type === 'minute') {
+        return `${value}分`;
+      }
+      return value;
+    },
   },
 
   /**
    * 包含我按钮事件监听
    * @param {*} event 事件
    */
-  changeContainMe (event) {
+  changeContainMe(event) {
     let inputPerson = this.data.personOpInfo.inputPerson
     this.setData({
       'personOpInfo.containMe': event.detail,
@@ -98,7 +113,7 @@ Page({
    * 修改人数事件监听
    * @param {*} event 事件
    */
-  changeInputPerson (event) {
+  changeInputPerson(event) {
     this.setData({
       'personOpInfo.inputPerson': event.detail
     })
@@ -108,12 +123,21 @@ Page({
    * 选择照片之后，做的上传操作
    * @param {*} event 事件
    */
-  afterReadPicture (event) {
-    const {file} = event.detail
+  afterReadPicture(event) {
+    const {
+      file
+    } = event.detail
     fileOp.default.upload(file.url).then((data) => {
-      let {key, id} = data
+      let {
+        key,
+        id
+      } = data
       let choosePictures = this.data.pictureOpInfo.choosePictures
-      choosePictures.push({ ...file, url: fileOp.default.getImgUrl(key), resourceId: id})
+      choosePictures.push({
+        ...file,
+        url: fileOp.default.getImgUrl(key),
+        resourceId: id
+      })
       this.setData({
         'pictureOpInfo.choosePictures': choosePictures
       })
@@ -135,77 +159,47 @@ Page({
   /**
    * 展示选择截止日期的弹窗
    */
-  openShowExpireDate () {
+  openShowExpireDate() {
     this.setData({
-      'expireTimeOpInfo.displayExpireDatePopUps': true
-    })
-  },
-
-    /**
-   * 不展示选择截止日期的弹窗
-   */
-  closeShowExpireDate () {
-    this.setData({
-      'expireTimeOpInfo.displayExpireDatePopUps': false
+      'expireTimeOpInfo.displayExpireTimePopUps': true
     })
   },
 
   /**
-   * 确认选择的日期
-   * @param {*} event 事件
+   * 不展示选择截止日期的弹窗
    */
-  confirmShowExpireDate (event) {
-    let chooseExpireDate = time.dateFormat(event.detail, 'yyyy-MM-dd')
+  closeShowExpireDate() {
     this.setData({
-      'expireTimeOpInfo.displayExpireTimePopUps': true, 
-      'expireTimeOpInfo.chooseExpireDate': chooseExpireDate, 
-      'expireTimeOpInfo.displayExpireDatePopUps': false,
+      'expireTimeOpInfo.displayExpireTimePopUps': false
     })
-    this.setData({'expireTimeOpInfo.finalExpireTime': this.consistTime()})
   },
+
 
   /**
    * 不展示选择截止时间的弹窗
    */
-  closeShowExpireTime () {
-    this.setData({'expireTimeOpInfo.displayExpireTimePopUps': false})
-  },
-
-  /**
-   * 拼接最终传递给后端的时间
-   */
-  consistTime () {
-    let time = ''
-    let expireTimeOpInfo = this.data.expireTimeOpInfo
-    if (expireTimeOpInfo.chooseExpireDate != null) {
-      time += expireTimeOpInfo.chooseExpireDate + ' '
-    }
-    if (expireTimeOpInfo.chooseExpireTime != null) {
-      time += expireTimeOpInfo.chooseExpireTime
-    } else {
-      time += '00:00'
-    }
-    time += ':00'
-    console.log(time)
-    return time
+  closeShowExpireTime() {
+    this.setData({
+      'expireTimeOpInfo.displayExpireTimePopUps': false
+    })
   },
 
   /**
    * 确认选择的时间
    * @param {*} event 事件
    */
-  confirmShowExpireTime (event) {
+  confirmShowExpireTime(event) {
     this.setData({
-      'expireTimeOpInfo.chooseExpireTime': event.detail, 
+      endTime: event.detail,
+      endTimeStr: time.timestap2Str(event.detail),
       'expireTimeOpInfo.displayExpireTimePopUps': false
     })
-    this.setData({'expireTimeOpInfo.finalExpireTime': this.consistTime()})
   },
 
   /**
    * 开启标签弹窗
    */
-  openShowTag () {
+  openShowTag() {
     this.setData({
       'labelOpInfo.displayLabelPopUps': true
     })
@@ -214,7 +208,7 @@ Page({
   /**
    * 关闭标签弹窗
    */
-  closeShowTag () {
+  closeShowTag() {
     this.setData({
       'labelOpInfo.displayLabelPopUps': false
     })
@@ -225,18 +219,21 @@ Page({
    * @param {*} event 事件
    */
   beforeReadPicture(event) {
-    const {file, callback} = event.detail
+    const {
+      file,
+      callback
+    } = event.detail
     callback(file.type === 'image')
   },
 
-  save () {
+  save() {
     let data = this.data
     if (string.isEmpty(data.title)) {
       wx.showToast({
         title: '标题为空',
         type: 'warn',
         duration: 1000
-      })      
+      })
       return
     }
     if (data.personOpInfo.inputPerson <= 0) {
@@ -244,14 +241,12 @@ Page({
         title: '人数必须大于0',
         type: 'warn',
         duration: 1000
-      })      
+      })
       return
     }
 
-    if (data.expireTimeOpInfo.finalExpireTime === null || data.expireTimeOpInfo.finalExpireTime === '') {
-      data.expireTimeOpInfo.finalExpireTime = new Date()
-    } else {
-      data.expireTimeOpInfo.finalExpireTime = new Date(data.expireTimeOpInfo.finalExpireTime)
+    if (data.endTime == 0) {
+      data.endTime = new Date().getTime()
     }
 
     let userInfo = getApp().globalData.userInfo
@@ -267,7 +262,7 @@ Page({
       // contactInfo: "string",
       // contactType: 0,
       containMe: data.personOpInfo.containMe ? 0 : 1,
-      endTime: data.expireTimeOpInfo.finalExpireTime.getTime(),
+      endTime: data.endTime,
       // id: 0,
       introduction: data.inputIntroduce,
       labels: data.labelOpInfo.chooseLabelInfos.map(x => x.id),
@@ -313,7 +308,7 @@ Page({
         labelName2LabelInfoMap[row.labelName] = labelInfos[labelInfos.length - 1]
       }
       that.setData({
-        'labelOpInfo.unchooseLabelInfos': labelInfos, 
+        'labelOpInfo.unchooseLabelInfos': labelInfos,
         'labelOpInfo.labelName2LabelInfoMap': labelName2LabelInfoMap
       })
     })
@@ -330,7 +325,7 @@ Page({
   /**
    * 初始化
    */
-  init () {
+  init() {
     // 2.填充地址信息
     // this.fillAddressInfo(this)
 
@@ -348,7 +343,7 @@ Page({
    * 选择选中的标签
    * @param {*} event 事件
    */
-  chooseTag (event) {
+  chooseTag(event) {
     let item = event.currentTarget.dataset.item
     let unchooseLabelInfos = this.data.labelOpInfo.unchooseLabelInfos
     let chooseLabelInfos = this.data.labelOpInfo.chooseLabelInfos
@@ -374,7 +369,7 @@ Page({
    * 取消选择的标签
    * @param {*} event 事件
    */
-  closeTag (event) {
+  closeTag(event) {
     let item = event.currentTarget.dataset.item
     let unchooseLabelInfos = this.data.labelOpInfo.unchooseLabelInfos
     let chooseLabelInfos = this.data.labelOpInfo.chooseLabelInfos
