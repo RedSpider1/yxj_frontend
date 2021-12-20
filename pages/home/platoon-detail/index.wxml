@@ -7,6 +7,7 @@
   <van-row>
     <van-col span="16">
       <view class="flex">
+        
         <van-image round width="20" height="20" src="{{authorAvatar}}" />
         <view class="author-name">{{authorName}}</view>
         <view>
@@ -142,14 +143,13 @@
     </van-tab>
   </van-tabs>
 
-  <view class="flex flex-wrap justify-center btnGroup">
+  <view class="flex justify-center btnGroup">
+    <button class="btn operation second-bg shadow" wx:if="{{showBtn.edit}}">修改</button>
     <button class="btn operation primary-bg shadow" wx:if="{{showBtn.join}}">参与</button>
     <button class="btn operation warning-bg shadow" wx:if="{{showBtn.exit}}">退出</button>
-    <button class="btn operation primary-bg shadow" wx:if="{{showBtn.login}}">登录</button>
-    <button class="btn operation primary-bg shadow" wx:if="{{showBtn.postpone}}">延期</button>
-    <button class="btn operation danger-bg shadow" wx:if="{{showBtn.abandon}}">废弃</button>
-    <button class="btn operation second-bg shadow" wx:if="{{showBtn.edit}}">修改</button>
-    <button class="btn operation primary-bg shadow" wx:if="{{showBtn.pass}}">提前成功</button>
+    <!-- <button class="btn operation primary-bg shadow" wx:if="{{showBtn.postpone}}">延期</button> -->
+    <!-- <button class="btn operation danger-bg shadow" wx:if="{{showBtn.abandon}}">废弃</button> -->
+    <!-- <button class="btn operation primary-bg shadow" wx:if="{{showBtn.pass}}">提前成功</button> -->
   </view>
 </view>
 

@@ -52,7 +52,6 @@ Page({
     showBtn: {
       join: true, // 参与
       exit: true, // 退出
-      login: true, // 登录
       abandon: true, // 废弃
       edit: true, // 修改
       pass: true, // 提前成功
