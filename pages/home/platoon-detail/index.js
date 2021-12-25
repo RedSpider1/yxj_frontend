@@ -37,12 +37,27 @@ Page({
     largeSize: 0, // 屏幕长度/宽度
     joinerInfos: [], // 参与组队单用户信息
     showShare: false, // 展示分享
-    showOptions: [
-      { name: '微信', icon: 'wechat', openType: 'share' },
-      { name: '微博', icon: 'weibo' },
-      { name: '复制链接', icon: 'link' },
-      { name: '分享海报', icon: 'poster' },
-      { name: '二维码', icon: 'qrcode' },
+    showOptions: [{
+        name: '微信',
+        icon: 'wechat',
+        openType: 'share'
+      },
+      {
+        name: '微博',
+        icon: 'weibo'
+      },
+      {
+        name: '复制链接',
+        icon: 'link'
+      },
+      {
+        name: '分享海报',
+        icon: 'poster'
+      },
+      {
+        name: '二维码',
+        icon: 'qrcode'
+      },
     ],
     movableBtn: {
       width: wx.getSystemInfoSync().windowWidth - 40,
@@ -65,18 +80,20 @@ Page({
   onLoad: function (options) {
     auth.checkAuthAndExecCallback(() => this.init(options))
   },
-  init (options) {
+  async init(options) {
     const query = wx.createSelectorQuery()
     query.select('#header').boundingClientRect()
     query.exec(res => {
-      this.setData({headerHeight: res[0].height - 1})
+      this.setData({
+        headerHeight: res[0].height - 1
+      })
     })
 
     let platoonId = options.id
     if (platoonId === null || typeof platoonId === 'undefined' || platoonId === '') {
       wx.navigateTo({
         url: '/pages/index/index',
-        success () {
+        success() {
           wx.showToast({
             title: '组队单id错误',
             icon: 'error',
@@ -86,65 +103,73 @@ Page({
       })
       return
     }
+    this.setData({
+      platoonId: platoonId
+    })
 
-    this.setData({platoonId: platoonId})
-    http.get(`pss/group/id/${platoonId}`).then(res => {
-      let pictureUrlArray = []
-      if (res.resourceObjList !== null && typeof res.resourceObjList !== undefined) {
-        for (let pictureUrl of res.resourceObjList) {
-          pictureUrlArray.push(file.default.getImgUrl(pictureUrl.path))
+    const groupInfo = await http.get(`pss/group/id/${platoonId}`)
+    let pictureUrlArray = []
+    if (groupInfo.resourceObjList !== null && typeof groupInfo.resourceObjList !== undefined) {
+      for (let pictureUrl of groupInfo.resourceObjList) {
+        pictureUrlArray.push(file.default.getImgUrl(pictureUrl.path))
+      }
+    }
+    this.setData({
+      title: groupInfo.title,
+      introduce: groupInfo.introduction,
+      authorId: groupInfo.ownerInfo.id,
+      authorName: groupInfo.ownerInfo.name,
+      authorAvatar: file.default.getImgUrl(groupInfo.ownerInfo.avatar),
+      examineTime: time.timestap2Str(new Date(groupInfo.startTime)),
+      expireTime: new Date(groupInfo.endTime).toISOString(),
+      countDownTime: groupInfo.endTime - new Date().getTime(),
+      personRate: groupInfo.condition.currentTeamSize / groupInfo.condition.minTeamSize,
+      pictureUrlArray: pictureUrlArray,
+    })
+    let labelArray = []
+    const labels = await http.get(request.labelList.url)
+    if (groupInfo.labels !== null && typeof groupInfo.labels !== undefined) {
+      for (let label of groupInfo.labels) {
+        for (const v of labels) {
+          if(label == v.id.toString()) {
+            labelArray.push({
+              color: color.randomColor(),
+              name: v.labelName
+            })
+          }
         }
       }
-      this.setData({
-        title: res.title,
-        introduce: res.introduction,
-        authorId: res.ownerInfo.id,
-        authorName: res.ownerInfo.name,
-        authorAvatar: file.default.getImgUrl(res.ownerInfo.avatar),
-        examineTime: time.timestap2Str(new Date(res.startTime)),
-        expireTime: new Date(res.endTime).toISOString(),
-        countDownTime: res.endTime - new Date().getTime(),
-        personRate: res.condition.currentTeamSize / res.condition.minTeamSize,
-        pictureUrlArray: pictureUrlArray,
-      })
-      console.log(this.data)
-      // let labelArray = []
-      // if (res.labels !== null && typeof res.labels !== undefined) {
-      //   for (let label of res.labels) {
-      //     labelArray.push({
-      //       color: color.randomColor(),
-      //       name: label
-      //     })
-      //   }
-      // }
-      
-      // let countDownTime = parseInt(res.endTime) / 1000 - new Date().getTime()
-      // that.setData({
-      //   title: res.title, 
-      //   introduce: res.introduce,
-      //   authorId: res.ownerId,
-      //   authorName: res.createName,
-      //   firstAuthorNameChar: res.ownerId,
-      //   examineTime: res.examineTime,
-      //   expireTime: res.endTime,
-      //   countDownTime: countDownTime,
-      //   labelArray: labelArray,
-      //   personRateDesc: `${res.currentJoinNum} / ${res.condition.minTeamSize}`,
-      //   personRate: res.currentJoinNum * 1.0 / res.condition.minTeamSize * 100,
-      //   personColor: res.teamStatus === 3 ? '#e15141' : (res.teamStatus === 2 ? '#07c160' : '#3d8af2'),
-      //   status: res.teamStatus,
-      //   statusDesc: status.team_status[res.teamStatus],
-      //   pictureUrlArray: pictureUrlArray,
-      //   largeSize: Math.min(wx.getSystemInfoSync().windowHeight, wx.getSystemInfoSync().windowWidth) - 50,
-      // })
-
-      // http.get(request.getUserInfoById.url, {userId: that.data.authorId}).then(res => {
-      //   that.setData({
-      //     authorAvatar: file.default.getImgUrl(res.avatar),
-      //     authorName: res.name
-      //   })
-      // })
+    }
+    this.setData({
+      labelArray: labelArray
     })
+
+    // let countDownTime = parseInt(res.endTime) / 1000 - new Date().getTime()
+    // that.setData({
+    //   title: res.title, 
+    //   introduce: res.introduce,
+    //   authorId: res.ownerId,
+    //   authorName: res.createName,
+    //   firstAuthorNameChar: res.ownerId,
+    //   examineTime: res.examineTime,
+    //   expireTime: res.endTime,
+    //   countDownTime: countDownTime,
+    //   labelArray: labelArray,
+    //   personRateDesc: `${res.currentJoinNum} / ${res.condition.minTeamSize}`,
+    //   personRate: res.currentJoinNum * 1.0 / res.condition.minTeamSize * 100,
+    //   personColor: res.teamStatus === 3 ? '#e15141' : (res.teamStatus === 2 ? '#07c160' : '#3d8af2'),
+    //   status: res.teamStatus,
+    //   statusDesc: status.team_status[res.teamStatus],
+    //   pictureUrlArray: pictureUrlArray,
+    //   largeSize: Math.min(wx.getSystemInfoSync().windowHeight, wx.getSystemInfoSync().windowWidth) - 50,
+    // })
+
+    // http.get(request.getUserInfoById.url, {userId: that.data.authorId}).then(res => {
+    //   that.setData({
+    //     authorAvatar: file.default.getImgUrl(res.avatar),
+    //     authorName: res.name
+    //   })
+    // })
 
     // http.get(request.groupTeamQueryUsers.url, {groupId: this.data.platoonId}).then(res => {
     //   let joinerInfos = []
@@ -173,16 +198,25 @@ Page({
   enlargeImg: function (event) {
     let pictureUrl = event.currentTarget.dataset.url
     console.log(pictureUrl)
-    this.setData({enlargeImg: true, largeImg: pictureUrl})
+    this.setData({
+      enlargeImg: true,
+      largeImg: pictureUrl
+    })
   },
   ensmallImg: function () {
-    this.setData({enlargeImg: false})
+    this.setData({
+      enlargeImg: false
+    })
   },
   openShowShare: function () {
-    this.setData({showShare: true})
+    this.setData({
+      showShare: true
+    })
   },
   closeShowShare() {
-    this.setData({showShare: false});
+    this.setData({
+      showShare: false
+    });
   },
   selectShowShare(event) {
     Toast(event.detail.name);

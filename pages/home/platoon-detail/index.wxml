@@ -44,7 +44,7 @@
   <view class="flex flex-wrap">
     <view>标签：</view>
     <view wx:if="{{labelArray.length > 0}}" class="flex align-items-center">
-      <van-tag wx:for="{{labelArray}}" wx:key="key" plain type="primary" style="--tag-primary-color: {{item.color}};">
+      <van-tag wx:for="{{labelArray}}" wx:key="key" class="tag" plain type="primary" style="--tag-primary-color: {{item.color}};">
         {{item.name}}
       </van-tag>
     </view>

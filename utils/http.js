@@ -7,12 +7,12 @@ let baseUrl = "https://mobile.youxiaoju.com/api/"
  * 封装请求
  */
 function fetch(options) {
-  if (options.loading) {
-    wx.showLoading({
-      title: '加载中',
-      mask: true
-    })
-  }
+  // if (options.loading) {
+  //   wx.showLoading({
+  //     title: '加载中',
+  //     mask: true
+  //   })
+  // }
   return new Promise((resolve, reject) => {
     if (options.url.indexOf('/') === 0) {
       options.url = options.url.substring(1)
@@ -108,7 +108,7 @@ export function put(url, params, loading = true) {
 /**
  * GET请求
  */
-export function get(urls, params, loading = true) {
+export async function get(urls, params, loading = true) {
   var option = {
     url: urls,
     data: params,
