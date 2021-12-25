@@ -7,7 +7,7 @@
  */
 export const dateFormat = function (date, fmt = 'yyyy-MM-dd') {
   let o = {
-    "M+": date.getMonth() + 2, //月份
+    "M+": date.getMonth() + 1, //月份
     "d+": date.getDate(), //日
     "h+": date.getHours(), //小时
     "m+": date.getMinutes(), //分
