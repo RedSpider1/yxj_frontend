@@ -10,6 +10,7 @@ Page({
    */
   data: {
     type: '',
+    typeEnum: '',
     requestUrl: '',
     showChoose: true,
     items: [],
@@ -22,30 +23,38 @@ Page({
   },
   getTitleByType: function (type) {
     let title = ''
-    let requestUrl = ''
+    let requestUrl = request.groupTeamRelationList.url
+    let typeEnum = ''
     switch (type) {
       case 'view':
         title = '我浏览过'
-        requestUrl = request.groupTeamQueryViewedGroups.url
+        typeEnum = 2
         break;
       case 'join':
         title = '我参与的'
-        requestUrl = request.groupTeamQueryInvolveGroups.url
+        typeEnum = 1
         break;
       case 'create':
         title = '我创建的'
-        requestUrl = request.groupTeamQueryListByUser.url
+        typeEnum = 4
         break;
       case 'star':
         title = '我收藏的'
+        typeEnum = 3
         break;
       default:
         title = '相关'
     }
-    this.setData({requestUrl: requestUrl})
+
+    this.setData({
+      requestUrl: requestUrl,
+      typeEnum: typeEnum
+    })
+
     return '友小聚 - ' + title
   },
   list: function () {
+    console.log("type:" + this.data.typeEnum)
     if(this.data.hasNoMore) {
       return
     }
@@ -59,6 +68,7 @@ Page({
     }
     
     http.get(this.data.requestUrl, {
+      type: this.data.typeEnum,
       pageNum: pageNum,
       pageSize: pageSize
     }).then(res => {

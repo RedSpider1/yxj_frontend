@@ -145,7 +145,7 @@
 
   <view class="flex justify-center btnGroup">
     <button class="btn operation second-bg shadow" wx:if="{{showBtn.edit}}">修改</button>
-    <button class="btn operation primary-bg shadow" wx:if="{{showBtn.join}}">参与</button>
+    <button class="btn operation primary-bg shadow" wx:if="{{showBtn.join}}" bindtap="joinTeam">参与</button>
     <button class="btn operation warning-bg shadow" wx:if="{{showBtn.exit}}">退出</button>
     <!-- <button class="btn operation primary-bg shadow" wx:if="{{showBtn.postpone}}">延期</button> -->
     <!-- <button class="btn operation danger-bg shadow" wx:if="{{showBtn.abandon}}">废弃</button> -->
@@ -160,3 +160,13 @@
     </van-image>
   </view>
 </van-popup>
+<van-dialog
+  use-slot
+  title="标题"
+  show="{{ showJoinDialog }}"
+  show-cancel-button
+  bind:close="onCloseJoinDialog"
+  bind:confirm="onConfirmJoin"
+>
+  body
+</van-dialog>

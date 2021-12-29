@@ -68,6 +68,11 @@ export const groupTeamQueryListByUser = {
   desc: '我创建的组队单'
 }
 
+export const groupTeamRelationList = {
+  url: '/pss/group/list',
+  desc: '相关模块统一接口'
+}
+
 export const updateUserInfo = {
   url: 'user/updateUserInfo',
   desc: '更新用户信息'

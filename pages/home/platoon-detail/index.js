@@ -37,6 +37,7 @@ Page({
     largeSize: 0, // 屏幕长度/宽度
     joinerInfos: [], // 参与组队单用户信息
     showShare: false, // 展示分享
+    showJoinDialog: false,
     showOptions: [{
         name: '微信',
         icon: 'wechat',
@@ -221,6 +222,20 @@ Page({
   selectShowShare(event) {
     Toast(event.detail.name);
     this.onClose();
+  },
+  joinTeam() {
+    this.setData({
+      showJoinDialog: true
+    })
+  },
+  onConfirmJoin() {
+
+  },
+  
+  onCloseJoinDialog() {
+    this.setData({
+      showJoinDialog: false
+    })
   },
 
   /**

@@ -2,6 +2,7 @@
  * 请求相关的封装
  */
 let baseUrl = "https://mobile.youxiaoju.com/api/"
+// let baseUrl = "http://127.0.0.1:8080/api/"
 
 /**
  * 封装请求
