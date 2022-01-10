@@ -29,7 +29,7 @@ export const getFileToken = {
 }
 
 export const groupTeamQueryUsers = {
-  url: 'groupTeam/query/queryUsersByGroupId',
+  url: 'pss/group/attendees',
   desc: '查询参与当前组队单的用户信息'
 }
 

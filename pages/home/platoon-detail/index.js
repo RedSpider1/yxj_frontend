@@ -172,21 +172,19 @@ Page({
     //   })
     // })
 
-    // http.get(request.groupTeamQueryUsers.url, {groupId: this.data.platoonId}).then(res => {
-    //   let joinerInfos = []
-    //   for (let joinerInfo of res) {
-    //     joinerInfos.push({
-    //       id: joinerInfo.id,
-    //       name: joinerInfo.name,
-    //       avatar: file.default.getImgUrl(joinerInfo.avatar),
-    //       type: joinerInfo.type === 0 ? '手机' : '微信',
-    //       contact: joinerInfo.type === 0 ? joinerInfo.phone : joinerInfo.wechatNum,
-    //       // todo 这里的逻辑要确认下，现在先取创建时间
-    //       createTime: joinerInfo.createTime,
-    //     })
-    //   }
-    //   that.setData({joinerInfos: joinerInfos})
-    // })
+    http.get(request.groupTeamQueryUsers.url + '/' + this.data.platoonId).then(res => {
+      let joinerInfos = []
+      for (let joinerInfo of res.attendeeVOS) {
+        joinerInfos.push({
+          id: joinerInfo.userId,
+          name: joinerInfo.name,
+          avatar: joinerInfo.avatar,
+          type: joinerInfo.attendeeContactVO.name,
+          contact: joinerInfo.attendeeContactVO.value,
+        })
+      }
+      this.setData({joinerInfos: joinerInfos})
+    })
 
     // if (string.isNotEmpty(getApp().globalData.authToken)) {
     //   http.get(request.groupTeamSelelctGroupTeamUserStatus.url(this.data.platoonId)).then(res => {
