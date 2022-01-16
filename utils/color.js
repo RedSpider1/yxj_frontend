@@ -4,6 +4,7 @@
  */
 export const randomColor = function () {
   let kind = Math.floor(Math.random() * 20)
+  // todo qisu 这里尽量都弄深色的。
   switch (kind) {
     case 1:
       return '#CE93D8'

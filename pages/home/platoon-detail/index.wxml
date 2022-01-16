@@ -89,36 +89,34 @@
     <van-tab title="记录" name="record">
       <view class="container-v tab-item">
         <!-- todo 这里数据对接后修改逻辑 -->
-        <view wx:for="{{joinerInfos}}" wx:key="key" class="record-item margin-v">
+        <view wx:for="{{involveList}}" wx:key="id" class="record-item margin-v">
           <view class="flex justify-between align-items-center">
             <view class="flex">
-              <van-image round width="20" height="20" src="{{item.avatar}}" />
-              <view class="author-name">{{item.name}}</view>
+              <van-image round width="20" height="20" src="{{item.userAvatar}}" />
+              <view class="author-name">{{item.userName}}</view>
             </view>
             <view>
-              <text class="small grey">{{item.createTime}}</text>
+            <!-- todo 这里差个时间，后端没返回 -->
+              <!-- <text class="small grey">{{item.createTime}}</text> -->
               <!-- todo 这里只展示加入和退出的记录 -->
-              <van-tag plain type="primary" class="record-tag" wx:if="{{index == 0}}">加入</van-tag>
+              <van-tag plain type="primary" class="record-tag" wx:if="{{item.flag == 1}}">加入</van-tag>
               <van-tag plain type="warning" class="record-tag" wx:else>退出</van-tag>
             </view>
           </view>
           <!-- todo 参与和退出都可以留消息。这里有的话就会展示 -->
           <view class="container-v">
             <view class="small grey">
-              {{introduce}}
+              {{item.remark}}
             </view>
-            <view class="margin-v">
-              <van-image width="40" height="40" src="{{item}}" wx:for="{{pictureUrlArray}}" wx:key="key"
-                bindtap="enlargeImg" data-url="{{item}}">
-              </van-image>
-            </view>
+            <van-image width="40" height="40" src="https://file.youxiaoju.com/{{item}}" wx:for="{{item.pictureUrlArray}}" wx:key="key" bindtap="enlargeImg" class="margin-v">
+              <text slot="error">加载失败</text>
+            </van-image>
           </view>
         </view>
       </view>
     </van-tab>
-    <van-tab title="评论" name="comment">
+    <!-- <van-tab title="评论" name="comment">
       <view class="container-v tab-item">
-        <!-- todo 这里数据对接后修改逻辑 -->
         <view wx:for="{{joinerInfos}}" wx:key="key" class="record-item margin-v">
           <view class="flex justify-between align-items-center">
             <view class="flex">
@@ -127,7 +125,6 @@
             </view>
             <text class="small grey">{{item.createTime}}</text>
           </view>
-          <!-- todo 参与和退出都可以留消息。这里有的话就会展示 -->
           <view class="container-v">
             <view class="small grey">
               {{introduce}}
@@ -140,7 +137,7 @@
           </view>
         </view>
       </view>
-    </van-tab>
+    </van-tab> -->
   </van-tabs>
 
   <view class="flex justify-center btnGroup">

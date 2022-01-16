@@ -35,7 +35,8 @@ Page({
     enlargeImg: false, // 是否放大图片
     largeImg: '', // 放大图片的url
     largeSize: 0, // 屏幕长度/宽度
-    joinerInfos: [], // 参与组队单用户信息
+    joinerInfos: [], // 参与组队单用户信息，
+    involveList: [], // 参与记录
     showShare: false, // 展示分享
     showJoinDialog: false,
     showOptions: [{
@@ -184,6 +185,28 @@ Page({
         })
       }
       this.setData({joinerInfos: joinerInfos})
+    })
+
+    http.post('pss/group/involveList', {
+      "id": this.data.platoonId,
+      "keyWord": "",
+      "offset": 0,
+      "pageNum": 1,
+      "pageSize": 999
+    }).then(res => {
+      let involveList = []
+      for (let v of res) {
+        involveList.push({
+          id: v.id,
+          userId: v.userInfo.userId,
+          userName: v.userInfo.name,
+          userAvatar: v.userInfo.avatar,
+          flag: v.flag,
+          pictureUrlArray: v.pictureUrlArray,
+          remark: v.remark
+        })
+      }
+      this.setData({involveList: involveList})
     })
 
     // if (string.isNotEmpty(getApp().globalData.authToken)) {
