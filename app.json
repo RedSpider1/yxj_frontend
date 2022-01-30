@@ -26,8 +26,10 @@
   },
   "entryPagePath": "pages/init",
   "sitemapLocation": "sitemap.json",
+
   "usingComponents": {
     "header": "./components/header/index",
+    
     "van-button": "@vant/weapp/button/index",
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",

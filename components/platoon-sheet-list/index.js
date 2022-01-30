@@ -34,10 +34,10 @@ Component({
         let status = item.status
         item.statusLabel = getStatusLabel(status)
         let statusTagType = 'primary'
-        if(status === 'SUCCESS') {
+        if(status == 30) {
           statusTagType = 'success'
         }
-        if(status === 'FAIL' || status === 'CANCEL') {
+        if(status == 40) {
           statusTagType = 'warning'
         }
         item.statusTagType = statusTagType

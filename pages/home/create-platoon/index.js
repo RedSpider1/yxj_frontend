@@ -261,7 +261,7 @@ Page({
       },
       // contactInfo: "string",
       // contactType: 0,
-      containMe: data.personOpInfo.containMe ? 0 : 1,
+      containMe: data.personOpInfo.containMe ? 1 : 0,
       endTime: data.endTime,
       // id: 0,
       introduction: data.inputIntroduce,
