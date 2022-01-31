@@ -28,6 +28,14 @@ Component({
       type: Number,
       value: 0
     },
+    loading: {
+      type: Boolean,
+      value: false,
+    },
+    hasNoMore: {
+      type: Boolean,
+      value: false,
+    }
   },
   computed: {
     wrapperItems(data) {
@@ -42,7 +50,6 @@ Component({
           statusTagType = 'warning'
         }
         item.statusTagType = statusTagType
-        item.circleValue = (1 - item.condition.currentTeamSize * 1.0 / item.condition.minTeamSize) * 100
         item.startTimeStr = time.timestap2Str(item.startTime, 'yyyy-MM-dd hh:mm')
 
         let labelArray = []

@@ -42,7 +42,6 @@
 }
 .has-no-more {
   text-align: center;
-  padding-bottom: 5em;
   font-size: 0.8em;
 }
 .img {
@@ -69,4 +68,7 @@
 }
 .number {
   margin-right: 5px;
+}
+.blank-bottom {
+  padding-bottom: 5em;
 }

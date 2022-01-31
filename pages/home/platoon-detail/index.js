@@ -7,6 +7,7 @@ const string = require('../../../utils/string')
 const file = require('../../../utils/file')
 const auth = require('../../../utils/auth')
 const time = require('../../../utils/time')
+const enums = require('../../../utils/enums')
 
 
 Page({
@@ -15,6 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    groupInfo: {},
     headerHeight: 0,
     primary: getApp().globalData.themes.primary,
     platoonId: null, // 组队单id
@@ -27,9 +29,9 @@ Page({
     expireTime: '', // 截止时间
     countDownTime: 0, // 倒计时
     labelArray: [], // 标签
-    personDesc: '', // 参加人数 / 组队人数 描述
     personRate: 0, // 参加人数 / 组队人数 百分比
-    personColor: '', // 参加人数 / 组队人数 颜色
+    personColor: '#1989fa', // 参加人数 / 组队人数 颜色
+    statusLabel: '',
     status: 0, // 组队单状态
     statusDesc: '', // 组队单状态描述
     enlargeImg: false, // 是否放大图片
@@ -118,56 +120,32 @@ Page({
     }
     let labelArray = []
     for (let label of groupInfo.labels) {
-        for (const v of getApp().globalData.labels) {
-          if(label == v.id.toString()) {
-            labelArray.push({
-              color: v.color,
-              name: v.name,
-              id: v.id
-            })
-          }
+      for (const v of getApp().globalData.labels) {
+        if (label == v.id.toString()) {
+          labelArray.push({
+            color: v.color,
+            name: v.name,
+            id: v.id
+          })
         }
+      }
     }
     this.setData({
+      groupInfo: groupInfo,
       title: groupInfo.title,
       introduce: groupInfo.introduction,
       authorId: groupInfo.ownerInfo.id,
       authorName: groupInfo.ownerInfo.name,
       authorAvatar: file.default.getImgUrl(groupInfo.ownerInfo.avatar),
-      examineTime: time.timestap2Str(new Date(groupInfo.startTime)),
-      expireTime: new Date(groupInfo.endTime).toISOString(),
+      examineTime: time.timestap2Str(new Date(groupInfo.startTime), 'yyyy-MM-dd hh:mm'),
+      expireTime: time.timestap2Str(new Date(groupInfo.endTime), 'yyyy-MM-dd hh:mm'),
       countDownTime: groupInfo.endTime - new Date().getTime(),
-      personRate: groupInfo.condition.currentTeamSize / groupInfo.condition.minTeamSize,
+      personRate: groupInfo.condition.currentTeamSize / groupInfo.condition.minTeamSize * 100,
+      personColor: this.getStatusColor(groupInfo.status),
+      statusLabel: this.getStatusLabel(groupInfo.status),
       pictureUrlArray: pictureUrlArray,
       labelArray: labelArray,
     })
-
-    // let countDownTime = parseInt(res.endTime) / 1000 - new Date().getTime()
-    // that.setData({
-    //   title: res.title, 
-    //   introduce: res.introduce,
-    //   authorId: res.ownerId,
-    //   authorName: res.createName,
-    //   firstAuthorNameChar: res.ownerId,
-    //   examineTime: res.examineTime,
-    //   expireTime: res.endTime,
-    //   countDownTime: countDownTime,
-    //   labelArray: labelArray,
-    //   personRateDesc: `${res.currentJoinNum} / ${res.condition.minTeamSize}`,
-    //   personRate: res.currentJoinNum * 1.0 / res.condition.minTeamSize * 100,
-    //   personColor: res.teamStatus === 3 ? '#e15141' : (res.teamStatus === 2 ? '#07c160' : '#3d8af2'),
-    //   status: res.teamStatus,
-    //   statusDesc: status.team_status[res.teamStatus],
-    //   pictureUrlArray: pictureUrlArray,
-    //   largeSize: Math.min(wx.getSystemInfoSync().windowHeight, wx.getSystemInfoSync().windowWidth) - 50,
-    // })
-
-    // http.get(request.getUserInfoById.url, {userId: that.data.authorId}).then(res => {
-    //   that.setData({
-    //     authorAvatar: file.default.getImgUrl(res.avatar),
-    //     authorName: res.name
-    //   })
-    // })
 
     http.get(request.groupTeamQueryUsers.url + '/' + this.data.platoonId).then(res => {
       let joinerInfos = []
@@ -180,7 +158,9 @@ Page({
           contact: joinerInfo.attendeeContactVO.value,
         })
       }
-      this.setData({joinerInfos: joinerInfos})
+      this.setData({
+        joinerInfos: joinerInfos
+      })
     })
 
     http.post('pss/group/involveList', {
@@ -203,7 +183,9 @@ Page({
           createTime: time.timestap2Str(new Date(v.createTime))
         })
       }
-      this.setData({involveList: involveList})
+      this.setData({
+        involveList: involveList
+      })
     })
 
     // if (string.isNotEmpty(getApp().globalData.authToken)) {
@@ -249,7 +231,26 @@ Page({
   onConfirmJoin() {
 
   },
-  
+  getStatusColor(status) {
+    switch (status) {
+      case 20:
+        return '#1989fa'
+      case 30:
+        return '#07c160'
+      case 40:
+        return '#ff976a'
+      default:
+        return '#1989fa'
+    }
+  },
+  getStatusLabel(status) {
+    for (let v of enums.getEnumByAlias('组队单状态').enumDescriptionVOS) {
+      if (status == v.code) {
+        return v.description
+      }
+    }
+  },
+
   onCloseJoinDialog() {
     this.setData({
       showJoinDialog: false

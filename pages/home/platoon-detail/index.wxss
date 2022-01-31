@@ -128,9 +128,6 @@
   margin: .5rem 0;
   padding-bottom: .5rem;
 }
-.tab-item {
-  min-height: 800px;
-}
 .record-tag {
   margin-left: 10px;
 }

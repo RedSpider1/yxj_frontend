@@ -1,5 +1,6 @@
 let http = require('../../utils/http')
 let auth = require('../../utils/auth')
+let time = require('../../utils/time')
 
 Page({
   data: {
@@ -21,7 +22,8 @@ Page({
       // 高度设置
       height: wx.getSystemInfoSync().windowHeight - 0.25 * wx.getSystemInfoSync().windowHeight + 20,
       // 是否没有数据
-      hasNoMore: false, 
+      hasNoMore: false,
+      loading: false,
       // 组队单列表类型 0首页, 1我参与过, 2我浏览过, 3收藏列表
       type: 0
     },
@@ -35,25 +37,36 @@ Page({
     //   pageSize: 20,
     // },
   },
-  onChangeActive (event) {
+  onChangeActive(event) {
     console.log(event)
   },
 
   /**
    * 请求最新组队单接口
    */
-  newList () {
+  async newList() {
     let newOpInfo = this.data.newOpInfo
-    if(newOpInfo.hasNoMore) {
+    if (newOpInfo.hasNoMore) {
       return
     }
+    while (newOpInfo.loading) {
+      await time.sleep(100)
+    }
+    this.setData({
+      'newOpInfo.loading': true
+    })
     http.get('/pss/group/list', {
       pageNum: newOpInfo.pageNum,
       pageSize: newOpInfo.pageSize,
       type: newOpInfo.type
     }).then(res => {
       if (res === null || res.length === 0) {
-        this.setData({'newOpInfo.hasNoMore': true})
+        this.setData({
+          'newOpInfo.hasNoMore': true
+        })
+        this.setData({
+          'newOpInfo.loading': false
+        })
         return
       }
 
@@ -66,8 +79,9 @@ Page({
         items.push(row)
       }
       this.setData({
-        'newOpInfo.items': items, 
-        'newOpInfo.alreadyExistId': alreadyExistId, 
+        'newOpInfo.items': items,
+        'newOpInfo.loading': false,
+        'newOpInfo.alreadyExistId': alreadyExistId,
         'newOpInfo.pageNum': ++newOpInfo.pageNum
       })
     }).catch(res => {
@@ -140,11 +154,11 @@ Page({
   //     "searchParam.keyWord": e.detail,
   //   });
   // },
-  onShow () {
+  onShow() {
     auth.checkAuthAndExecCallback(this.init)
   },
 
-  init () {
+  init() {
     this.newList()
     // this.listLabel()
     // todo 这里会报没权限 检查一下

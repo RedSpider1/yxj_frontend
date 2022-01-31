@@ -4,7 +4,7 @@
   <van-tabs active="{{ active }}" bind:change="onChangeActive" class="tabs" color="{{primary}}">
     <!-- 最新 -->
     <van-tab title="最新">
-      <platoon-sheet-list items="{{newOpInfo.items}}" bind:list="newList" height="{{newOpInfo.height}}">
+      <platoon-sheet-list class="platoon-sheet-list" items="{{newOpInfo.items}}" hasNoMore="{{newOpInfo.hasNoMore}}" loading="{{newOpInfo.loading}}" bind:list="newList" height="{{newOpInfo.height}}">
       </platoon-sheet-list>
     </van-tab>
 

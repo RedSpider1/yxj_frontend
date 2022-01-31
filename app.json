@@ -44,7 +44,6 @@
     "van-tabbar-item": "@vant/weapp/tabbar-item/index",
     "van-tag": "@vant/weapp/tag/index",
     "van-image": "@vant/weapp/image/index",
-    "van-circle": "@vant/weapp/circle/index",
     "van-popup": "@vant/weapp/popup/index",
     "van-notice-bar": "@vant/weapp/notice-bar/index",
     "van-collapse": "@vant/weapp/collapse/index",
@@ -59,7 +58,9 @@
     "van-dropdown-item": "@vant/weapp/dropdown-item/index",
     "van-overlay": "@vant/weapp/overlay/index",
     "van-radio": "@vant/weapp/radio/index",
-    "van-radio-group": "@vant/weapp/radio-group/index"
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-progress": "@vant/weapp/progress/index",
+    "van-loading": "@vant/weapp/loading/index"
   },
   "permission": {
     "scope.userLocation": {

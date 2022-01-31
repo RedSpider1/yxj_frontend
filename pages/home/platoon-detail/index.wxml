@@ -5,62 +5,72 @@
     {{title}}
   </view>
   <van-row>
-    <van-col span="16">
+    <van-col span="24">
       <view class="flex">
-        
         <van-image round width="14" height="14" src="{{authorAvatar}}" />
         <view class="author-name">{{authorName}}</view>
         <view>
-          <van-icon name="star-o" class="tag-btn primary" size="14" />
+          <!-- <van-icon name="star-o" class="tag-btn primary" size="14" /> -->
           <!-- 收藏后变实心 -->
           <!-- <van-icon name="star" class="tag-btn primary" size="14" /> -->
-          <van-icon name="share" class="tag-btn second" size="14" />
+          <!-- <van-icon name="share" class="tag-btn second" size="14" /> -->
         </view>
       </view>
-      <view class="small grey margin-v">发布于：{{examineTime}}</view>
-      <view class="small grey flex margin-v" wx:if="{{countDownTime > 0 }}">
-        <text>将于：</text>
-        <van-count-down time="{{countDownTime}}" format="DD天HH时mm分ss秒" class="count-down" />
-        <text>后截止</text>
+      <view class="small grey margin-v">发布时间：{{examineTime}}</view>
+      <view class="small grey flex margin-v" wx:if="{{countDownTime > 0 && countDownTime < 24 * 60 * 60 * 1000 }}">
+        <text>截止时间：</text>
+        <van-count-down time="{{countDownTime}}" format="HH小时mm分ss秒" class="count-down grey small" />
+        <text>后</text>
       </view>
-      <view class="small grey margin-v" wx:else>
-        <text>已截止</text>
+      <view wx:else class="small grey margin-v">
+        截止时间：{{expireTime}}
       </view>
     </van-col>
-    <van-col span="8">
+    <!-- <van-col span="8">
       <view class="flex justify-end">
         <view class="flex-col align-items-center">
-          <view class="personRateDesc" style="color: {{personColor}};">{{personRateDesc}}</view>
+          <view class="personRateDesc" style="color: {{personColor}};">{{groupInfo.condition.currentTeamSize}} / {{groupInfo.condition.minTeamSize}}</view>
           <van-circle class="circle" value="{{personRate}}" size="60" stroke-width="4"
-            style="--circle-text-color: {{personColor}}" layer-color="#eeeeee" color="{{personColor}}"
+            layer-color="#eeeeee" color="{{personColor}}"
             type="2d"
-            text="{{statusDesc}}" />
+            text="{{personDesc}}" />
         </view>
       </view>
-    </van-col>
+    </van-col> -->
   </van-row>
 
 
   <view class="flex flex-wrap">
-    <view>标签：</view>
     <view wx:if="{{labelArray.length > 0}}" class="flex align-items-center">
       <van-tag wx:for="{{labelArray}}" wx:key="id" class="tag" plain type="primary" style="--tag-primary-color: {{item.color}};">
         {{item.name}}
       </van-tag>
     </view>
-    <view wx:else>无</view>
+    <view wx:else>
+      <van-tag class="tag" plain type="primary" color="grey">
+        暂无标签
+      </van-tag>
+    </view>
   </view>
+
+  <view class="flex justify-between align-items-center margin-v">
+    <view class="flex-1">
+      <van-progress percentage="{{personRate}}" pivot-text="{{groupInfo.condition.currentTeamSize}} / {{groupInfo.condition.minTeamSize}}" color="{{personColor}}" pivot-color="{{personColor}}" />
+    </view>
+    <van-tag class="tag m-l" type="primary" color="{{personColor}}">
+      {{statusLabel}}
+    </van-tag>
+  </view>
+
   <van-divider></van-divider>
-  <van-tabs type="card" active="detail" sticky animated swipeable line-height="0" color="{{primary}}"
-    offset-top="{{headerHeight}}">
+  <van-tabs type="card" active="detail" sticky animated swipeable line-height="0" color="{{primary}}" offset-top="{{headerHeight}}">
     <van-tab title="详情" name="detail">
       <view class="container-v tab-item">
         <view class="introduce">
           {{introduce}}
         </view>
         <view class="margin-v">
-          <van-image width="100" height="100" src="{{item}}" wx:for="{{pictureUrlArray}}" wx:key="key"
-            bindtap="enlargeImg" data-url="{{item}}">
+          <van-image width="100" height="100" src="{{item}}" wx:for="{{pictureUrlArray}}" wx:key="key" bindtap="enlargeImg" data-url="{{item}}">
           </van-image>
         </view>
       </view>
@@ -90,7 +100,7 @@
       <view class="container-v tab-item">
         <view wx:for="{{involveList}}" wx:key="id" class="record-item margin-v">
           <view class="flex justify-between align-items-center">
-            <view class="flex">
+            <view class="flex align-items-center">
               <van-image round width="20" height="20" src="{{item.userAvatar}}" />
               <view class="author-name">{{item.userName}}</view>
             </view>
@@ -154,13 +164,6 @@
     </van-image>
   </view>
 </van-popup>
-<van-dialog
-  use-slot
-  title="标题"
-  show="{{ showJoinDialog }}"
-  show-cancel-button
-  bind:close="onCloseJoinDialog"
-  bind:confirm="onConfirmJoin"
->
+<van-dialog use-slot title="标题" show="{{ showJoinDialog }}" show-cancel-button bind:close="onCloseJoinDialog" bind:confirm="onConfirmJoin">
   body
 </van-dialog>

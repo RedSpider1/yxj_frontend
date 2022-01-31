@@ -27,3 +27,7 @@ export function timestap2Str (timestap, fmt='yyyy-MM-dd hh:mm:ss') {
   // return new Date(timestap).toISOString().replace('T', ' ').replace('.000Z', '')
   return dateFormat(new Date(timestap), fmt)
 }
+
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

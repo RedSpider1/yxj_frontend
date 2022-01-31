@@ -83,7 +83,7 @@
           </van-tag>
         </view>
         <view wx:else="">
-        <van-tag size="medium" color="grey" plain>暂无标签</van-tag>
+          <van-tag size="medium" color="grey" plain>暂无标签</van-tag>
         </view>
       </view>
       <view class="flex justify-end">
@@ -93,5 +93,10 @@
     </view>
     <van-divider></van-divider>
   </view>
-  <text class="has-no-more grey flex justify-center">没有更多了~</text>
+  <text wx:if="{{hasNoMore}}" class="has-no-more grey flex justify-center">没有更多了~</text>
+  <view class="flex justify-center" wx:if="{{loading}}">
+    <van-loading type="spinner" />
+  </view>
+  <view class="blank-bottom">
+  </view>
 </scroll-view>
