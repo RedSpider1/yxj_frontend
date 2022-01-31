@@ -8,13 +8,13 @@
     <van-col span="16">
       <view class="flex">
         
-        <van-image round width="20" height="20" src="{{authorAvatar}}" />
+        <van-image round width="14" height="14" src="{{authorAvatar}}" />
         <view class="author-name">{{authorName}}</view>
         <view>
-          <van-icon name="star-o" class="tag-btn primary" size="20" />
+          <van-icon name="star-o" class="tag-btn primary" size="14" />
           <!-- 收藏后变实心 -->
-          <!-- <van-icon name="star" class="tag-btn primary" size="20" /> -->
-          <van-icon name="share" class="tag-btn second" size="20" />
+          <!-- <van-icon name="star" class="tag-btn primary" size="14" /> -->
+          <van-icon name="share" class="tag-btn second" size="14" />
         </view>
       </view>
       <view class="small grey margin-v">发布于：{{examineTime}}</view>
@@ -44,7 +44,7 @@
   <view class="flex flex-wrap">
     <view>标签：</view>
     <view wx:if="{{labelArray.length > 0}}" class="flex align-items-center">
-      <van-tag wx:for="{{labelArray}}" wx:key="key" class="tag" plain type="primary" style="--tag-primary-color: {{item.color}};">
+      <van-tag wx:for="{{labelArray}}" wx:key="id" class="tag" plain type="primary" style="--tag-primary-color: {{item.color}};">
         {{item.name}}
       </van-tag>
     </view>
@@ -70,7 +70,7 @@
         <view wx:if="{{joinerInfos.length > 0}}">
           <view wx:for="{{joinerInfos}}" wx:key="key" class="joiner-item margin-v">
             <view class="flex">
-              <van-image round width="20" height="20" src="{{item.avatar}}" />
+              <van-image round width="14" height="14" src="{{item.avatar}}" />
               <view class="author-name">{{item.name}}</view>
             </view>
             <!-- todo 以后联系方式会有多个 -->
@@ -88,7 +88,6 @@
     </van-tab>
     <van-tab title="记录" name="record">
       <view class="container-v tab-item">
-        <!-- todo 这里数据对接后修改逻辑 -->
         <view wx:for="{{involveList}}" wx:key="id" class="record-item margin-v">
           <view class="flex justify-between align-items-center">
             <view class="flex">
@@ -96,10 +95,8 @@
               <view class="author-name">{{item.userName}}</view>
             </view>
             <view>
-            <!-- todo 这里差个时间，后端没返回 -->
-              <!-- <text class="small grey">{{item.createTime}}</text> -->
-              <!-- todo 这里只展示加入和退出的记录 -->
-              <van-tag plain type="primary" class="record-tag" wx:if="{{item.flag == 1}}">加入</van-tag>
+              <text class="small grey">{{item.createTime}}</text>
+              <van-tag plain type="primary" class="record-tag" wx:if="{{item.flag == 0}}">参与</van-tag>
               <van-tag plain type="warning" class="record-tag" wx:else>退出</van-tag>
             </view>
           </view>

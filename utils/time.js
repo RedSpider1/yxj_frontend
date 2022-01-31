@@ -23,7 +23,7 @@ export const dateFormat = function (date, fmt = 'yyyy-MM-dd') {
   return fmt
 }
 
-export function timestap2Str (timestap) {
+export function timestap2Str (timestap, fmt='yyyy-MM-dd hh:mm:ss') {
   // return new Date(timestap).toISOString().replace('T', ' ').replace('.000Z', '')
-  return dateFormat(new Date(timestap), 'yyyy-MM-dd hh:mm:ss')
+  return dateFormat(new Date(timestap), fmt)
 }

@@ -14,5 +14,7 @@ App({
     authToken: null,
     userInfo: null,
     enums: [],
+    labels: [],
+    labelName2LabelInfoMap: {},
   }
 })

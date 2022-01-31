@@ -1,6 +1,7 @@
 const computedBehavior = require("../../miniprogram_npm/miniprogram-computed/index").behavior;
 const enums = require("../../utils/enums")
 const time = require('../../utils/time')
+const color = require('../../utils/color')
 
 Component({
   behaviors: [computedBehavior],
@@ -30,19 +31,33 @@ Component({
   },
   computed: {
     wrapperItems(data) {
-      for(let item of data.items) {
+      for (let item of data.items) {
         let status = item.status
         item.statusLabel = getStatusLabel(status)
         let statusTagType = 'primary'
-        if(status == 30) {
+        if (status == 30) {
           statusTagType = 'success'
         }
-        if(status == 40) {
+        if (status == 40) {
           statusTagType = 'warning'
         }
         item.statusTagType = statusTagType
         item.circleValue = (1 - item.condition.currentTeamSize * 1.0 / item.condition.minTeamSize) * 100
-        item.startTimeStr = time.timestap2Str(item.startTime)
+        item.startTimeStr = time.timestap2Str(item.startTime, 'yyyy-MM-dd hh:mm')
+
+        let labelArray = []
+        for (let label of item.labels) {
+          for (const v of getApp().globalData.labels) {
+            if (label == v.id.toString()) {
+              labelArray.push({
+                color: v.color,
+                name: v.name,
+                id: v.id,
+              })
+            }
+          }
+        }
+        item.labelArray = labelArray
       }
       return data.items
     },
@@ -50,8 +65,7 @@ Component({
   /**
    * 组件的初始数据
    */
-  data: {
-  },
+  data: {},
 
   /**
    * 组件的方法列表
@@ -60,7 +74,7 @@ Component({
     list() {
       this.triggerEvent('list')
     },
-    jmp (event) {
+    jmp(event) {
       let id = event.currentTarget.dataset.id
       wx.navigateTo({
         url: `/pages/home/platoon-detail/index?id=${id}`,

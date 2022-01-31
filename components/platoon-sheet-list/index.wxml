@@ -1,14 +1,14 @@
 <scroll-view scroll-y='true' style="height: {{height}}px;" bindscrolltolower="list">
   <view wx:for="{{wrapperItems}}" class="subContainer" wx:key="id" bindtap="jmp" data-id="{{item.id}}">
     <van-row>
-      <van-col span="16">
+      <van-col span="14">
         <view class="hide title primary">
           {{item.title}}
         </view>
       </van-col>
-      <van-col span="8">
-        <view class="flex justify-end">
-          <van-tag type="{{item.statusTagType}}" size="medium">{{item.statusLabel}}</van-tag>
+      <van-col span="10">
+        <view class="time">
+          {{item.startTimeStr}}
         </view>
       </van-col>
     </van-row>
@@ -16,12 +16,12 @@
     <!-- 如果有图片就这样搞，否则就占满 -->
     <van-row wx:if="{{item.resourceObjList.length > 0}}">
       <van-col span="16">
+        <view class="flex">
+          <van-image round width="14" height="14" src="{{item.ownerInfo.avatar}}" />
+          <view class="author-name">{{item.ownerInfo.name}}</view>
+        </view>
         <view class="van-multi-ellipsis--l2 subtitle">
           {{item.introduction}}
-        </view>
-
-        <view class="create-info">
-          {{item.ownerInfo.name + ' ' + item.startTimeStr}}
         </view>
       </van-col>
       <van-col span="8">
@@ -34,18 +34,18 @@
     <!-- 否则 -->
     <van-row wx:else>
       <van-col span="24">
+        <view class="flex">
+          <van-image round width="14" height="14" src="{{item.ownerInfo.avatar}}" />
+          <view class="author-name">{{item.ownerInfo.name}}</view>
+        </view>
         <view class="van-multi-ellipsis--l2 subtitle">
           {{item.introduction}}
-        </view>
-
-        <view class="create-info">
-          {{item.ownerInfo.name + ' ' + item.startTimeStr}}
         </view>
       </van-col>
     </van-row>
 
 
-<!-- 
+    <!-- 
     <van-row>
       <van-col span="18" class="hide">
         {{item.title}}
@@ -75,6 +75,22 @@
         </van-col>
       </van-row>
     </view> -->
+    <view class="flex justify-between bottom">
+      <view>
+        <view wx:if="{{item.labelArray.length > 0}}" class="flex align-items-center">
+          <van-tag wx:for="{{item.labelArray}}" wx:key="id" class="m-r" plain type="primary" style="--tag-primary-color: {{item.color}};">
+            {{item.name}}
+          </van-tag>
+        </view>
+        <view wx:else="">
+        <van-tag size="medium" color="grey" plain>暂无标签</van-tag>
+        </view>
+      </view>
+      <view class="flex justify-end">
+        <van-tag type="{{item.statusTagType}}" size="medium" class="m-r" plain>{{item.condition.currentTeamSize}} / {{item.condition.minTeamSize}}</van-tag>
+        <van-tag type="{{item.statusTagType}}" size="medium">{{item.statusLabel}}</van-tag>
+      </view>
+    </view>
     <van-divider></van-divider>
   </view>
   <text class="has-no-more grey flex justify-center">没有更多了~</text>

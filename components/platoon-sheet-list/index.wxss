@@ -1,5 +1,5 @@
 .subContainer {
-  margin: 20px 20px 40px 20px;
+  margin: 20px;
 }
 
 .title {
@@ -49,10 +49,24 @@
   width: 100%;
   height: 60px;
 }
-.create-info {
-  font-size: 12px;
-  color: grey;
-}
 .circle {
   margin-right: .5em;
+}
+.author-name {
+  color: grey;
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+.time {
+  color: grey;
+  font-size: 12px;
+  text-align: right;
+}
+
+.bottom {
+  margin-top: 5px;
+}
+.number {
+  margin-right: 5px;
 }

@@ -40,8 +40,6 @@ export const randomColor = function () {
       return '#C5E1A5'
     case 18:
       return '#E6EE9C'
-    case 19:
-      return '#FFF176'
     default:
       return 'gray'
   }

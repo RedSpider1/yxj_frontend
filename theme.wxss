@@ -44,3 +44,9 @@
 .shadow {
   box-shadow: 1px 1px 5px grey;
 }
+.m-r {
+  margin-right: 2px;
+}
+.m-l {
+  margin-left: 2px;
+}

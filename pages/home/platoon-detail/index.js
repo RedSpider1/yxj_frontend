@@ -116,6 +116,18 @@ Page({
         pictureUrlArray.push(file.default.getImgUrl(pictureUrl.path))
       }
     }
+    let labelArray = []
+    for (let label of groupInfo.labels) {
+        for (const v of getApp().globalData.labels) {
+          if(label == v.id.toString()) {
+            labelArray.push({
+              color: v.color,
+              name: v.name,
+              id: v.id
+            })
+          }
+        }
+    }
     this.setData({
       title: groupInfo.title,
       introduce: groupInfo.introduction,
@@ -127,23 +139,7 @@ Page({
       countDownTime: groupInfo.endTime - new Date().getTime(),
       personRate: groupInfo.condition.currentTeamSize / groupInfo.condition.minTeamSize,
       pictureUrlArray: pictureUrlArray,
-    })
-    let labelArray = []
-    const labels = await http.get(request.labelList.url)
-    if (groupInfo.labels !== null && typeof groupInfo.labels !== undefined) {
-      for (let label of groupInfo.labels) {
-        for (const v of labels) {
-          if(label == v.id.toString()) {
-            labelArray.push({
-              color: color.randomColor(),
-              name: v.labelName
-            })
-          }
-        }
-      }
-    }
-    this.setData({
-      labelArray: labelArray
+      labelArray: labelArray,
     })
 
     // let countDownTime = parseInt(res.endTime) / 1000 - new Date().getTime()
@@ -203,7 +199,8 @@ Page({
           userAvatar: v.userInfo.avatar,
           flag: v.flag,
           pictureUrlArray: v.pictureUrlArray,
-          remark: v.remark
+          remark: v.remark,
+          createTime: time.timestap2Str(new Date(v.createTime))
         })
       }
       this.setData({involveList: involveList})

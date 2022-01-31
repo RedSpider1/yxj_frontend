@@ -296,22 +296,10 @@ Page({
    * 加载标签信息
    */
   loadLabelData: (that) => {
-    http.get(request.labelList.url).then(res => {
-      let labelInfos = []
-      let labelName2LabelInfoMap = {}
-      for (let row of res) {
-        labelInfos.push({
-          id: row.id,
-          name: row.labelName,
-          color: color.randomColor()
-        })
-        labelName2LabelInfoMap[row.labelName] = labelInfos[labelInfos.length - 1]
-      }
       that.setData({
-        'labelOpInfo.unchooseLabelInfos': labelInfos,
-        'labelOpInfo.labelName2LabelInfoMap': labelName2LabelInfoMap
+        'labelOpInfo.unchooseLabelInfos': getApp().globalData.labels,
+        'labelOpInfo.labelName2LabelInfoMap': getApp().globalData.labelName2LabelInfoMap
       })
-    })
   },
 
   /**

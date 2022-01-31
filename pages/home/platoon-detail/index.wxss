@@ -32,9 +32,9 @@
 }
 
 .author-name {
-  color: rgba(42, 130, 228, 1);
+  color: grey;
   margin-left: 5px;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .examineTime, .expireTime, .labelArray {
