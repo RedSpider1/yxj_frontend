@@ -36,7 +36,7 @@ Page({
     statusDesc: '', // 组队单状态描述
     enlargeImg: false, // 是否放大图片
     largeImg: '', // 放大图片的url
-    largeSize: 0, // 屏幕长度/宽度
+    largeSize: 200, // 屏幕长度/宽度
     joinerInfos: [], // 参与组队单用户信息，
     involveList: [], // 参与记录
     showShare: false, // 展示分享
@@ -69,13 +69,17 @@ Page({
     }, // 导航按钮
     // 这里聚合按钮的显示逻辑，要根据当前用户的登录状态或id来判断
     showBtn: {
-      join: true, // 参与
-      exit: true, // 退出
-      abandon: true, // 废弃
-      edit: true, // 修改
-      pass: true, // 提前成功
-      postpone: true, // 延期
-    }
+      join: false, // 参与
+      exit: false, // 退出
+      abandon: false, // 废弃
+      edit: false, // 修改
+      pass: false, // 提前成功
+      postpone: false, // 延期
+      collect: false, // 收藏
+    },
+    contacts: [],
+    currentContact: {},
+    joinDescription: '',
   },
 
   /**
@@ -112,6 +116,12 @@ Page({
     })
 
     const groupInfo = await http.get(`pss/group/id/${platoonId}`)
+    const relation = await http.get(`pss/group/${platoonId}/user-group-relation`)
+    this.setData({
+      'showBtn.join': !relation.joined && !relation.created && groupInfo.status == 20,
+      'showBtn.exit': relation.joined && !relation.created && groupInfo.status == 20,
+      'showBtn.collect': !relation.collected,
+    })
     let pictureUrlArray = []
     if (groupInfo.resourceObjList !== null && typeof groupInfo.resourceObjList !== undefined) {
       for (let pictureUrl of groupInfo.resourceObjList) {
@@ -188,11 +198,55 @@ Page({
       })
     })
 
+    const systemInfo = wx.getSystemInfoSync()
+    this.setData({
+      largeSize: systemInfo.screenWidth
+    })
     // if (string.isNotEmpty(getApp().globalData.authToken)) {
     //   http.get(request.groupTeamSelelctGroupTeamUserStatus.url(this.data.platoonId)).then(res => {
     //     // todo
     //   })
     // }
+
+    http.get('pss/contactinformation', null).then(res => {
+      let contacts = []
+      for (let contact of res) {
+        contacts.push({
+          id: contact.id,
+          type: contact.type,
+          value: contact.id,
+          contactInformation: contact.contactInformation,
+          text: this.getContactLalel(contact.type, contact.contactInformation)
+        })
+      }
+      this.setData({
+        contacts: contacts
+      })
+      if (contacts.length > 0) {
+        this.setData({
+          currentContact: contacts[0]
+        })
+      }
+    })
+  },
+
+  onContactChange(event) {
+    for (const contact of this.data.contacts) {
+      if (contact.id == event.detail) {
+        this.setData({
+          currentContact: contact
+        })
+      }
+    }
+  },
+
+  getContactLalel(type, value) {
+    for (let v of enums.getEnumByAlias('联系方式类型').enumDescriptionVOS) {
+      if (type == v.code) {
+        return v.description + ': ' + value
+      }
+    }
+    return type + ': ' + value
   },
 
 
@@ -229,7 +283,18 @@ Page({
     })
   },
   onConfirmJoin() {
-
+    http.post('pss/group/join', {
+      contactInfo: this.data.currentContact.contactInformation,
+      ossKey: '',
+      remarks: this.data.joinDescription,
+      resources: [],
+      teamId: this.data.groupInfo.id,
+      type: this.data.currentContact.type,
+    }).then(res => {
+      this.setData({
+        showJoinDialog: false
+      })
+    })
   },
   getStatusColor(status) {
     switch (status) {

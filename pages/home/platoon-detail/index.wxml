@@ -62,7 +62,6 @@
     </van-tag>
   </view>
 
-  <van-divider></van-divider>
   <van-tabs type="card" active="detail" sticky animated swipeable line-height="0" color="{{primary}}" offset-top="{{headerHeight}}">
     <van-tab title="详情" name="detail">
       <view class="container-v tab-item">
@@ -150,20 +149,38 @@
   <view class="flex justify-center btnGroup">
     <button class="btn operation second-bg shadow" wx:if="{{showBtn.edit}}">修改</button>
     <button class="btn operation primary-bg shadow" wx:if="{{showBtn.join}}" bindtap="joinTeam">参与</button>
-    <button class="btn operation warning-bg shadow" wx:if="{{showBtn.exit}}">退出</button>
+    <button class="btn operation warning-bg shadow" wx:if="{{showBtn.exit}}" bindtap="exitTeam">退出</button>
     <!-- <button class="btn operation primary-bg shadow" wx:if="{{showBtn.postpone}}">延期</button> -->
     <!-- <button class="btn operation danger-bg shadow" wx:if="{{showBtn.abandon}}">废弃</button> -->
     <!-- <button class="btn operation primary-bg shadow" wx:if="{{showBtn.pass}}">提前成功</button> -->
   </view>
 </view>
 
-<van-popup show="{{enlargeImg}}" bind:close="ensmallImg">
-  <view>
-    <van-image width="{{largeSize}}" height="{{largeSize}}" src="{{largeImg}}" lazy-load use-error-slot>
+<van-overlay show="{{enlargeImg}}" bind:click="ensmallImg">
+  <view class="flex align-items-center justify-center full-height">
+    <van-image width="{{largeSize}}" height="{{largeSize}}" src="{{largeImg}}" lazy-load fit="contain">
       <text slot="error">加载失败</text>
     </van-image>
   </view>
-</van-popup>
-<van-dialog use-slot title="标题" show="{{ showJoinDialog }}" show-cancel-button bind:close="onCloseJoinDialog" bind:confirm="onConfirmJoin">
-  body
-</van-dialog>
+</van-overlay>
+<van-overlay show="{{ showJoinDialog }}">
+  <view class="full-height flex justify-center align-items-center">
+    <van-cell-group class="full-width white-bg">
+      <van-row>
+        <van-col span="12">
+          <van-cell title="联系方式：" />
+        </van-col>
+        <van-col span="12">
+          <van-dropdown-menu overlay="{{false}}" active-color="#33B4BC">
+            <van-dropdown-item value="{{ currentContact.id }}" options="{{ contacts }}" bind:change="onContactChange" />
+          </van-dropdown-menu>
+        </van-col>
+      </van-row>
+      <van-field model:value="{{joinDescription}}" type="textarea" label="参与备注：" placeholder="请输入备注" autosize="true" maxlength="200" border="false" clearable custom-style="border-color: black;" show-word-limit />
+    <view class="flex justify-end">
+      <button class="btn primary-bg" bindtap="onCloseJoinDialog" plain>取消</button>
+      <button class="btn primary-bg" bindtap="onConfirmJoin">确认参与</button>
+    </view>
+    </van-cell-group>
+  </view>
+</van-overlay>

@@ -82,3 +82,16 @@ page {
 .small {
   font-size: .8rem;
 }
+
+.full-height {
+  height: 100%;
+}
+.full-width {
+  width: 100%;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
