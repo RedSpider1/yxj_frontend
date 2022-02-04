@@ -94,7 +94,7 @@
     <van-divider></van-divider>
   </view>
   <text wx:if="{{hasNoMore}}" class="has-no-more grey flex justify-center">没有更多了~</text>
-  <view class="flex justify-center" wx:if="{{loading}}">
+  <view class="flex justify-center container-v" wx:if="{{loading}}">
     <van-loading type="spinner" />
   </view>
   <view class="blank-bottom">

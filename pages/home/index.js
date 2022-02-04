@@ -1,6 +1,8 @@
 let http = require('../../utils/http')
 let auth = require('../../utils/auth')
 let time = require('../../utils/time')
+let request = require('../../utils/request')
+let enums = require('../../utils/enums')
 
 Page({
   data: {
@@ -27,15 +29,15 @@ Page({
       // 组队单列表类型 0首页, 1我参与过, 2我浏览过, 3收藏列表
       type: 0
     },
-    // searchItems: [],
-    // historyLabels: [],
-    // searchLabels: [],
-    // searchParam: {
-    //   keyWord: '',
-    //   labelIds: [],
-    //   pageNum: 1,
-    //   pageSize: 20,
-    // },
+    searchItems: [],
+    historyLabels: [],
+    searchLabels: [],
+    searchParam: {
+      keyWord: '',
+      labelIds: [],
+      pageNum: 1,
+      pageSize: 20,
+    },
   },
   onChangeActive(event) {
     console.log(event)
@@ -89,38 +91,36 @@ Page({
     })
   },
 
-
-  // search() {
-  //   let that = this
-  //   http.post(request.groupTeamSearch.url, {
-  //     q: {
-  //       keyword: that.data.searchParam.keyWord,
-  //       lables: that.data.searchParam.labelIds
-  //     },
-  //     currentPage: that.data.searchParam.pageNum,
-  //     pageSize: that.data.searchParam.pageSize
-  //   }).then(res => {
-  //     if (res === null || res.length === 0) {
-  //       wx.showToast({
-  //         title: '没有更多数据了哦',
-  //         icon: 'none'
-  //       })
-  //       return
-  //     }
-  //     let items = that.data.searchItems
-  //     for (let row of res) {
-  //       items.push({
-  //         id: row.id,
-  //         title: row.title,
-  //         introduce: row.introduce,
-  //         subtitle: row.createName + ' 发布于 ' + row.examineTime,
-  //         person: row.currentJoinNum + ' / ' + row.needNum,
-  //         status: enums.team_status[row.teamStatus],
-  //       })
-  //     }
-  //     that.setData({searchItems: items, "searchParam.pageNum": searchParam.pageNum + 1})
-  //   })
-  // },
+  search() {
+    let that = this
+    http.post(request.groupTeamSearch.url, {
+      q:{
+        keyword: that.data.searchParam.keyWord,
+      },
+      currentPage: that.data.searchParam.pageNum,
+      pageSize: that.data.searchParam.pageSize
+    }).then(res => {
+      if (res.data == null || res.data.length == 0) {
+        wx.showToast({
+          title: '没有更多数据了哦',
+          icon: 'none'
+        })
+        return
+      }
+      let items = that.data.searchItems
+      for (let row of res.data) {
+        items.push({
+          id: row.id,
+          title: row.title,
+          introduce: row.introduce,
+          subtitle: row.createName + ' 发布于 ' + row.examineTime,
+          person: row.currentJoinNum + ' / ' + row.needNum,
+          status: enums.team_status[row.teamStatus],
+        })
+      }
+      that.setData({searchItems: items, "searchParam.pageNum": searchParam.pageNum + 1})
+    })
+  },
   // listLabel() {
   //   let that = this
   //   http.get(request.labelList.url, { 

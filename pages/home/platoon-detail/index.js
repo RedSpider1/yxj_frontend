@@ -41,6 +41,7 @@ Page({
     involveList: [], // 参与记录
     showShare: false, // 展示分享
     showJoinDialog: false,
+    showExitDialog: false,
     showOptions: [{
         name: '微信',
         icon: 'wechat',
@@ -80,6 +81,7 @@ Page({
     contacts: [],
     currentContact: {},
     joinDescription: '',
+    exitDescription: '',
   },
 
   /**
@@ -248,8 +250,6 @@ Page({
     }
     return type + ': ' + value
   },
-
-
   enlargeImg: function (event) {
     let pictureUrl = event.currentTarget.dataset.url
     console.log(pictureUrl)
@@ -282,6 +282,11 @@ Page({
       showJoinDialog: true
     })
   },
+  exitTeam() {
+    this.setData({
+      showExitDialog: true
+    })
+  },
   onConfirmJoin() {
     http.post('pss/group/join', {
       contactInfo: this.data.currentContact.contactInformation,
@@ -291,8 +296,25 @@ Page({
       teamId: this.data.groupInfo.id,
       type: this.data.currentContact.type,
     }).then(res => {
+      this.init({
+        id: this.data.groupInfo.id
+      })
       this.setData({
         showJoinDialog: false
+      })
+    })
+  },
+  onConfirmExit() {
+    http.post('pss/group/quit', {
+      remark: this.data.exitDescription,
+      resourceList: [],
+      id: this.data.groupInfo.id,
+    }).then(res => {
+      this.init({
+        id: this.data.groupInfo.id
+      })
+      this.setData({
+        showExitDialog: false
       })
     })
   },
@@ -319,6 +341,12 @@ Page({
   onCloseJoinDialog() {
     this.setData({
       showJoinDialog: false
+    })
+  },
+
+  onCloseExitDialog() {
+    this.setData({
+      showExitDialog: false
     })
   },
 

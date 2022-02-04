@@ -177,10 +177,22 @@
         </van-col>
       </van-row>
       <van-field model:value="{{joinDescription}}" type="textarea" label="参与备注：" placeholder="请输入备注" autosize="true" maxlength="200" border="false" clearable custom-style="border-color: black;" show-word-limit />
-    <view class="flex justify-end">
-      <button class="btn primary-bg" bindtap="onCloseJoinDialog" plain>取消</button>
-      <button class="btn primary-bg" bindtap="onConfirmJoin">确认参与</button>
-    </view>
+      <view class="flex justify-end">
+        <button class="btn primary-bg" bindtap="onCloseJoinDialog" plain>取消</button>
+        <button class="btn primary-bg" bindtap="onConfirmJoin">确认参与</button>
+      </view>
+    </van-cell-group>
+  </view>
+</van-overlay>
+
+<van-overlay show="{{ showExitDialog }}">
+  <view class="full-height flex justify-center align-items-center">
+    <van-cell-group class="full-width white-bg">
+      <van-field model:value="{{exitDescription}}" type="textarea" label="退出备注：" placeholder="请输入备注" autosize="{{true}}" maxlength="200" clearable custom-style="border-color: black;" show-word-limit />
+      <view class="flex justify-end">
+        <button class="btn primary-bg" bindtap="onCloseExitDialog" plain>取消</button>
+        <button class="btn primary-bg" bindtap="onConfirmExit">确认退出</button>
+      </view>
     </van-cell-group>
   </view>
 </van-overlay>
