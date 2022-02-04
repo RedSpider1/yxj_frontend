@@ -5,7 +5,7 @@
 page {
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
   --primary: #33B4BC;
-  --second: #D2CB1D;
+  --second: #00CC66;
   --third: #D21DAA;
   background-color: #f5f6f7;
 }

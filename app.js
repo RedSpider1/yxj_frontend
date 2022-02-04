@@ -7,7 +7,7 @@ App({
   globalData: {
     themes: {
       primary: '#33B4BC',
-      second: '#D2CB1D',
+      second: '#00CC66',
       third: '#D21DAA'
     },
     // 后段交互toekn

@@ -2,7 +2,7 @@
   color: #33B4BC;
 }
 .second {
-  color: #D2CB1D;
+  color: #00CC66;
 }
 .third {
   color: #D21DAA;
@@ -12,7 +12,7 @@
   color: white
 }
 .second-bg {
-  background-color: #D2CB1D;
+  background-color: #00CC66;
   color: white
 }
 .third-bg {

@@ -1,5 +1,5 @@
 <header title="{{currentContact.id == 0 ? '创建' : '编辑'}}个人信息" needReturn="{{true}}"></header>
-<view>
+<view class="white-bg">
   <van-dialog id="van-dialog" />
 
   <van-row>
@@ -13,9 +13,9 @@
     </van-col>
   </van-row>
   <van-field label="联系方式" placeholder="请输入联系方式值" value="{{currentContact.contactInformation}}" bind:change="changeInfo" />
-  <view class="flex justify-center">
-    <button class="btn warning-bg" bindtap="deleteContact" wx:if="{{currentContact.id != 0}}">删除</button>
-    <button class="btn primary-bg" bindtap="saveContact">{{currentContact.id == 0 ? '创建' : '保存'}}</button>
-  </view>
 </view>
-<van-toast id="van-toast"/>
+<view class="flex justify-center">
+  <button class="btn warning-bg" bindtap="deleteContact" wx:if="{{currentContact.id != 0}}">删除</button>
+  <button class="btn primary-bg" bindtap="saveContact">{{currentContact.id == 0 ? '创建' : '保存'}}</button>
+</view>
+<van-toast id="van-toast" />
