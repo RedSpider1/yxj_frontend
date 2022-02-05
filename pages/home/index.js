@@ -15,8 +15,6 @@ Page({
     newOpInfo: {
       // 组队单列表
       items: [],
-      // 已经存在于组队单列表的id
-      alreadyExistId: [],
       // 页码
       pageNum: 1,
       // 页大小
@@ -26,33 +24,38 @@ Page({
       // 是否没有数据
       hasNoMore: false,
       loading: false,
-      // 组队单列表类型 0首页, 1我参与过, 2我浏览过, 3收藏列表
+      // 组队单列表类型 0首页, 1我参与的, 2我浏览过, 3收藏列表 4我创建的 5搜索页面
       type: 0
+    },
+    searchOpInfo: {
+      // 组队单列表
+      items: [],
+      keyword: '',
+      // 页码
+      pageNum: 1,
+      // 页大小
+      pageSize: 20,
+      // 高度设置
+      height: wx.getSystemInfoSync().windowHeight - 0.25 * wx.getSystemInfoSync().windowHeight + 20,
+      // 是否没有数据
+      hasNoMore: false,
+      loading: false,
+      // 组队单列表类型 0首页, 1我参与的, 2我浏览过, 3收藏列表 4我创建的 5搜索页面
+      type: 5
     },
     searchItems: [],
     historyLabels: [],
     searchLabels: [],
-    searchParam: {
-      keyWord: '',
-      labelIds: [],
-      pageNum: 1,
-      pageSize: 20,
-    },
   },
-  onChangeActive(event) {
-    console.log(event)
-  },
+  onChangeActive(event) {},
 
   /**
    * 请求最新组队单接口
    */
   async newList() {
     let newOpInfo = this.data.newOpInfo
-    if (newOpInfo.hasNoMore) {
+    if (newOpInfo.hasNoMore || newOpInfo.loading) {
       return
-    }
-    while (newOpInfo.loading) {
-      await time.sleep(100)
     }
     this.setData({
       'newOpInfo.loading': true
@@ -64,96 +67,92 @@ Page({
     }).then(res => {
       if (res === null || res.length === 0) {
         this.setData({
-          'newOpInfo.hasNoMore': true
-        })
-        this.setData({
-          'newOpInfo.loading': false
+          'newOpInfo.hasNoMore': true,
+          'newOpInfo.loading': false,
         })
         return
       }
 
-      let alreadyExistId = newOpInfo.alreadyExistId
       let items = newOpInfo.items
       for (let row of res) {
-        if (alreadyExistId.indexOf(row.id) !== -1) {
-          continue
-        }
         items.push(row)
       }
       this.setData({
         'newOpInfo.items': items,
         'newOpInfo.loading': false,
-        'newOpInfo.alreadyExistId': alreadyExistId,
         'newOpInfo.pageNum': ++newOpInfo.pageNum
       })
+      if (res.length < newOpInfo.pageSize) {
+        this.setData({
+          'newOpInfo.hasNoMore': true,
+        })
+      }
     }).catch(res => {
       console.log(res)
+      this.setData({
+        'newOpInfo.loading': false
+      })
+    })
+  },
+
+  async searchList() {
+    let searchOpInfo = this.data.searchOpInfo
+    if (searchOpInfo.hasNoMore || searchOpInfo.loading) {
+      return
+    }
+    this.setData({
+      'searchOpInfo.loading': true
+    })
+    http.get('/pss/group/list', {
+      pageNum: searchOpInfo.pageNum,
+      pageSize: searchOpInfo.pageSize,
+      keyWord: searchOpInfo.keyword,
+      type: searchOpInfo.type
+    }).then(res => {
+      if (res === null || res.length === 0) {
+        this.setData({
+          'searchOpInfo.hasNoMore': true,
+          'searchOpInfo.loading': false,
+        })
+        return
+      }
+
+      let items = searchOpInfo.items
+      for (let row of res) {
+        items.push(row)
+      }
+      this.setData({
+        'searchOpInfo.items': items,
+        'searchOpInfo.loading': false,
+        'searchOpInfo.pageNum': ++searchOpInfo.pageNum
+      })
+      if (res.length < searchOpInfo.pageSize) {
+        this.setData({
+          'searchOpInfo.hasNoMore': true,
+        })
+      }
+    }).catch(res => {
+      console.log(res)
+      this.setData({
+        'searchOpInfo.loading': false
+      })
     })
   },
 
   search() {
-    let that = this
-    http.post(request.groupTeamSearch.url, {
-      q:{
-        keyword: that.data.searchParam.keyWord,
-      },
-      currentPage: that.data.searchParam.pageNum,
-      pageSize: that.data.searchParam.pageSize
-    }).then(res => {
-      if (res.data == null || res.data.length == 0) {
-        wx.showToast({
-          title: '没有更多数据了哦',
-          icon: 'none'
-        })
-        return
-      }
-      let items = that.data.searchItems
-      for (let row of res.data) {
-        items.push({
-          id: row.id,
-          title: row.title,
-          introduce: row.introduce,
-          subtitle: row.createName + ' 发布于 ' + row.examineTime,
-          person: row.currentJoinNum + ' / ' + row.needNum,
-          status: enums.team_status[row.teamStatus],
-        })
-      }
-      that.setData({searchItems: items, "searchParam.pageNum": searchParam.pageNum + 1})
-    })
+    this.setData({
+      "searchOpInfo.pageNum": 1,
+      'searchOpInfo.items': [],
+      'searchOpInfo.hasNoMore': false,
+    });
+    this.searchList()
   },
-  // listLabel() {
-  //   let that = this
-  //   http.get(request.labelList.url, { 
-  //     pageNum: 1,
-  //     pageSize: 10
-  //   })
-  //   .then(res => {
-  //     if(res) {
-  //       for (let row of res) {
-  //         row.color = color.randomColor()
-  //       }
-  //       that.setData({searchLabels: res})
-  //     }
-  //   })
-  // },
-  // listSearchHistory() {
-  //   let that = this
-  //   http.get(request.listSearchHistory.url, {})
-  //   .then(res => {
-  //     if(res) {
-  //       for (let row of res) {
-  //         row.color = color.randomColor()
-  //       }
-  //       that.setData({searchLabels: res})
-  //     }
-  //   })
-  // },
 
-  // onKeyWordChange(e) {
-  //   this.setData({
-  //     "searchParam.keyWord": e.detail,
-  //   });
-  // },
+  onKeyWordChange(e) {
+    this.setData({
+      "searchOpInfo.keyword": e.detail,
+    });
+  },
   onShow() {
     auth.checkAuthAndExecCallback(this.init)
   },

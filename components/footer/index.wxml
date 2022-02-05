@@ -1,6 +1,6 @@
 <view>
   <van-tabbar class="tabbar" style="--tabbar-background-color: {{primary}}" active="{{active}}" bind:change="onChange"
-   active-color="{{second}}" inactive-color="white">
+   active-color="{{activeColor}}" inactive-color="white">
     <van-tabbar-item wx:for="{{items}}" wx:key="text" icon="{{item.icon}}" name="{{item.text}}">
     {{item.text}}
     </van-tabbar-item>

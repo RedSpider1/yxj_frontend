@@ -10,8 +10,11 @@
 
     <!-- 搜索 -->
     <van-tab title="搜索">
-      <van-search placeholder="请输入要搜索的组队单标题关键词" bind:change="onKeyWordChange" bind:search="search"></van-search>
-       <platoon-sheet-list items="{{searchItems}}" bind:list="search" height="{{height}}"></platoon-sheet-list>
+      <van-search placeholder="请输入要搜索的组队单标题关键词" bind:change="onKeyWordChange" bind:search="search"  use-action-slot>
+        <button slot="action" bindtap="search" class="btn primary-bg">搜索</button>
+      </van-search>
+      <platoon-sheet-list class="platoon-sheet-list" items="{{searchOpInfo.items}}" hasNoMore="{{searchOpInfo.hasNoMore}}" loading="{{searchOpInfo.loading}}" bind:list="searchList" height="{{searchOpInfo.height}}">
+      </platoon-sheet-list>
     </van-tab>
   </van-tabs>
 

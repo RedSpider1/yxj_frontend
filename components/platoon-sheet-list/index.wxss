@@ -43,6 +43,7 @@
 .has-no-more {
   text-align: center;
   font-size: 0.8em;
+  margin-bottom: 50px;
 }
 .img {
   width: 100%;

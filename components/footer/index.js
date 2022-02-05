@@ -19,7 +19,7 @@ Component({
    */ 
   data: {
     primary: getApp().globalData.themes.primary,
-    second: getApp().globalData.themes.second,
+    activeColor: '#00FFFF',
     active: '',
     footerHeight: 0,
     items: [
