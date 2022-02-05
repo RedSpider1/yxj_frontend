@@ -1,7 +1,5 @@
 // pages/relation/list/index.js
 const http = require('../../../utils/http')
-const request = require('../../../utils/request')
-const auth = require('../../../utils/auth')
 
 Page({
 
@@ -9,82 +7,85 @@ Page({
    * 页面的初始数据
    */
   data: {
-    type: '',
-    typeEnum: '',
-    requestUrl: '',
-    showChoose: true,
-    items: [],
     title: '',
-    alreadyExistId: [],
-    pageNum: 1,
-    pageSize: 20,
-    hasNoMore: false,
-    height: wx.getSystemInfoSync().windowHeight - 0.15 * wx.getSystemInfoSync().windowHeight
+    // 最新组队单操作信息
+    newOpInfo: {
+      // 组队单列表
+      items: [],
+      // 页码
+      pageNum: 1,
+      // 页大小
+      pageSize: 20,
+      // 高度设置
+      height: wx.getSystemInfoSync().windowHeight - 0.25 * wx.getSystemInfoSync().windowHeight + 20,
+      // 是否没有数据
+      hasNoMore: false,
+      loading: false,
+      // 组队单列表类型 0首页, 1我参与的, 2我浏览过, 3收藏列表 4我创建的 5搜索页面
+      type: 0
+    },
   },
   getTitleByType: function (type) {
     let title = ''
-    let requestUrl = request.groupTeamRelationList.url
-    let typeEnum = ''
     switch (type) {
-      case 'view':
+      case '2':
         title = '我浏览过'
-        typeEnum = 2
         break;
-      case 'join':
+      case '1':
         title = '我参与的'
-        typeEnum = 1
         break;
-      case 'create':
+      case '4':
         title = '我创建的'
-        typeEnum = 4
         break;
-      case 'star':
+      case '3':
         title = '我收藏的'
-        typeEnum = 3
         break;
       default:
         title = '相关'
     }
 
-    this.setData({
-      requestUrl: requestUrl,
-      typeEnum: typeEnum
-    })
-
     return '友小聚 - ' + title
   },
-  list: function () {
-    console.log("type:" + this.data.typeEnum)
-    if(this.data.hasNoMore) {
+  async newList() {
+    let newOpInfo = this.data.newOpInfo
+    if (newOpInfo.hasNoMore || newOpInfo.loading) {
       return
     }
-    let that = this
-    let pageNum = this.data.pageNum
-    let pageSize = this.data.pageSize
-
-    if (this.data.requestUrl === '') {
-      this.setData({hasNoMore: true})
-      return
-    }
-    
-    http.get(this.data.requestUrl, {
-      type: this.data.typeEnum,
-      pageNum: pageNum,
-      pageSize: pageSize
+    this.setData({
+      'newOpInfo.loading': true
+    })
+    http.get('/pss/group/list', {
+      pageNum: newOpInfo.pageNum,
+      pageSize: newOpInfo.pageSize,
+      type: newOpInfo.type
     }).then(res => {
       if (res === null || res.length === 0) {
-        this.setData({hasNoMore: true})
+        this.setData({
+          'newOpInfo.hasNoMore': true,
+          'newOpInfo.loading': false,
+        })
         return
       }
-      let alreadyExistId = that.data.alreadyExistId
-      let items = that.data.items
+
+      let items = newOpInfo.items
       for (let row of res) {
-        if (alreadyExistId.indexOf(row.id) !== -1) {
-          continue
-        }
         items.push(row)
       }
-      that.setData({items: items, alreadyExistId: alreadyExistId, pageNum: ++pageNum, pageSize: pageSize})
+      this.setData({
+        'newOpInfo.items': items,
+        'newOpInfo.loading': false,
+        'newOpInfo.pageNum': ++newOpInfo.pageNum
+      })
+      if (res.length < newOpInfo.pageSize) {
+        this.setData({
+          'newOpInfo.hasNoMore': true,
+        })
+      }
+    }).catch(res => {
+      console.log(res)
+      this.setData({
+        'newOpInfo.loading': false
+      })
     })
   },
 
@@ -94,9 +95,9 @@ Page({
   onLoad: function (options) {
     this.setData({
       type: options.type,
-      title: this.getTitleByType(options.type)
+      title: this.getTitleByType(options.type),
+      'newOpInfo.type': options.type
     })
-    // todo 这里根据不同的type拉数据，然后设置到items上
-    this.list()
+    this.newList()
   },
 })
