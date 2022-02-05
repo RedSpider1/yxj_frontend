@@ -230,6 +230,8 @@ Page({
         })
       }
     })
+
+    http.post('pss/group/view/id/' + groupInfo.id, {})
   },
 
   onContactChange(event) {
