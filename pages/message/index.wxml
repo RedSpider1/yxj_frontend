@@ -1,7 +1,7 @@
 <header title="友小聚 - 消息"></header>
 <view class="container">
   <view>
-    <view>你的code：{{code}}</view>
+    <view class="flex align-items-center, justify-center grey small">开发中，敬请期待</view>
   </view>
 </view>
 

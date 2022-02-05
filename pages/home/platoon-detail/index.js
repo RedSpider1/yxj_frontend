@@ -1,13 +1,11 @@
 // pages/home/platoon-detail/index.js
 const http = require('../../../utils/http')
 const request = require('../../../utils/request')
-const status = require('../../../utils/enums')
-const color = require('../../../utils/color')
-const string = require('../../../utils/string')
 const file = require('../../../utils/file')
 const auth = require('../../../utils/auth')
 const time = require('../../../utils/time')
 const enums = require('../../../utils/enums')
+import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 
 
 Page({
@@ -254,7 +252,6 @@ Page({
   },
   enlargeImg: function (event) {
     let pictureUrl = event.currentTarget.dataset.url
-    console.log(pictureUrl)
     this.setData({
       enlargeImg: true,
       largeImg: pictureUrl
@@ -349,6 +346,33 @@ Page({
   onCloseExitDialog() {
     this.setData({
       showExitDialog: false
+    })
+  },
+
+  collect() {
+    http.post('/pss/group/collect/id/' + this.data.groupInfo.id).then(res => {
+      this.setData({
+        'showBtn.collect': false,
+      })
+      Toast({
+        type: 'success',
+        message: '收藏成功',
+        forbidClick: true,
+        duration: 1000,
+      });
+    })
+  },
+  cancelCollect() {
+    http.put('/pss/group/cancelCollect/id/' + this.data.groupInfo.id).then(res => {
+      this.setData({
+        'showBtn.collect': true,
+      })
+      Toast({
+        type: 'success',
+        message: '取消收藏成功',
+        forbidClick: true,
+        duration: 1000,
+      });
     })
   },
 

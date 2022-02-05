@@ -10,9 +10,9 @@
         <van-image round width="14" height="14" src="{{authorAvatar}}" />
         <view class="author-name">{{authorName}}</view>
         <view>
-          <!-- <van-icon name="star-o" class="tag-btn primary" size="14" /> -->
+          <van-icon name="star-o" class="tag-btn primary" size="14" bind:click="collect" wx:if="{{showBtn.collect}}"/>
           <!-- 收藏后变实心 -->
-          <!-- <van-icon name="star" class="tag-btn primary" size="14" /> -->
+          <van-icon name="star" class="tag-btn primary" size="14" bind:click="cancelCollect" wx:if="{{!showBtn.collect}}"/>
           <!-- <van-icon name="share" class="tag-btn second" size="14" /> -->
         </view>
       </view>
@@ -196,3 +196,5 @@
     </van-cell-group>
   </view>
 </van-overlay>
+
+<van-toast id="van-toast" />
