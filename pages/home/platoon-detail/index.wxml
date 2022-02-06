@@ -1,20 +1,20 @@
 <header title="友小聚 - 组队单详情" needReturn="{{true}}" id="header"></header>
 <view class="container margin-bottom">
 
-  <view class="title">
-    {{title}}
+  <view>
+    <view class="title">
+      {{title}}
+      <van-icon name="star-o" class="tag-btn primary" size="20" bind:click="collect" wx:if="{{showBtn.collect}}" />
+      <!-- 收藏后变实心 -->
+      <van-icon name="star" class="tag-btn primary" size="20" bind:click="cancelCollect" wx:if="{{!showBtn.collect}}" />
+      <!-- <van-icon name="share" class="tag-btn second" size="14" /> -->
+    </view>
   </view>
   <van-row>
     <van-col span="24">
       <view class="flex">
         <van-image round width="14" height="14" src="{{authorAvatar}}" />
         <view class="author-name">{{authorName}}</view>
-        <view class="flex justify-center align-items-center">
-          <van-icon name="star-o" class="tag-btn primary" size="14" bind:click="collect" wx:if="{{showBtn.collect}}"/>
-          <!-- 收藏后变实心 -->
-          <van-icon name="star" class="tag-btn primary" size="14" bind:click="cancelCollect" wx:if="{{!showBtn.collect}}"/>
-          <!-- <van-icon name="share" class="tag-btn second" size="14" /> -->
-        </view>
       </view>
       <view class="small grey margin-v">发布时间：{{examineTime}}</view>
       <view class="small grey flex margin-v" wx:if="{{countDownTime > 0 && countDownTime < 24 * 60 * 60 * 1000 }}">

@@ -2,8 +2,11 @@
  * 获取随机颜色
  * @returns 随机颜色
  */
-export const randomColor = function () {
-  let kind = Math.floor(Math.random() * 20)
+export const randomColor = function (id) {
+  let kind = Math.floor(Math.random() * 18)
+  if (id && id > 0) {
+    kind = id % 18
+  }
   // todo qisu 这里尽量都弄深色的。
   switch (kind) {
     case 1:
@@ -11,7 +14,7 @@ export const randomColor = function () {
     case 2:
       return '#339933'
     case 3:
-      return '#339933'
+      return '#CC0066'
     case 4:
       return '#660099'
     case 5:

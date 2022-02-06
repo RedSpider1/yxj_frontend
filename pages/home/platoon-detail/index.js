@@ -402,7 +402,7 @@ Page({
         labelInfos.push({
           id: row.id,
           name: row.labelName,
-          color: color.randomColor()
+          color: color.randomColor(row.id)
         })
         labelName2LabelInfoMap[row.labelName] = labelInfos[labelInfos.length - 1]
       }
