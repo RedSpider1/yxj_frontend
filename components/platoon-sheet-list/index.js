@@ -72,7 +72,9 @@ Component({
   /**
    * 组件的初始数据
    */
-  data: {},
+  data: {
+    refreshTrigger: false
+  },
 
   /**
    * 组件的方法列表
@@ -80,6 +82,12 @@ Component({
   methods: {
     list() {
       this.triggerEvent('list')
+    },
+    refresh() {
+      this.triggerEvent('refresh')
+      this.setData({
+        refreshTrigger: false
+      })
     },
     jmp(event) {
       let id = event.currentTarget.dataset.id

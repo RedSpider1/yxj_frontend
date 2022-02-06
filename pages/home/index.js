@@ -95,6 +95,16 @@ Page({
     })
   },
 
+  async refresh() {
+    this.setData({
+      'newOpInfo.items': [],
+      'newOpInfo.loading': false,
+      'newOpInfo.pageNum': 1,
+      'newOpInfo.hasNoMore': false,
+    }) 
+    this.newList()
+  },
+
   async searchList() {
     let searchOpInfo = this.data.searchOpInfo
     if (searchOpInfo.hasNoMore || searchOpInfo.loading) {
@@ -137,6 +147,16 @@ Page({
         'searchOpInfo.loading': false
       })
     })
+  },
+
+  async refreshSearch() {
+    this.setData({
+      'searchOpInfo.items': [],
+      'searchOpInfo.loading': false,
+      'searchOpInfo.pageNum': 1,
+      'searchOpInfo.hasNoMore': false,
+    }) 
+    this.searchList()
   },
 
   search() {

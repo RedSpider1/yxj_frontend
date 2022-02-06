@@ -89,6 +89,16 @@ Page({
     })
   },
 
+  async refresh() {
+    this.setData({
+      'newOpInfo.items': [],
+      'newOpInfo.loading': false,
+      'newOpInfo.pageNum': 1,
+      'newOpInfo.hasNoMore': false,
+    }) 
+    this.newList()
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

@@ -293,7 +293,7 @@ Page({
       startTime: new Date().getTime(),
       title: data.title
     }).then(id => {
-      wx.redirectTo({
+      wx.reLaunch({
         url: `/pages/home/platoon-detail/index?id=${id}`,
       })
     })

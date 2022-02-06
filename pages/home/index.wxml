@@ -4,7 +4,7 @@
   <van-tabs active="{{ active }}" bind:change="onChangeActive" class="tabs" color="{{primary}}">
     <!-- 最新 -->
     <van-tab title="最新">
-      <platoon-sheet-list class="platoon-sheet-list" items="{{newOpInfo.items}}" hasNoMore="{{newOpInfo.hasNoMore}}" loading="{{newOpInfo.loading}}" bind:list="newList" height="{{newOpInfo.height}}">
+      <platoon-sheet-list class="platoon-sheet-list" items="{{newOpInfo.items}}" hasNoMore="{{newOpInfo.hasNoMore}}" loading="{{newOpInfo.loading}}" bind:list="newList" bind:refresh="refresh" height="{{newOpInfo.height}}">
       </platoon-sheet-list>
     </van-tab>
 
@@ -13,7 +13,7 @@
       <van-search placeholder="请输入要搜索的组队单标题关键词" bind:change="onKeyWordChange" bind:search="search"  use-action-slot>
         <button slot="action" bindtap="search" class="btn primary-bg">搜索</button>
       </van-search>
-      <platoon-sheet-list class="platoon-sheet-list" items="{{searchOpInfo.items}}" hasNoMore="{{searchOpInfo.hasNoMore}}" loading="{{searchOpInfo.loading}}" bind:list="searchList" height="{{searchOpInfo.height}}">
+      <platoon-sheet-list class="platoon-sheet-list" items="{{searchOpInfo.items}}" hasNoMore="{{searchOpInfo.hasNoMore}}" loading="{{searchOpInfo.loading}}" bind:list="searchList" bind:refresh="refreshSearch" height="{{searchOpInfo.height}}">
       </platoon-sheet-list>
     </van-tab>
   </van-tabs>

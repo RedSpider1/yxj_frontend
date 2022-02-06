@@ -37,7 +37,6 @@ Component({
         })
         return
       }
-
       wx.navigateBack({delta: 1})
     },
     home() {

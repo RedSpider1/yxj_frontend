@@ -1,4 +1,11 @@
-<scroll-view scroll-y='true' style="height: {{height}}px;" bindscrolltolower="list">
+<scroll-view scroll-y='true' style="height: {{height}}px;" bindscrolltolower="list"
+  refresher-enabled="{{true}}"
+  refresher-threshold="{{100}}"
+  refresher-default-style="white"
+  refresher-background="grey"
+  refresher-triggered="{{refreshTrigger}}"
+  bindrefresherrefresh="refresh"
+>
   <view wx:for="{{wrapperItems}}" class="subContainer" wx:key="id" bindtap="jmp" data-id="{{item.id}}">
     <van-row>
       <van-col span="14">

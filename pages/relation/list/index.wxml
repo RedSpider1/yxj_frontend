@@ -1,6 +1,6 @@
 <!--pages/relation/list/index.wxml-->
 <header title="{{title}}" needReturn="{{true}}"></header>
 <view>
-  <platoon-sheet-list class="platoon-sheet-list" items="{{newOpInfo.items}}" hasNoMore="{{newOpInfo.hasNoMore}}" loading="{{newOpInfo.loading}}" bind:list="newList" height="{{newOpInfo.height}}">
+  <platoon-sheet-list class="platoon-sheet-list" items="{{newOpInfo.items}}" hasNoMore="{{newOpInfo.hasNoMore}}" loading="{{newOpInfo.loading}}" bind:list="newList" height="{{newOpInfo.height}}" bind:refresh="refresh" >
   </platoon-sheet-list>
 </view>
