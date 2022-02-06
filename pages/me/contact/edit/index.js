@@ -66,6 +66,10 @@ Component({
       this.setData({'currentContact.userId': getApp().globalData.userInfo.id})
       const contactTypes = []
       for (const i in enums.contact_type) {
+        // 手机因为要验证，暂时不能添加手机作为联系方式
+        if(i == 0) {
+          continue
+        }
         contactTypes.push({
           value: parseInt(i),
           text: enums.contact_type[i]
