@@ -43,6 +43,7 @@ Page({
     }).then( () => {
       auth.freeLogin(getApp())
     }).then( () => {
+      getApp().globalData.initDone = true
       wx.reLaunch({
         url: `/pages/home/index`,
       })

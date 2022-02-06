@@ -62,6 +62,20 @@ Page({
         icon: 'qrcode'
       },
     ],
+    onShareAppMessage() {
+      const promise = new Promise(resolve => {
+        setTimeout(() => {
+          resolve({
+            title: '转发到朋友圈'
+          })
+        }, 2000)
+      })
+      return {
+        title: '转发到朋友圈',
+        path: '/pages/home/platoon-detail/index?id=' + this.data.platoonId,
+        promise
+      }
+    },
     movableBtn: {
       width: wx.getSystemInfoSync().windowWidth - 40,
       height: wx.getSystemInfoSync().windowHeight - 40
@@ -89,6 +103,7 @@ Page({
     auth.checkAuthAndExecCallback(() => this.init(options))
   },
   async init(options) {
+    this.initData()
     const query = wx.createSelectorQuery()
     query.select('#header').boundingClientRect()
     query.exec(res => {
@@ -373,6 +388,34 @@ Page({
         forbidClick: true,
         duration: 1000,
       });
+    })
+  },
+
+  initData() {
+    if (getApp().globalData.initDone) {
+      return
+    }
+    http.get('pss/label/list', null, false).then(res => {
+      let labelInfos = []
+      let labelName2LabelInfoMap = {}
+      for (let row of res) {
+        labelInfos.push({
+          id: row.id,
+          name: row.labelName,
+          color: color.randomColor()
+        })
+        labelName2LabelInfoMap[row.labelName] = labelInfos[labelInfos.length - 1]
+      }
+      getApp().globalData.labels = labelInfos
+      getApp().globalData.labelName2LabelInfoMap = labelName2LabelInfoMap
+    })
+
+    http.get(request.getEnums.url, null, false).then((res) => {
+      getApp().globalData.enums = res
+    }).then(() => {
+      auth.freeLogin(getApp())
+    }).then(() => {
+      getApp().globalData.initDone = true
     })
   },
 

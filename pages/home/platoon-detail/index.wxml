@@ -147,6 +147,7 @@
   </van-tabs>
 
   <view class="flex justify-center btnGroup">
+    <button class="btn operation second-bg shadow" open-type="share">分享</button>
     <button class="btn operation second-bg shadow" wx:if="{{showBtn.edit}}">修改</button>
     <button class="btn operation primary-bg shadow" wx:if="{{showBtn.join}}" bindtap="joinTeam">参与</button>
     <button class="btn operation warning-bg shadow" wx:if="{{showBtn.exit}}" bindtap="exitTeam">退出</button>

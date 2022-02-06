@@ -16,5 +16,6 @@ App({
     enums: [],
     labels: [],
     labelName2LabelInfoMap: {},
+    initDone: false,
   }
 })

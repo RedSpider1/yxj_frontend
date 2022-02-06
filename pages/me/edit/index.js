@@ -12,7 +12,7 @@ Component({
       img: null,
       nickName: null,
       sex: '男',
-      birthday: '2000-01-01',
+      birthday: '1990-01-01',
       slogan: ''
     },
     showSexSheet: false,
@@ -142,8 +142,9 @@ Component({
       })
       const birthday = app.globalData.userInfo.birthday
       if(birthday != '' && birthday != null && birthday != '1970-01-01') {
+        const birthDayDate = Date.parse(app.globalData.userInfo.birthday)
         this.setData({
-          defaultBirthday: app.globalData.userInfo.birthday 
+          defaultBirthday: birthDayDate
         })
       }
     },
