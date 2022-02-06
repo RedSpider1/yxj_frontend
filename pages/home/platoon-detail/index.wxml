@@ -9,7 +9,7 @@
       <view class="flex">
         <van-image round width="14" height="14" src="{{authorAvatar}}" />
         <view class="author-name">{{authorName}}</view>
-        <view>
+        <view class="flex justify-center align-items-center">
           <van-icon name="star-o" class="tag-btn primary" size="14" bind:click="collect" wx:if="{{showBtn.collect}}"/>
           <!-- 收藏后变实心 -->
           <van-icon name="star" class="tag-btn primary" size="14" bind:click="cancelCollect" wx:if="{{!showBtn.collect}}"/>
@@ -100,7 +100,7 @@
         <view wx:for="{{involveList}}" wx:key="id" class="record-item margin-v">
           <view class="flex justify-between align-items-center">
             <view class="flex align-items-center">
-              <van-image round width="20" height="20" src="{{item.userAvatar}}" />
+              <van-image round width="14" height="14" src="{{item.userAvatar}}" />
               <view class="author-name">{{item.userName}}</view>
             </view>
             <view>

@@ -1,5 +1,5 @@
 <header title="友小聚 - 创建组队单" needReturn="{{true}}"></header>
-<view class="container">
+<view>
   <!-- 标题 -->
   <van-field model:value="{{title}}" required clearable label="标题：" auto-focus placeholder="请输入标题" />
 
@@ -16,14 +16,19 @@
 
   <!-- 照片 -->
   <view class="img-con white-bg">
-    <van-uploader file-list="{{pictureOpInfo.choosePictures}}" use-before-read bind:before-read="beforeReadPicture" bind:after-read="afterReadPicture" max-count="9" bind:delete="deletePicture" />
+    <van-uploader file-list="{{pictureOpInfo.choosePictures}}" use-before-read bind:before-read="beforeReadPicture" bind:after-read="afterReadPicture" max-count="9" bind:delete="deletePicture" preview-size="40" />
   </view>
 
-  <view class="divider">
+  <view>
     <van-field model:value="{{endTimeStr}}" readonly placeholder="请选择截止时间" label="截止时间：" bindtap="openShowExpireDate" />
     <van-popup show="{{expireTimeOpInfo.displayExpireTimePopUps}}" position="bottom" custom-style="height: 50%;" bind:close="closeShowExpireTime">
       <van-datetime-picker type="datetime" formatter="{{ formatter }}" value="{{endTime}}" bind:close="closeShowExpireTime" bind:confirm="confirmShowExpireTime" />
     </van-popup>
+    <van-field value="" readonly center label="快捷选择:" use-button-slot>
+      <van-button slot="button" size="small" type="primary" class="quick-select" bind:click="quickSelectOneDay">一天后</van-button>
+      <van-button slot="button" size="small" type="primary" class="quick-select"  bind:click="quickSelectOneWeek">一星期后</van-button>
+      <van-button slot="button" size="small" type="primary" class="quick-select"  bind:click="quickSelectOneMonth">一月后</van-button>
+    </van-field>
   </view>
 
   <!-- 标签 -->

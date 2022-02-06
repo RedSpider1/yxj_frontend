@@ -24,7 +24,7 @@
       <van-cell value="{{userInfo.birthday}}" title="生日" is-link bind:click="editBirthday" icon="fire" />
       <van-action-sheet show="{{ showBirthdaySheet }}" title="选择生日" bind:close="closeBirthday">
         <view>
-          <van-datetime-picker type="datetime" type="date" value="{{ defaultValue }}" min-date="{{ minBirthday }}"
+          <van-datetime-picker type="datetime" type="date" value="{{ defaultBirthday }}" min-date="{{ minBirthday }}"
             max-date="{{ maxBirthday }}" bind:confirm="onSelectBirthday" bind:cancel="closeBirthday" />
         </view>
       </van-action-sheet>

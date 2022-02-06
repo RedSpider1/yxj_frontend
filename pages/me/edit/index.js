@@ -29,6 +29,7 @@ Component({
     ],
     minBirthday: new Date(1900, 0, 1).getTime(),
     maxBirthday: Date.now(),
+    defaultBirthday: new Date(1990, 0, 1).getTime(),
     formatter(type, value) {
       if (type === 'year') {
         return `${value}年`;
@@ -137,8 +138,14 @@ Component({
         'userInfo.nickName': app.globalData.userInfo.nickname,
         'userInfo.sex': getSexFromWechatGender(app.globalData.userInfo.sex),
         'userInfo.birthday': app.globalData.userInfo.birthday,
-        'userInfo.slogan': app.globalData.userInfo.slogan
+        'userInfo.slogan': app.globalData.userInfo.slogan,
       })
+      const birthday = app.globalData.userInfo.birthday
+      if(birthday != '' && birthday != null && birthday != '1970-01-01') {
+        this.setData({
+          defaultBirthday: app.globalData.userInfo.birthday 
+        })
+      }
     },
   }
 })

@@ -45,7 +45,7 @@ function fetch(options) {
           wx.showToast({
             title: res.data.message,
             mask: "true",
-            icon: 'error',
+            icon: 'none',
             duration: 3000
           })
           reject(res.data)

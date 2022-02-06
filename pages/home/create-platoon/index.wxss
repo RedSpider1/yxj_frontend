@@ -39,8 +39,13 @@
   flex-wrap: wrap;
 }
 .img-con {
-  padding: 0 1em;
+  padding: 1em;
 }
 .tag-con {
   padding: 1em;
+}
+.quick-select button {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  margin-left: 2px;
 }

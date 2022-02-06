@@ -58,8 +58,8 @@ Page({
     },
 
     // 截止时间操作信息
-    endTime: new Date().getTime(),
-    endTimeStr: time.timestap2Str(new Date().getTime()),
+    endTime: new Date().getTime() + 1000 * 60 * 60 * 24, // 默认是1天后
+    endTimeStr: time.timestap2Str(new Date().getTime() + 1000 * 60 * 60 * 24),
     expireTimeOpInfo: {
       // 是否展示时间弹窗
       displayExpireTimePopUps: false
@@ -105,7 +105,29 @@ Page({
     this.setData({
       'personOpInfo.containMe': event.detail,
       'personOpInfo.minPerson': event.detail ? 1 : 0,
-      'personOpInfo.inputPerson': event.detail ? inputPerson + 1 : inputPerson - 1
+    })
+    if (event.detail && inputPerson == 0) {
+      this.setData({
+        'personOpInfo.inputPerson': 1
+      })
+    }
+  },
+  quickSelectOneDay() {
+    this.setData({
+      endTime: new Date().getTime() + 1000 * 60 * 60 * 24, // 默认是1天后
+      endTimeStr: time.timestap2Str(new Date().getTime() + 1000 * 60 * 60 * 24),
+    })
+  },
+  quickSelectOneWeek() {
+    this.setData({
+      endTime: new Date().getTime() + 1000 * 60 * 60 * 24 * 7, 
+      endTimeStr: time.timestap2Str(new Date().getTime() + 1000 * 60 * 60 * 24 * 7),
+    })
+  },
+  quickSelectOneMonth() {
+    this.setData({
+      endTime: new Date().getTime() + 1000 * 60 * 60 * 24 * 30, 
+      endTimeStr: time.timestap2Str(new Date().getTime() + 1000 * 60 * 60 * 24 * 30),
     })
   },
 
@@ -296,10 +318,14 @@ Page({
    * 加载标签信息
    */
   loadLabelData: (that) => {
-      that.setData({
-        'labelOpInfo.unchooseLabelInfos': getApp().globalData.labels,
-        'labelOpInfo.labelName2LabelInfoMap': getApp().globalData.labelName2LabelInfoMap
-      })
+    let allLabels = []
+    for (const label of getApp().globalData.labels) {
+      allLabels.push(label)
+    }
+    that.setData({
+      'labelOpInfo.unchooseLabelInfos': allLabels,
+      'labelOpInfo.labelName2LabelInfoMap': getApp().globalData.labelName2LabelInfoMap
+    })
   },
 
   /**
