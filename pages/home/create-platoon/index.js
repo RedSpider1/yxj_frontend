@@ -29,10 +29,10 @@ Page({
     // 用户选择的人数必须大于等于最小人数
     personOpInfo: {
       // 用户选择的人数，默认为0，不小于最小人数
-      inputPerson: 0,
+      inputPerson: 2,
 
       // 最小人数
-      minPerson: 0,
+      minPerson: 1,
 
       // 包含我
       containMe: false
@@ -104,11 +104,11 @@ Page({
     let inputPerson = this.data.personOpInfo.inputPerson
     this.setData({
       'personOpInfo.containMe': event.detail,
-      'personOpInfo.minPerson': event.detail ? 1 : 0,
+      'personOpInfo.minPerson': event.detail ? 2 : 1,
     })
-    if (event.detail && inputPerson == 0) {
+    if (event.detail && inputPerson == 1) {
       this.setData({
-        'personOpInfo.inputPerson': 1
+        'personOpInfo.inputPerson': 2
       })
     }
   },
@@ -253,7 +253,7 @@ Page({
     if (string.isEmpty(data.title)) {
       wx.showToast({
         title: '标题为空',
-        type: 'warn',
+        icon: 'error',
         duration: 1000
       })
       return
@@ -261,7 +261,7 @@ Page({
     if (data.personOpInfo.inputPerson <= 0) {
       wx.showToast({
         title: '人数必须大于0',
-        type: 'warn',
+        icon: 'error',
         duration: 1000
       })
       return
