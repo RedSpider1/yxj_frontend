@@ -146,7 +146,7 @@ Page({
     let labelArray = []
     for (let label of groupInfo.labels) {
       for (const v of getApp().globalData.labels) {
-        if (label == v.id.toString()) {
+        if (label == v.name) {
           labelArray.push({
             color: v.color,
             name: v.name,

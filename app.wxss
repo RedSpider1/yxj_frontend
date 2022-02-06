@@ -16,6 +16,9 @@ page {
 .container-v {
   margin: 20px 0;
 }
+.container-h {
+  margin: 0 20px;
+}
 
 .deliver {
   margin-bottom: 10px;

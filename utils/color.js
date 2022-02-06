@@ -7,39 +7,41 @@ export const randomColor = function () {
   // todo qisu 这里尽量都弄深色的。
   switch (kind) {
     case 1:
-      return '#CE93D8'
+      return '#000099'
     case 2:
-      return '#FF1744'
+      return '#339933'
+    case 3:
+      return '#339933'
     case 4:
-      return '#FFCDD2'
+      return '#660099'
     case 5:
-      return '#F48FB1'
+      return '#663333'
     case 6:
-      return '#E57373'
+      return '#669933'
     case 7:
-      return '#D1C4E9'
+      return '#9900CC'
     case 8:
-      return '#C5CAE9'
+      return '#993333'
     case 9:
-      return '#BBDEFB'
+      return '#996666'
     case 10:
-      return '#2196F3'
+      return '#CC0066'
     case 11:
-      return '#B3E5FC'
+      return '#CC33CC'
     case 12:
-      return '#039BE5'
+      return '#0000CC'
     case 13:
-      return '#80DEEA'
+      return '#006666'
     case 14:
-      return '#00ACC1'
+      return '#330033'
     case 15:
-      return '#80CBC4'
+      return '#6600CC'
     case 16:
-      return '#A5D6A7'
+      return '#990033'
     case 17:
-      return '#C5E1A5'
+      return '#333300'
     case 18:
-      return '#E6EE9C'
+      return '#996600'
     default:
       return 'gray'
   }

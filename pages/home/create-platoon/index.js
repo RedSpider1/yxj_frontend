@@ -287,7 +287,7 @@ Page({
       endTime: data.endTime,
       // id: 0,
       introduction: data.inputIntroduce,
-      labels: data.labelOpInfo.chooseLabelInfos.map(x => x.id),
+      labels: data.labelOpInfo.chooseLabelInfos.map(x => x.name),
       ownerId: userInfo.id,
       resourceList: data.pictureOpInfo.choosePictures.map(x => x.resourceId),
       startTime: new Date().getTime(),
