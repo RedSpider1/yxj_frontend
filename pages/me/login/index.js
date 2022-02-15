@@ -16,6 +16,18 @@ Page({
     loginButtonWidth: 0,
     loginSuccess: false,
     sourceRoute: null,
+    showPolicy: false,
+  },
+
+  showPolicy() {
+    this.setData({
+      showPolicy: true
+    })
+  },
+  onClosePolicy() {
+    this.setData({
+      showPolicy: false
+    })
   },
 
   agreeProtocol() {

@@ -64,3 +64,16 @@
   color: #979797;
   margin-top: 6px;
 }
+.policy-view {
+  height: 500px;
+  width: 300px;
+}
+
+.policy-view2 {
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+.policy-title {
+  font-weight: 700;
+}
