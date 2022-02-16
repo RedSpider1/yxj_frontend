@@ -1,5 +1,5 @@
 <view wx:if="{{!loginSuccess}}">
-  <header title="友小聚 - 登录" needReturn="{{false}}" id="header"></header>
+  <header title="友小聚 - 登录" needReturn="{{true}}" id="header"></header>
   <view class="container" style="height: {{containerHeight}}px;">
     <view>
       <view style="justify-content: center;" class="flex row">
@@ -81,9 +81,9 @@
         </button>
       </view>
       <view style="justify-content: center; margin-top: 10px;" class="flex row">
-        <button class="loginButton" style="background-color: #979797; width: {{loginButtonWidth}}px;"
+        <button class="loginButton primary-bg" style="background-color: #979797; width: {{loginButtonWidth}}px;"
          bindtap="goIndex">
-          返回
+          返回首页
         </button>
       </view>
     </view>

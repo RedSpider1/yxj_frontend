@@ -174,7 +174,8 @@ Page({
     });
   },
   onShow() {
-    auth.checkAuthAndExecCallback(this.init)
+    this.init()
+    // auth.checkAuthAndExecCallback(this.init)
   },
 
   init() {

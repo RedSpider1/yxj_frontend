@@ -89,6 +89,7 @@ Page({
       pass: false, // 提前成功
       postpone: false, // 延期
       collect: false, // 收藏
+      login: false, // 登录
     },
     contacts: [],
     currentContact: {},
@@ -100,7 +101,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    auth.checkAuthAndExecCallback(() => this.init(options))
+    this.init(options)
+    // auth.checkAuthAndExecCallback(() => this.init(options))
+  },
+  login() {
+    auth.goToLoginPage()
   },
   async init(options) {
     this.initData()
@@ -137,6 +142,12 @@ Page({
       'showBtn.exit': relation.joined && !relation.created && groupInfo.status == 20,
       'showBtn.collect': !relation.collected,
     })
+    console.log(getApp().globalData.userInfo)
+    if (getApp().globalData.userInfo == null) {
+      this.setData({
+        'showBtn.login': true,
+      })
+    }
     let pictureUrlArray = []
     if (groupInfo.resourceObjList !== null && typeof groupInfo.resourceObjList !== undefined) {
       for (let pictureUrl of groupInfo.resourceObjList) {

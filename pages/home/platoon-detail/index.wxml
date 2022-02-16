@@ -154,6 +154,7 @@
     <!-- <button class="btn operation primary-bg shadow" wx:if="{{showBtn.postpone}}">延期</button> -->
     <!-- <button class="btn operation danger-bg shadow" wx:if="{{showBtn.abandon}}">废弃</button> -->
     <!-- <button class="btn operation primary-bg shadow" wx:if="{{showBtn.pass}}">提前成功</button> -->
+    <button class="btn operation primary-bg shadow" wx:if="{{showBtn.login}}" bindtap="login">登录</button>
   </view>
 </view>
 

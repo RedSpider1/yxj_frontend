@@ -37,9 +37,12 @@ Page({
   },
 
   getPhoneNumber(event) {
-    console.log(event)
     const phoneDetail = event.detail
     wx.login().then(res => {
+      console.log(phoneDetail)
+      if(phoneDetail.errMsg != "getPhoneNumber:ok") {
+        return
+      }
       http.post(request.login.url, {
         cloudId: phoneDetail.cloudID,
         encryptedData: phoneDetail.encryptedData,
@@ -51,6 +54,8 @@ Page({
         this.setData({
           loginSuccess: true,
         })
+      }).catch(res => {
+        console.log(res)
       }).catch(res => {
         console.log(res)
       })

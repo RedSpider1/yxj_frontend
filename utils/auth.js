@@ -29,7 +29,8 @@ export function freeLogin(app) {
             getCurrentUser(app)
             resolve()
           } else {
-            goToLoginPage(app)
+            // 免登失败就不登
+            // goToLoginPage(app)
           }
         })
       }
@@ -89,18 +90,30 @@ export function getCurrentUser(app) {
         birthday: string.isEmpty(res.birthday) ? '1970-01-01' : res.birthday
       }
     } else {
-      goToLoginPage()
+      wx.reLaunch({
+        url: `/pages/home/index`,
+      })
+      // goToLoginPage()
     }
   }).catch(e => {
-    goToLoginPage()
+    wx.reLaunch({
+      url: `/pages/home/index`,
+    })
+    // goToLoginPage()
   })
 }
 
 /**
  * 跳转登录页
  */
-function goToLoginPage() {
-  wx.reLaunch({
+export function goToLoginPage() {
+  wx.navigateTo({
     url: `/pages/me/login/index`,
   })
+}
+
+export function checkAndGoToLoginPage() {
+  if (getApp().globalData.userInfo == null) {
+    goToLoginPage()
+  }
 }

@@ -38,9 +38,11 @@ Component({
         .catch(() => {});
     },
     onLoad () {
-      auth.checkAuthAndExecCallback(() => this.init())
+      auth.checkAndGoToLoginPage()
+      this.initUserInfo()
+      // auth.checkAuthAndExecCallback(() => this.init())
     },
-    init () {
+    initUserInfo () {
       this.setData({
         nickname: getApp().globalData.userInfo.nickname,
         avatar: getApp().globalData.userInfo.avatar

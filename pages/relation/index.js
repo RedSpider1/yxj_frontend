@@ -9,6 +9,7 @@ Page({
   },
 
   jmp: function (e) {
+    auth.checkAndGoToLoginPage()
     const type = e.currentTarget.dataset.type
     wx.navigateTo({
       url: `/pages/relation/list/index?type=${type}`,
