@@ -39,10 +39,10 @@ Page({
   getPhoneNumber(event) {
     const phoneDetail = event.detail
     wx.login().then(res => {
-      console.log(phoneDetail)
-      if(phoneDetail.errMsg != "getPhoneNumber:ok") {
+      if (phoneDetail.errMsg != "getPhoneNumber:ok") {
         return
       }
+      getApp().globalData.authToken = null
       http.post(request.login.url, {
         cloudId: phoneDetail.cloudID,
         encryptedData: phoneDetail.encryptedData,

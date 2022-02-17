@@ -4,9 +4,9 @@
   <view>
     <view class="title">
       {{title}}
-      <van-icon name="star-o" class="tag-btn primary" size="20" bind:click="collect" wx:if="{{showBtn.collect}}" />
+      <van-icon name="star-o" class="tag-btn primary" size="20" bind:click="collect" wx:if="{{showBtn.collect && !showBtn.login}}" />
       <!-- 收藏后变实心 -->
-      <van-icon name="star" class="tag-btn primary" size="20" bind:click="cancelCollect" wx:if="{{!showBtn.collect}}" />
+      <van-icon name="star" class="tag-btn primary" size="20" bind:click="cancelCollect" wx:if="{{!showBtn.collect && !showBtn.login}}" />
       <!-- <van-icon name="share" class="tag-btn second" size="14" /> -->
     </view>
   </view>

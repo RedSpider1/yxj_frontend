@@ -137,15 +137,15 @@ Page({
 
     const groupInfo = await http.get(`pss/group/id/${platoonId}`)
     const relation = await http.get(`pss/group/${platoonId}/user-group-relation`)
-    this.setData({
-      'showBtn.join': !relation.joined && !relation.created && groupInfo.status == 20,
-      'showBtn.exit': relation.joined && !relation.created && groupInfo.status == 20,
-      'showBtn.collect': !relation.collected,
-    })
-    console.log(getApp().globalData.userInfo)
     if (getApp().globalData.userInfo == null) {
       this.setData({
         'showBtn.login': true,
+      })
+    } else {
+      this.setData({
+        'showBtn.join': !relation.joined && !relation.created && groupInfo.status == 20,
+        'showBtn.exit': relation.joined && !relation.created && groupInfo.status == 20,
+        'showBtn.collect': !relation.collected,
       })
     }
     let pictureUrlArray = []

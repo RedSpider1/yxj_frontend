@@ -9,10 +9,11 @@ Page({
   },
 
   jmp: function (e) {
-    auth.checkAndGoToLoginPage()
-    const type = e.currentTarget.dataset.type
-    wx.navigateTo({
-      url: `/pages/relation/list/index?type=${type}`,
+    auth.checkAndGoToLoginPageOrCallback(() => {
+      const type = e.currentTarget.dataset.type
+      wx.navigateTo({
+        url: `/pages/relation/list/index?type=${type}`,
+      })
     })
   },
 
@@ -25,7 +26,9 @@ Page({
     query.exec(res => {
       const systemInfo = wx.getSystemInfoSync()
       let containerHeight = systemInfo.windowHeight - systemInfo.statusBarHeight - res[0].height
-      this.setData({containerHeight: containerHeight})
+      this.setData({
+        containerHeight: containerHeight
+      })
     })
   },
 })

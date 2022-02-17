@@ -56,7 +56,12 @@ Component({
       });
       this.data.items.forEach(item => {
         if (event.detail == '我的') {
-          auth.checkAndGoToLoginPage()
+          auth.checkAndGoToLoginPageOrCallback(() => {
+            wx.redirectTo({
+              url: '/pages/me/index',
+            })
+          })
+          return
         }
         if (item.text == event.detail) {
           wx.redirectTo({
@@ -66,10 +71,13 @@ Component({
       })
     },
     add() {
-      auth.checkAndGoToLoginPage()
-      wx.navigateTo({
-        url: '/pages/home/create-platoon/index',
-      })
+      auth.checkAndGoToLoginPageOrCallback(
+        () => {
+          wx.navigateTo({
+            url: '/pages/home/create-platoon/index',
+          })
+        }
+      )
     },
   },
   lifetimes: {

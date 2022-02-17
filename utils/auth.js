@@ -112,8 +112,10 @@ export function goToLoginPage() {
   })
 }
 
-export function checkAndGoToLoginPage() {
+export function checkAndGoToLoginPageOrCallback(callback) {
   if (getApp().globalData.userInfo == null) {
     goToLoginPage()
+  } else {
+    execCallback(callback)
   }
 }
