@@ -51,9 +51,9 @@ Component({
    */
   methods: {
     onChange(event) {
-      this.setData({
-        active: event.detail
-      });
+      if (this.data.active == event.detail) {
+        return
+      }
       this.data.items.forEach(item => {
         if (event.detail == '我的') {
           auth.checkAndGoToLoginPageOrCallback(() => {
@@ -64,9 +64,14 @@ Component({
           return
         }
         if (item.text == event.detail) {
+          this.setData({
+            active: event.detail
+          });
+          // todo qishu这里其实可以想办法优化下感觉，不用每次都销毁，但是要防止页面栈超出
           wx.redirectTo({
             url: '/' + item.defaultPath,
           })
+          return
         }
       })
     },

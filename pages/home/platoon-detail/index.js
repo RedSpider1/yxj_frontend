@@ -245,6 +245,11 @@ Page({
           text: this.getContactLalel(contact.type, contact.contactInformation)
         })
       }
+      contacts.push({
+        id: -1,
+        value: -1,
+        text: '新增联系方式'
+      })
       this.setData({
         contacts: contacts
       })
@@ -259,6 +264,15 @@ Page({
   },
 
   onContactChange(event) {
+    if (event.detail == -1) {
+      wx.navigateTo({
+        url: '/pages/me/contact/index',
+      })
+      this.setData({
+        currentContact: this.data.contacts[0]
+      })
+      return
+    }
     for (const contact of this.data.contacts) {
       if (contact.id == event.detail) {
         this.setData({
