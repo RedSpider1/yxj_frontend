@@ -20,7 +20,7 @@ Page({
       // 页大小
       pageSize: 20,
       // 高度设置
-      height: wx.getSystemInfoSync().windowHeight - 0.25 * wx.getSystemInfoSync().windowHeight + 20,
+      height: getApp().globalData.windowHeightWithoutHeaderAndFooter,
       // 是否没有数据
       hasNoMore: false,
       loading: false,
@@ -36,7 +36,7 @@ Page({
       // 页大小
       pageSize: 20,
       // 高度设置
-      height: wx.getSystemInfoSync().windowHeight - 0.25 * wx.getSystemInfoSync().windowHeight + 20,
+      height: getApp().globalData.windowHeightWithoutHeaderAndFooter,
       // 是否没有数据
       hasNoMore: false,
       loading: false,

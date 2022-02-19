@@ -5,6 +5,7 @@
     style="--nav-bar-background-color: {{color}}; --nav-bar-icon-color: white; --nav-bar-title-text-color: white;"
     fixed
     placeholder
+    border="{{false}}"
     class="nav-bar"
   >
   <van-icon name="arrow-left" slot="left" class="left-icon" wx:if="{{needReturn}}" ontap="back"/>

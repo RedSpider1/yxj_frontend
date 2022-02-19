@@ -1,3 +1,4 @@
+<header title="" id="header"></header>
 <view class="flex-col" style="height: {{containerHeight}}px;">
   <view class="flex-1 flex">
     <view ontap="jmp" data-type="view" class="flex-1 flex-col justify-center align-items-center white primary-bg">
@@ -6,3 +7,4 @@
     </view>
   </view>
 </view>
+<footer id="footer" name="view"></footer>

@@ -12,11 +12,11 @@ Page({
   data: {
     color: getApp().globalData.themes.primary,
     agreeProtocol: false, // 同意注册/登录
-    containerHeight: 0,
-    loginButtonWidth: 0,
+    containerHeight: getApp().globalData.windowHeightWithoutHeaderAndFooter,
     loginSuccess: false,
     sourceRoute: null,
     showPolicy: false,
+    loginButtonWidth: 0.8 * getApp().globalData.systemInfo.screenWidth,
   },
 
   showPolicy() {
@@ -85,64 +85,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onLoad: function (options) {
-    const query = wx.createSelectorQuery()
-    query.select('#header').boundingClientRect()
-    query.exec(res => {
-      const systemInfo = wx.getSystemInfoSync()
-      let containerHeight = systemInfo.windowHeight - systemInfo.statusBarHeight - res[0].height
-      if (this.data.loginSuccess) {
-        containerHeight = 0.9 * containerHeight
-      }
-      this.setData({
-        containerHeight: containerHeight,
-        loginButtonWidth: 0.6 * systemInfo.screenWidth
-      })
+    this.setData({
+      loginButtonWidth: 0.6 * getApp().globalData.systemInfo.screenWidth,
     })
-
-
-    // if (!string.isEmpty(options.sourceRoute)) {
-    //   this.setData({sourceRoute: options.sourceRoute})
-    // }
-    // const app = getApp()
-    // if (!string.isEmpty(app.globalData.authToken)) {
-    //   const phone = app.globalData.userInfo.phone
-    //   if (!string.isEmpty(phone)) {
-    //     this.selectComponent('#header').back()
-    //     return
-    //   }
-    // }
-
-    // let that = this
-    // http.get(request.getUserInfo.url).then(res => {
-    //   if (res !== null && !string.isEmpty(res.phone)) {
-    //     app.globalData.userInfo.id = res.id
-    //     app.globalData.userInfo.phone = res.phone
-    //     app.globalData.userInfo.wechatNum = res.wechatNum
-    //     app.globalData.userInfo.nickname = string.isEmpty(res.name) ? '' : res.name
-    //     app.globalData.userInfo.avatar = string.isEmpty(res.avatar) ? image.defaultAvatar : res.avatar
-    //     app.globalData.userInfo.sex = res.sex === null ? 1 : res.sex
-    //     app.globalData.userInfo.slogan = string.isEmpty(res.slogan) ? '' : res.slogan
-    //     app.globalData.userInfo.birthday = string.isEmpty(res.birthday) ? '1970-01-01' : res.birthday
-
-    //     this.selectComponent('#header').back()
-    //     return
-    //   } else {
-    //     that.reload()
-    //   }
-    // })
   },
 
   reload: function () {
-    // const query = wx.createSelectorQuery()
-    // query.select('#header').boundingClientRect()
-    // const that = this
-    // query.exec(res => {
-    //   const systemInfo = wx.getSystemInfoSync()
-    //   let containerHeight = systemInfo.windowHeight - systemInfo.statusBarHeight - res[0].height
-    //   if (that.data.loginSuccess) {
-    //     containerHeight = 0.9 * containerHeight
-    //   }
-    //   that.setData({containerHeight: containerHeight, loginButtonWidth: 0.6 * systemInfo.screenWidth})
-    // })
+  
   },
 })

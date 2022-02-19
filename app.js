@@ -10,6 +10,9 @@ App({
       second: '#00CC66',
       third: '#D21DAA'
     },
+    windowHeightWithoutHeader: 812,
+    windowHeightWithoutHeaderAndFooter: 700,
+    systemInfo: {},
     // 后段交互toekn
     authToken: null,
     userInfo: null,

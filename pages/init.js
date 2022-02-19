@@ -17,12 +17,21 @@ Page({
    */
   onShow: async function () {
     const systemInfo = wx.getSystemInfoSync()
-    let containerHeight = systemInfo.windowHeight
-    this.setData({
-      containerHeight: containerHeight
+    getApp().globalData.systemInfo = systemInfo
+    const query = wx.createSelectorQuery()
+    query.select('#header').boundingClientRect()
+    await query.exec(res => {
+      getApp().globalData.windowHeightWithoutHeader = systemInfo.windowHeight - res[0].height
+      this.setData({
+        containerHeight: getApp().globalData.windowHeightWithoutHeader
+      })
+    })
+    query.select('#footer').boundingClientRect()
+    await query.exec(res => {
+      getApp().globalData.windowHeightWithoutHeaderAndFooter = getApp().globalData.windowHeightWithoutHeader - res[0].height
     })
 
-    http.get('pss/label/list', null, false).then( res => {
+    http.get('pss/label/list', null, false).then(res => {
       let labelInfos = []
       let labelName2LabelInfoMap = {}
       for (let row of res) {
@@ -36,13 +45,12 @@ Page({
       getApp().globalData.labels = labelInfos
       getApp().globalData.labelName2LabelInfoMap = labelName2LabelInfoMap
     })
-
     http.get(request.getEnums.url, null, false).then((res) => {
       getApp().globalData.enums = res
       console.log(res)
-    }).then( () => {
+    }).then(() => {
       auth.freeLogin(getApp())
-    }).then( () => {
+    }).then(() => {
       getApp().globalData.initDone = true
       wx.reLaunch({
         url: `/pages/home/index`,
