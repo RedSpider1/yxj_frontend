@@ -1,7 +1,7 @@
 <header title="友小聚 - 相关" id="header"></header>
 <view class="flex-col" style="height: {{containerHeight}}px;">
   <view class="flex-1 flex">
-    <view ontap="jmp" data-type="2" class="flex-1 flex-col justify-center align-items-center white relation-item">
+    <view ontap="jmp" data-type="2" class="flex-1 flex-col justify-center align-items-center white relation-item-right">
       <van-icon name="eye-o" class="primary" size="2rem" />
       <text class="container-v primary">我浏览过</text>
     </view>
@@ -12,11 +12,11 @@
     </view>
   </view>
   <view class="flex-1 flex">
-    <view ontap="jmp" data-type="4" class="flex-1 flex-col justify-center align-items-center white relation-item">
+    <view ontap="jmp" data-type="4" class="flex-1 flex-col justify-center align-items-center white relation-item-right relation-item-top">
       <van-icon name="add-o" class="primary" size="2rem" />
       <text class="container-v primary">我创建的</text>
     </view>
-    <view ontap="jmp" data-type="3" class="flex-1 flex-col justify-center align-items-center white relation-item">
+    <view ontap="jmp" data-type="3" class="flex-1 flex-col justify-center align-items-center white relation-item-top">
       <van-icon name="star-o" class="primary" size="2rem" />
       <text class="container-v primary">我收藏的</text>
     </view>

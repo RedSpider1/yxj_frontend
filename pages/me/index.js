@@ -38,8 +38,7 @@ Component({
         .catch(() => {});
     },
     onLoad () {
-      auth.checkAndGoToLoginPageOrCallback(() => this.initUserInfo())
-      // auth.checkAuthAndExecCallback(() => this.init())
+      this.initUserInfo()
     },
     initUserInfo () {
       this.setData({

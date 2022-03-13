@@ -22,7 +22,7 @@ Page({
    */
   onShow: function () {
     this.setData({
-      containerHeight: getApp().globalData.windowHeightWithoutHeaderAndFooter + 20
+      containerHeight: getApp().globalData.windowHeightWithoutHeaderAndFooter
     })
   },
 })

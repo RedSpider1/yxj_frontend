@@ -55,15 +55,13 @@ Component({
         return
       }
       this.data.items.forEach(item => {
-        if (event.detail == '我的') {
-          auth.checkAndGoToLoginPageOrCallback(() => {
-            wx.redirectTo({
-              url: '/pages/me/index',
-            })
-          })
-          return
-        }
         if (item.text == event.detail) {
+          if (event.detail == '我的' && getApp().globalData.userInfo == null) {
+            wx.navigateTo({
+              url: `/pages/me/login/index`,
+            })
+            return
+          }
           this.setData({
             active: event.detail
           });
